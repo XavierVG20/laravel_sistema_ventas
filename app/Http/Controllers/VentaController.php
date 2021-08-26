@@ -130,7 +130,7 @@ class VentaController extends Controller
                 $detalle->cantidad = $det['cantidad'];
                 $detalle->precio = $det['precio'];
                 $detalle->descuento = $det['descuento'];         
-              //  $detalle->save();
+                $detalle->save();
             }          
         
            // DB::commit();

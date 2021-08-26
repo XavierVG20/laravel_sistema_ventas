@@ -8,9 +8,12 @@ require('./bootstrap');
 
 
 window.$ = window.jQuery = require('jquery');
+import { Line } from 'react-chartjs-2';
+import { Chart } from 'chart.js';
 
 window.Vue = require('vue').default;
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
+
 window.Swal = Swal;
 const Toast = Swal.mixin({
     toast: true,
@@ -48,6 +51,7 @@ Vue.component('ingreso-component', require('./components/IngresoComponent.vue').
 Vue.component('venta-component', require('./components/VentaComponent.vue').default);
 Vue.component('info-component', require('./components/InfoComponent.vue').default);
 Vue.component('usuario-component', require('./components/UsuarioComponent.vue').default);
+Vue.component('dashboard-component', require('./components/DashboardComponent.vue').default);
 
 
 
