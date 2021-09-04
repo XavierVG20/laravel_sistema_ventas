@@ -21,6 +21,6 @@ mix.styles(['resources/admin/bootstrap/css/bootstrap.min.css',
    
     .js([
     'resources/js/app.js'], 'public/js/app.js')
-
+  
     .vue()
     .sass('resources/sass/app.scss', 'public/css');

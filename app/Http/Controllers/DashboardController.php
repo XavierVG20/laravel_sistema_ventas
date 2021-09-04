@@ -2,34 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
-class HomeController extends Controller
+class DashboardController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function index()
-    {
+    //
+    public function index(Request $reques){
          return view('home');
-       
     }
-
-    public function __invoke(){
-        if (!$request->ajax())
+    public function __invoke(Request $reques){
 
         $anio=date('Y');
         $ingresos=DB::table('ingresos as i')

@@ -43,7 +43,7 @@
 
         <li class="header">Administracion</li>
         <li class="treeview {{ ! Route:: is('user.index') ?: 'active' }}"><a href="{{ route('user.index') }}"><i class="fa fa-circle-o text-red"></i> <span>Usuarios</span></a></li>
-        <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Datos</span></a></li>
+        <li class="treeview {{ ! Route:: is('datos.index') ?: 'active' }}"><a  href="{{ route('datos.index') }}"><i class="fa fa-circle-o text-yellow"></i> <span>Datos</span></a></li>
         <li class="treeview {{ ! Route:: is('info.index') ?: 'active' }} "><a  href="{{ route('info.index') }}"><i class="fa fa-circle-o text-aqua"></i> <span>Informacion</span></a></li>
       </ul>
     </section>

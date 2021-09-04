@@ -6,10 +6,10 @@
 
 require('./bootstrap');
 
+import PureVueChart from 'pure-vue-chart';
 
 window.$ = window.jQuery = require('jquery');
-import { Line } from 'react-chartjs-2';
-import { Chart } from 'chart.js';
+
 
 window.Vue = require('vue').default;
 import Swal from 'sweetalert2';
@@ -52,6 +52,8 @@ Vue.component('venta-component', require('./components/VentaComponent.vue').defa
 Vue.component('info-component', require('./components/InfoComponent.vue').default);
 Vue.component('usuario-component', require('./components/UsuarioComponent.vue').default);
 Vue.component('dashboard-component', require('./components/DashboardComponent.vue').default);
+Vue.component('datos_empresa-component', require('./components/Datos_EmpresaComponent.vue').default);
+
 
 
 

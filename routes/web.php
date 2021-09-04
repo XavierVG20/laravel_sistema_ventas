@@ -22,7 +22,9 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\DashboardController::class, 'index'])->name('home');
+Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, '__invoke']);
+
 //Route::resource('/categoria',App\Http\Controllers\CategoriaController::class);
 Route::get('/categoria', [App\Http\Controllers\CategoriaController::class, 'index'])->name('categoria.index');
 Route::post('/categoria', [App\Http\Controllers\CategoriaController::class, 'store'])->name('categoria.store');
@@ -70,7 +72,7 @@ Route::put('/categoria', [App\Http\Controllers\CategoriaController::class, 'elim
     Route::get('/venta/obtenerDetalles',  [App\Http\Controllers\VentaController::class, 'obtenerDetalles'])->name('venta.obtenerDetalles');
     Route::get('/venta/pdf/{id}',  [App\Http\Controllers\VentaController::class, 'pdf'])->name('pdf');
 
-    Route::get('/info', [App\Http\Controllers\RolController::class, 'index'])->name('info.index');;
+    Route::get('/info', [App\Http\Controllers\RolController::class, 'index'])->name('info.index');
     Route::get('/rol/selectRol', [App\Http\Controllers\RolController::class, 'selectRol'] );
 
     Route::get('/user',  [App\Http\Controllers\UserController::class, 'index'])->name('user.index');
@@ -78,5 +80,10 @@ Route::put('/categoria', [App\Http\Controllers\CategoriaController::class, 'elim
     Route::put('/user/actualizar', [App\Http\Controllers\UserController::class, 'update'] );
     Route::put('/user/desactivar',[App\Http\Controllers\UserController::class, 'desactivar'] );
     Route::put('/user/activar', [App\Http\Controllers\UserController::class, 'activar'] );
+
+    Route::get('/datos', [App\Http\Controllers\EmpresaDatosController::class, 'index'] ) ->name('datos.index');
+    Route::post('/datos/registrar', [App\Http\Controllers\EmpresaDatosController::class, 'store'] ) ->name('datos.store');
+    Route::put('/datos/actualizar', [App\Http\Controllers\EmpresaDatosController::class, 'update'] ) ->name('datos.update');
+
 //Route::resource('/books', BooksController::class);
 
