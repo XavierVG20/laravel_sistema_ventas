@@ -84,6 +84,7 @@ Route::put('/categoria', [App\Http\Controllers\CategoriaController::class, 'elim
     Route::get('/datos', [App\Http\Controllers\EmpresaDatosController::class, 'index'] ) ->name('datos.index');
     Route::post('/datos/registrar', [App\Http\Controllers\EmpresaDatosController::class, 'store'] ) ->name('datos.store');
     Route::put('/datos/actualizar', [App\Http\Controllers\EmpresaDatosController::class, 'update'] ) ->name('datos.update');
+    Route::put('/datos/uploda_img', [App\Http\Controllers\EmpresaDatosController::class, 'Upload_img'] ) ->name('datos.upload');
 
 //Route::resource('/books', BooksController::class);
 

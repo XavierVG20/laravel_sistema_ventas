@@ -19,6 +19,7 @@ class CreateEmpresaDatosTable extends Migration
             $table->string('email');
             $table->string('direccion');
             $table->string('telefono');
+            $table->string('image');
             
             $table->timestamps();
         });

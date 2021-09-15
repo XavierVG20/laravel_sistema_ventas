@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use App\Models\Venta;
 use App\Models\DetalleVenta;
+use App\Models\Empresa_datos;
 use App\Models\User;
 
 class VentaController extends Controller
@@ -92,9 +93,11 @@ class VentaController extends Controller
         ->where('detalle_ventas.idventa','=',$id)
         ->orderBy('detalle_ventas.id','desc')->get();
 
+        $empresa_datos = Empresa_datos::take(1)->get();
+
         $numventa=Venta::select('num_comprobante')->where('id',$id)->get();
 
-        $pdf = \PDF::loadView('pdf.reporte_venta',['venta'=>$venta,'detalles'=>$detalles]);
+        $pdf = \PDF::loadView('pdf.reporte_venta',['venta'=>$venta,'detalles'=>$detalles, 'empresa_datos'=> $empresa_datos]);
         return $pdf->download('venta-'.$numventa[0]->num_comprobante.'.pdf');
 
     }

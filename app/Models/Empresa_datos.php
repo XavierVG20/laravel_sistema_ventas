@@ -13,6 +13,7 @@ class Empresa_datos extends Model
         'nombre_empresa',
         'email',
         'direccion',
-        'telefono'
+        'telefono',
+        'image',
     ];
 }

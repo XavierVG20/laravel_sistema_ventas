@@ -1,231 +1,188 @@
-<!DOCTYPE>
+<!DOCTYPE html>
 <html>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Reporte de venta</title>
-    <style>
-        body {
-        /*position: relative;*/
-        /*width: 16cm;  */
-        /*height: 29.7cm; */
-        /*margin: 0 auto; */
-        /*color: #555555;*/
-        /*background: #FFFFFF; */
-        font-family: Arial, sans-serif; 
-        font-size: 14px;
-        /*font-family: SourceSansPro;*/
-        }
- 
-        #logo{
-        float: left;
-        margin-top: 1%;
-        margin-left: 2%;
-        margin-right: 2%;
-        }
- 
-        #imagen{
-        width: 100px;
-        }
- 
-        #datos{
-        float: left;
-        margin-top: 0%;
-        margin-left: 2%;
-        margin-right: 2%;
-        /*text-align: justify;*/
-        }
- 
-        #encabezado{
-        text-align: center;
-        margin-left: 10%;
-        margin-right: 35%;
-        font-size: 15px;
-        }
- 
-        #fact{
-        /*position: relative;*/
-        float: right;
-        margin-top: 2%;
-        margin-left: 2%;
-        margin-right: 2%;
-        font-size: 20px;
-        }
- 
-        section{
-        clear: left;
-        }
- 
-        #cliente{
-        text-align: left;
-        }
- 
-        #facliente{
-        width: 40%;
-        border-collapse: collapse;
-        border-spacing: 0;
-        margin-bottom: 15px;
-        }
- 
-        #fac, #fv, #fa{
-        color: #FFFFFF;
-        font-size: 15px;
-        }
- 
-        #facliente thead{
-        padding: 20px;
-        background: #2183E3;
-        text-align: left;
-        border-bottom: 1px solid #FFFFFF;  
-        }
- 
-        #facvendedor{
-        width: 100%;
-        border-collapse: collapse;
-        border-spacing: 0;
-        margin-bottom: 15px;
-        }
- 
-        #facvendedor thead{
-        padding: 20px;
-        background: #2183E3;
-        text-align: center;
-        border-bottom: 1px solid #FFFFFF;  
-        }
- 
-        #facarticulo{
-        width: 100%;
-        border-collapse: collapse;
-        border-spacing: 0;
-        margin-bottom: 15px;
-        }
- 
-        #facarticulo thead{
-        padding: 20px;
-        background: #2183E3;
-        text-align: center;
-        border-bottom: 1px solid #FFFFFF;  
-        }
- 
-        #gracias{
-        text-align: center; 
-        }
-    </style>
+    <head>
+        <meta charset="utf-8">
+        <title>factura</title>
+        <style>
+            * {
+                -webkit-box-sizing: border-box;
+                -moz-box-sizing: border-box;
+                box-sizing: border-box;
+            }
+            h1,h2,h3,h4,h5,h6,p,span,div { 
+                font-family: DejaVu Sans; 
+                font-size:10px;
+                font-weight: normal;
+            }
+            th,td { 
+                font-family: DejaVu Sans; 
+                font-size:10px;
+            }
+            .panel {
+                margin-bottom: 20px;
+                background-color: #fff;
+                border: 1px solid transparent;
+                border-radius: 4px;
+                -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);
+                box-shadow: 0 1px 1px rgba(0,0,0,.05);
+            }
+            .panel-default {
+                border-color: #ddd;
+            }
+            .panel-body {
+                padding: 15px;
+            }
+            table {
+                width: 100%;
+                max-width: 100%;
+                margin-bottom: 0px;
+                border-spacing: 0;
+                border-collapse: collapse;
+                background-color: transparent;
+            }
+            thead  {
+                text-align: left;
+                display: table-header-group;
+                vertical-align: middle;
+            }
+            th, td  {
+                border: 1px solid #ddd;
+                padding: 6px;
+            }
+            .well {
+                min-height: 20px;
+                padding: 19px;
+                margin-bottom: 20px;
+                background-color: #f5f5f5;
+                border: 1px solid #e3e3e3;
+                border-radius: 4px;
+                -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
+                box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
+            }
+        </style>
+            <style>
+                @page { margin-top: 140px;}
+                header {
+                    top: -100px;
+                    position: fixed;
+                }
+            </style>
+
+    </head>
     <body>
-        @foreach ($venta as $v)
         <header>
-            <div id="logo">
-                <img src="img/logo2.png" alt="CompartiendoCodigo" id="imagen">
+            <div style="position:absolute; left:0pt; width:250pt;">
+                <img class="img-rounded" height="" src="">
             </div>
-            <div id="datos">
-                <p id="encabezado">
-                    <b>Compartiendo Códigos</b><br>Arequipa, Perú<br>Telefono:(+51)999999999<br>Email: compartiendocodigos@gmail.com
-                </p>
+            <div style="margin-left:300pt;">
+                <b>Fecha: </b><br />
+           
+                    <b>Fecha de vencimiento: </b><br />
+
+              
+                    <b>Factura : </b>  
+          
+                <br />
             </div>
-            <div id="fact">
-                <p>{{$v->tipo_comprobante}}<br>
-                {{$v->serie_comprobante}}-{{$v->num_comprobante}}</p>
-            </div>
+            <br />
+            <h2>
+            {!!QrCode::size(300)->generate("www.nigmacode.com") !!}
+
+            </h2>
         </header>
-        <br>
-        <section>
-            <div>
-                <table id="facliente">
-                    <thead>                        
-                        <tr>
-                            <th id="fac">Cliente</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th><p id="cliente">Sr(a). {{$v->nombre}}<br>
-                            {{$v->tipo_documento}}: {{$v->num_documento}}<br>
-                            Dirección: {{$v->direccion}}<br>
-                            Teléfono: {{$v->telefono}}<br>
-                            Email: {{$v->email}}</</p></th>
-                        </tr>
-                    </tbody>
-                </table>
+        <main>
+            <div style="clear:both; position:relative;">
+                <div style="position:absolute; left:0pt; width:250pt;">
+                    <h4>Business Details:</h4>
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                          <i>No business details</i><br />
+                            <br />
+                            ID: <br />
+                          phone<br />
+                            <br />
+                            country<br />
+                        </div>
+                    </div>
+                </div>
+                <div style="margin-left: 300pt;">
+                    <h4>Customer Details:</h4>
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                           <i>No customer details</i><br />
+                           gactura
+                            <br />
+                            ID:<br />
+                            teledono<br />
+                            localizacion<br />
+                            <br />
+                        </div>
+                    </div>
+                </div>
             </div>
-        </section>
-        @endforeach
-        <br>
-        <section>
-            <div>
-                <table id="facvendedor">
-                    <thead>
-                        <tr id="fv">
-                            <th>VENDEDOR</th>
-                            <th>FECHA</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+            <h4>Items:</h4>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>#</th>                       
+                        <th>ID</th>
+                        <th>Item Name</th>
+                        <th>Price</th>
+                        <th>Amount</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
                         <tr>
-                            <td>{{$v->name}}</td>
-                            <td>{{$v->created_at}}</td>
+                            <td></td>                      
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
                         </tr>
-                    </tbody>
-                </table>
+                </tbody>
+            </table>
+            <div style="clear:both; position:relative;">
+                    <div style="position:absolute; left:0pt; width:250pt;">
+                        <h4>Notes:</h4>
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                            </div>
+                        </div>
+                    </div>
+                <div style="margin-left: 300pt;">
+                    <h4>Total:</h4>
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr>
+                                <td><b>Subtotal</b></td>
+                                <td></td>
+                            </tr>
+                                <tr>
+                                    <td>
+                                        <b>
+                                        </b>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                      
+                            <tr>
+                                <td><b>TOTAL</b></td>
+                                <td><b> </b></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        </section>
-        <br>
-        <section>
-            <div>
-                <table id="facarticulo">
-                    <thead>
-                        <tr id="fa">
-                            <th>CANT</th>
-                            <th>DESCRIPCION</th>
-                            <th>PRECIO UNIT</th>
-                            <th>DESC.</th>
-                            <th>PRECIO TOTAL</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($detalles as $det)
-                        <tr>
-                            <td>{{$det->cantidad}}</td>
-                            <td>{{$det->articulo}}</td>
-                            <td>{{$det->precio}}</td>
-                            <td>{{$det->descuento}}</td>
-                            <td>{{$det->cantidad*$det->precio-$det->descuento}}</td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                    <tfoot>
-                        @foreach ($venta as $v)
-                        <tr>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th>SUBTOTAL</th>
-                            <td>$ {{round($v->total-($v->total*$v->impuesto),2)}}</td>
-                        </tr>
-                        <tr>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th>Impuesto</th>
-                            <td>$ {{round($v->total*$v->impuesto,2)}}</td>
-                        </tr>
-                        <tr>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th>TOTAL</th>
-                            <td>$ {{$v->total}}</td>
-                        </tr>
-                        @endforeach
-                    </tfoot>
-                </table>
-            </div>
-        </section>
-        <br>
-        <br>
-        <footer>
-            <div id="gracias">
-                <p><b>Gracias por su compra!</b></p>
-            </div>
-        </footer>
+           
+                <br /><br />
+                <div class="well">
+                   
+                </div>
+           
+        </main>
+
+       
     </body>
 </html>

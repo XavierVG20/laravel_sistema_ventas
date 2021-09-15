@@ -9,8 +9,6 @@ require('./bootstrap');
 import PureVueChart from 'pure-vue-chart';
 
 window.$ = window.jQuery = require('jquery');
-
-
 window.Vue = require('vue').default;
 import Swal from 'sweetalert2';
 
