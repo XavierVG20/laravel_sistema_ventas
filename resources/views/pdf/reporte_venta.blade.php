@@ -86,66 +86,66 @@
             </div>
             <br />
             <h2>
-            {!!QrCode::size(300)->generate("www.nigmacode.com") !!}
-
+            {!! QrCode::generate('Make me into a QrCode!'); !!}
+    <p>Escanéame para volver a la página principal.</p>
             </h2>
         </header>
         <main>
+        @foreach ($venta as $v)
             <div style="clear:both; position:relative;">
                 <div style="position:absolute; left:0pt; width:250pt;">
-                    <h4>Business Details:</h4>
+                    <h4>Detalle Cliente:</h4>
                     <div class="panel panel-default">
                         <div class="panel-body">
-                          <i>No business details</i><br />
-                            <br />
-                            ID: <br />
-                          phone<br />
-                            <br />
-                            country<br />
+                        Sr(a). {{$v->nombre}}<br>
+                            {{$v->tipo_documento}}: {{$v->num_documento}}<br>
+                            Dirección: {{$v->direccion}}<br>
+                            Teléfono: {{$v->telefono}}<br>
+                            Email: {{$v->email}}<br>
                         </div>
                     </div>
                 </div>
                 <div style="margin-left: 300pt;">
-                    <h4>Customer Details:</h4>
+                    <h4>Detalle Vendedor:</h4>
                     <div class="panel panel-default">
                         <div class="panel-body">
-                           <i>No customer details</i><br />
-                           gactura
-                            <br />
-                            ID:<br />
-                            teledono<br />
-                            localizacion<br />
-                            <br />
+                          
+                        Sr(a). {{$v->nombre}}<br>
+                            {{$v->tipo_documento}}: {{$v->num_documento}}<br>
+                            Dirección: {{$v->direccion}}<br>
+                            Teléfono: {{$v->telefono}}<br>
+                            Email: {{$v->email}}<br>
                         </div>
                     </div>
                 </div>
             </div>
-            <h4>Items:</h4>
+            @endforeach
+    
             <table class="table table-bordered">
                 <thead>
                     <tr>
-                        <th>#</th>                       
-                        <th>ID</th>
-                        <th>Item Name</th>
-                        <th>Price</th>
-                        <th>Amount</th>
-                        <th>Total</th>
+                            <th>CANT</th>
+                            <th>DESCRIPCION</th>
+                            <th>PRECIO UNIT</th>
+                            <th>DESC.</th>
+                            <th>PRECIO TOTAL</th>
                     </tr>
                 </thead>
                 <tbody>
+                @foreach ($detalles as $det)
                         <tr>
-                            <td></td>                      
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                        <td>{{$det->cantidad}}</td>
+                            <td>{{$det->articulo}}</td>
+                            <td>{{$det->precio}}</td>
+                            <td>{{$det->descuento}}</td>
+                            <td>{{$det->cantidad*$det->precio-$det->descuento}}</td>
                         </tr>
+                        @endforeach
                 </tbody>
             </table>
             <div style="clear:both; position:relative;">
                     <div style="position:absolute; left:0pt; width:250pt;">
-                        <h4>Notes:</h4>
+                        <h4>Gracias por su compra</h4>
                         <div class="panel panel-default">
                             <div class="panel-body">
                             </div>
@@ -155,22 +155,22 @@
                     <h4>Total:</h4>
                     <table class="table table-bordered">
                         <tbody>
+                        @foreach ($venta as $v)
                             <tr>
                                 <td><b>Subtotal</b></td>
-                                <td></td>
+                                <td>$ {{round($v->total-($v->total*$v->impuesto),2)}}</td>
                             </tr>
                                 <tr>
-                                    <td>
-                                        <b>
-                                        </b>
+                                    <td><b>IVA</b>
                                     </td>
-                                    <td></td>
+                                    <td>$ {{round($v->total*$v->impuesto,2)}}</td>
                                 </tr>
                       
                             <tr>
                                 <td><b>TOTAL</b></td>
-                                <td><b> </b></td>
+                                <td><b> $ {{$v->total}} </b></td>
                             </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

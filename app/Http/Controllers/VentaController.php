@@ -86,6 +86,9 @@ class VentaController extends Controller
         'personas.telefono','users.name')
         ->where('ventas.id','=',$id)
         ->orderBy('ventas.id','desc')->take(1)->get();
+        
+        \QrCode::size(100)->generate('MyNotePaper');
+
 
         $detalles = DetalleVenta::join('articulos','detalle_ventas.idarticulo','=','articulos.id')
         ->select('detalle_ventas.cantidad','detalle_ventas.precio','detalle_ventas.descuento',
@@ -98,7 +101,7 @@ class VentaController extends Controller
         $numventa=Venta::select('num_comprobante')->where('id',$id)->get();
 
         $pdf = \PDF::loadView('pdf.reporte_venta',['venta'=>$venta,'detalles'=>$detalles, 'empresa_datos'=> $empresa_datos]);
-        return $pdf->download('venta-'.$numventa[0]->num_comprobante.'.pdf');
+        return $pdf->download( 'venta-'.$numventa[0]->num_comprobante.'.pdf');
 
     }
     public function store(Request $request)
