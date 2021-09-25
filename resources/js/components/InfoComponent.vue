@@ -313,7 +313,7 @@
         axios.get(url).then(function (response) {
          
          
-          if(response.data.id = 1){
+          if(response.data.length == 1){
             console.log('existem datos');
             console.log(response)
             me.tipoAccion = 2;
@@ -324,7 +324,9 @@
           me.email = respuesta['email'];
           me.direccion = respuesta['direccion'];
           me.telefono = respuesta['telefono'];
-          } else {
+          me.imagen = respuesta['image']
+            console.log('nno existe informacion');
+  console.log(response)
             me.tipoAccion= 1;
           }
 

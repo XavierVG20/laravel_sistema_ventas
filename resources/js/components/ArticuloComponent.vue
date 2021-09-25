@@ -59,62 +59,62 @@
                         </div>
                     </div>
                     <div class="table-responsive">
-                    <table class="table table-bordered table-striped ">
-                        <thead>
-                            <tr>
-                                <th>Opciones</th>
-                                <th>Código</th>
-                                <th>Nombre</th>
-                                <th>Categoría</th>
-                                <th>Precio Venta</th>
-                                <th>Stock</th>
-                                <th>Descripción</th>
-                                <th>Estado</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr v-for="articulo in arrayArticulo" :key="articulo.id">
-                                <td>
-                                    <button type="button" @click="abrirModal('articulo','actualizar',articulo)"
-                                        class="btn btn-primary btn-sm" title="Editar">
-                                        <i class="fa fa-pencil"></i>
-                                    </button>
-                                    <template v-if="articulo.condicion">
-                                        <button type="button" class="btn btn-warning btn-sm"
-                                            @click="desactivarArticulo(articulo.id)" title="Desactivar">
-                                            <i class="fa fa-times"></i>
+                        <table class="table table-bordered table-striped ">
+                            <thead>
+                                <tr>
+                                    <th>Opciones</th>
+                                    <th>Código</th>
+                                    <th>Nombre</th>
+                                    <th>Categoría</th>
+                                    <th>Precio Venta</th>
+                                    <th>Stock</th>
+                                    <th>Descripción</th>
+                                    <th>Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="articulo in arrayArticulo" :key="articulo.id">
+                                    <td>
+                                        <button type="button" @click="abrirModal('articulo','actualizar',articulo)"
+                                            class="btn btn-primary btn-sm" title="Editar">
+                                            <i class="fa fa-pencil"></i>
                                         </button>
-                                    </template>
-                                    <template v-else>
-                                        <button type="button" class="btn btn-info btn-sm"
-                                            @click="activarArticulo(articulo.id)" title="Activar">
-                                            <i class="fa fa-check"></i>
+                                        <template v-if="articulo.condicion">
+                                            <button type="button" class="btn btn-warning btn-sm"
+                                                @click="desactivarArticulo(articulo.id)" title="Desactivar">
+                                                <i class="fa fa-times"></i>
+                                            </button>
+                                        </template>
+                                        <template v-else>
+                                            <button type="button" class="btn btn-info btn-sm"
+                                                @click="activarArticulo(articulo.id)" title="Activar">
+                                                <i class="fa fa-check"></i>
+                                            </button>
+                                        </template>
+                                        &nbsp;<button type="button" class="btn btn-danger btn-sm"
+                                            @click="eliminarArticulo(articulo.id)" title="Eliminar">
+                                            <i class="fa fa-trash"></i>
                                         </button>
-                                    </template>
-                                    &nbsp;<button type="button" class="btn btn-danger btn-sm"
-                                        @click="eliminarArticulo(articulo.id)" title="Eliminar">
-                                        <i class="fa fa-trash"></i>
-                                    </button>
-                                </td>
-                                <td v-text="articulo.codigo"></td>
-                                <td v-text="articulo.nombre"></td>
-                                <td v-text="articulo.nombre_categoria"></td>
-                                <td v-text="articulo.precio_venta"></td>
-                                <td v-text="articulo.stock"></td>
-                                <td v-text="articulo.descripcion"></td>
-                                <td>
-                                    <div v-if="articulo.condicion">
-                                        <span class="badge badge-success">Activo</span>
-                                    </div>
-                                    <div v-else>
-                                        <span class="badge badge-danger">Desactivado</span>
-                                    </div>
+                                    </td>
+                                    <td v-text="articulo.codigo"></td>
+                                    <td v-text="articulo.nombre"></td>
+                                    <td v-text="articulo.nombre_categoria"></td>
+                                    <td v-text="articulo.precio_venta"></td>
+                                    <td v-text="articulo.stock"></td>
+                                    <td v-text="articulo.descripcion"></td>
+                                    <td>
+                                        <div v-if="articulo.condicion">
+                                            <span class="badge badge-success">Activo</span>
+                                        </div>
+                                        <div v-else>
+                                            <span class="badge badge-danger">Desactivado</span>
+                                        </div>
 
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                     <nav>
                         <ul class="pagination">
                             <li class="page-item" v-if="pagination.current_page > 1">
@@ -263,7 +263,7 @@
                 modal: 0,
                 tituloModal: '',
                 tipoAccion: 0,
-               
+
                 pagination: {
                     'total': 0,
                     'current_page': 0,
@@ -322,6 +322,12 @@
                 })
                     .catch(function (error) {
                         console.log(error);
+                        Swal.fire({
+                            icon: "error",
+                            title: "Oops...",
+                            text: "Algo salio mas!",
+                            footer: error,
+                        });
                     });
             },
             cargarPdf() {
@@ -336,13 +342,12 @@
                     me.arrayCategoria = respuesta.categorias;
                 })
                     .catch(function (error) {
-                        console.log(error);
                         Swal.fire({
-                            icon: 'error',
-                            title: 'Oops...',
-                            text: 'Algo salio mas!',
-                            footer: '<a href>Actualizar</a>'
-                        })
+                            icon: "error",
+                            title: "Oops...",
+                            text: "Algo salio mas!",
+                            footer: error,
+                        });
                     });
             },
             cambiarPagina(page, buscar, criterio) {
@@ -375,18 +380,19 @@
                     })
                 } catch (error) {
                     // console.log(error)
+                    Swal.fire({
+                        icon: "error",
+                        title: "Oops...",
+                        text: "Algo salio mas!",
+                        footer: error,
+                    });
                     if (error.response.data) {
 
                         this.errors = error.response.data.errors;
-                        console.log(error.response.data.errors)
-                    } else {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Oops...',
-                            text: 'Algo salio mas!',
-                            footer: '<a href>Vuelve a intenatar</a>'
-                        })
+
                     }
+
+
                 }
 
             },
@@ -414,18 +420,19 @@
                         me.listarArticulo(1, '', 'nombre');
                     })
                 } catch (error) {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Oops...",
+                        text: "Algo salio mas!",
+                        footer: error,
+                    });
                     if (error.response.data) {
 
                         this.errors = error.response.data.errors;
-                        console.log(error.response.data.errors)
-                    } else {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Oops...',
-                            text: 'Algo salio mas!',
-                            footer: '<a href>Vuelve a intenatar</a>'
-                        })
+
                     }
+
+
                 }
             },
             desactivarArticulo(id) {
@@ -454,13 +461,13 @@
                         )
                         me.listarArticulo(1, '', 'nombre');
 
-                    }).catch(() => {
+                    }).catch((error) => {
                         Swal.fire({
-                            icon: 'error',
-                            title: 'Oops...',
-                            text: 'Algo salio mas!',
-                            footer: '<a href>Actualizar</a>'
-                        })
+                            icon: "error",
+                            title: "Oops...",
+                            text: "Algo salio mas!",
+                            footer: error,
+                        });
                     })
 
                 })
@@ -491,13 +498,13 @@
                             )
                             me.listarArticulo(1, '', 'nombre');
 
-                        }).catch(() => {
+                        }).catch((error) => {
                             Swal.fire({
-                                icon: 'error',
-                                title: 'Oops...',
-                                text: 'Algo salio mas!',
-                                footer: '<a href>Actualizar</a>'
-                            })
+                                icon: "error",
+                                title: "Oops...",
+                                text: "Algo salio mas!",
+                                footer: error,
+                            });
                         })
                     }
 
@@ -531,11 +538,11 @@
 
                         }).catch(function (error) {
                             Swal.fire({
-                                icon: 'error',
-                                title: 'Oops...',
-                                text: 'Algo salio mas!',
-                                footer: '<a href>Actualizar</a>'
-                            })
+                                icon: "error",
+                                title: "Oops...",
+                                text: "Algo salio mas!",
+                                footer: error,
+                            });
                         })
                     }
 
@@ -551,7 +558,7 @@
                 this.precio_venta = 0;
                 this.stock = 0;
                 this.descripcion = '';
-            this.errors={};
+                this.errors = {};
             },
             abrirModal(modelo, accion, data = []) {
                 switch (modelo) {

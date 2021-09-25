@@ -2248,6 +2248,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         me.pagination = respuesta.pagination;
       })["catch"](function (error) {
         console.log(error);
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Algo salio mas!",
+          footer: error
+        });
       });
     },
     cargarPdf: function cargarPdf() {
@@ -2261,12 +2267,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         var respuesta = response.data;
         me.arrayCategoria = respuesta.categorias;
       })["catch"](function (error) {
-        console.log(error);
         Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: 'Algo salio mas!',
-          footer: '<a href>Actualizar</a>'
+          icon: "error",
+          title: "Oops...",
+          text: "Algo salio mas!",
+          footer: error
         });
       });
     },
@@ -2303,27 +2308,25 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 });
 
               case 4:
-                _context.next = 9;
+                _context.next = 10;
                 break;
 
               case 6:
                 _context.prev = 6;
                 _context.t0 = _context["catch"](1);
-
                 // console.log(error)
+                Swal.fire({
+                  icon: "error",
+                  title: "Oops...",
+                  text: "Algo salio mas!",
+                  footer: _context.t0
+                });
+
                 if (_context.t0.response.data) {
                   _this.errors = _context.t0.response.data.errors;
-                  console.log(_context.t0.response.data.errors);
-                } else {
-                  Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'Algo salio mas!',
-                    footer: '<a href>Vuelve a intenatar</a>'
-                  });
                 }
 
-              case 9:
+              case 10:
               case "end":
                 return _context.stop();
             }
@@ -2358,26 +2361,24 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 });
 
               case 4:
-                _context2.next = 9;
+                _context2.next = 10;
                 break;
 
               case 6:
                 _context2.prev = 6;
                 _context2.t0 = _context2["catch"](1);
+                Swal.fire({
+                  icon: "error",
+                  title: "Oops...",
+                  text: "Algo salio mas!",
+                  footer: _context2.t0
+                });
 
                 if (_context2.t0.response.data) {
                   _this2.errors = _context2.t0.response.data.errors;
-                  console.log(_context2.t0.response.data.errors);
-                } else {
-                  Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'Algo salio mas!',
-                    footer: '<a href>Vuelve a intenatar</a>'
-                  });
                 }
 
-              case 9:
+              case 10:
               case "end":
                 return _context2.stop();
             }
@@ -2404,12 +2405,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }).then(function (response) {
           Swal.fire('Desactivado!', 'El registro ha sido desactivado con éxito.', 'success');
           me.listarArticulo(1, '', 'nombre');
-        })["catch"](function () {
+        })["catch"](function (error) {
           Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'Algo salio mas!',
-            footer: '<a href>Actualizar</a>'
+            icon: "error",
+            title: "Oops...",
+            text: "Algo salio mas!",
+            footer: error
           });
         });
       });
@@ -2433,12 +2434,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }).then(function (response) {
             Swal.fire('Activado!', 'El registro ha sido activado con éxito.', 'success');
             me.listarArticulo(1, '', 'nombre');
-          })["catch"](function () {
+          })["catch"](function (error) {
             Swal.fire({
-              icon: 'error',
-              title: 'Oops...',
-              text: 'Algo salio mas!',
-              footer: '<a href>Actualizar</a>'
+              icon: "error",
+              title: "Oops...",
+              text: "Algo salio mas!",
+              footer: error
             });
           });
         }
@@ -2466,10 +2467,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             Swal.fire('Eliminado!', 'El registro ha sido eliminado con éxito.', 'success');
           })["catch"](function (error) {
             Swal.fire({
-              icon: 'error',
-              title: 'Oops...',
-              text: 'Algo salio mas!',
-              footer: '<a href>Actualizar</a>'
+              icon: "error",
+              title: "Oops...",
+              text: "Algo salio mas!",
+              footer: error
             });
           });
         }
@@ -2922,19 +2923,25 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 });
 
               case 4:
-                _context2.next = 9;
+                _context2.next = 10;
                 break;
 
               case 6:
                 _context2.prev = 6;
                 _context2.t0 = _context2["catch"](1);
-
                 // console.log(error)
+                Swal.fire({
+                  icon: "error",
+                  title: "Oops...",
+                  text: "Algo salio mas!",
+                  footer: _context2.t0
+                });
+
                 if (_context2.t0.response.data) {
                   _this2.errors = _context2.t0.response.data.errors; // console.log(this.errors)
                 }
 
-              case 9:
+              case 10:
               case "end":
                 return _context2.stop();
             }
@@ -2951,9 +2958,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
-                // if (this.validarCategoria()) {
-                // return;
-                // }
                 me = _this3;
                 _context3.prev = 1;
                 _context3.next = 4;
@@ -2968,18 +2972,24 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 });
 
               case 4:
-                _context3.next = 9;
+                _context3.next = 10;
                 break;
 
               case 6:
                 _context3.prev = 6;
                 _context3.t0 = _context3["catch"](1);
+                Swal.fire({
+                  icon: "error",
+                  title: "Oops...",
+                  text: "Algo salio mas!",
+                  footer: _context3.t0
+                });
 
                 if (_context3.t0.response.data) {
                   _this3.errors = _context3.t0.response.data.errors; // console.log(this.errors)
                 }
 
-              case 9:
+              case 10:
               case "end":
                 return _context3.stop();
             }
@@ -3008,12 +3018,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }).then(function (response) {
             Swal.fire("Eliminado!", "El registro ha sido eliminado con éxito.", "success");
             me.listarCategoria(1, "", "nombre");
-          })["catch"](function () {
+          })["catch"](function (error) {
             Swal.fire({
               icon: "error",
               title: "Oops...",
               text: "Algo salio mas!",
-              footer: "<a href>Actualizar</a>"
+              footer: error
             });
           });
         }
@@ -3040,12 +3050,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }).then(function (response) {
             Swal.fire("Desactivado!", "El registro ha sido desactivado con éxito.", "success");
             me.listarCategoria(1, "", "nombre");
-          })["catch"](function () {
+          })["catch"](function (error) {
             Swal.fire({
               icon: "error",
               title: "Oops...",
               text: "Algo salio mas!",
-              footer: "<a href>Actualizar</a>"
+              footer: error
             });
           });
         }
@@ -3075,7 +3085,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               icon: "error",
               title: "Oops...",
               text: "Algo salio mas!",
-              footer: "<a href>Actualizar</a>"
+              footer: error
             });
           });
         }
@@ -3449,7 +3459,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         me.arrayPersona = respuesta.personas.data;
         me.pagination = respuesta.pagination;
       })["catch"](function (error) {
-        console.log(error);
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Algo salio mas!",
+          footer: error
+        });
       });
     },
     cambiarPagina: function cambiarPagina(page, buscar, criterio) {
@@ -3485,27 +3500,25 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 });
 
               case 4:
-                _context.next = 9;
+                _context.next = 10;
                 break;
 
               case 6:
                 _context.prev = 6;
                 _context.t0 = _context["catch"](1);
-
                 // console.log(error)
+                Swal.fire({
+                  icon: "error",
+                  title: "Oops...",
+                  text: "Algo salio mas!",
+                  footer: _context.t0
+                });
+
                 if (_context.t0.response.data) {
                   _this.errors = _context.t0.response.data.errors;
-                  console.log(_context.t0.response.data.errors);
-                } else {
-                  Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'Algo salio mas!',
-                    footer: '<a href>Vuelve a intenatar</a>'
-                  });
                 }
 
-              case 9:
+              case 10:
               case "end":
                 return _context.stop();
             }
@@ -3540,27 +3553,25 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 });
 
               case 4:
-                _context2.next = 9;
+                _context2.next = 10;
                 break;
 
               case 6:
                 _context2.prev = 6;
                 _context2.t0 = _context2["catch"](1);
-
                 // console.log(error)
+                Swal.fire({
+                  icon: "error",
+                  title: "Oops...",
+                  text: "Algo salio mas!",
+                  footer: _context2.t0
+                });
+
                 if (_context2.t0.response.data) {
                   _this2.errors = _context2.t0.response.data.errors;
-                  console.log(_context2.t0.response.data.errors);
-                } else {
-                  Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'Algo salio mas!',
-                    footer: '<a href>Vuelve a intenatar</a>'
-                  });
                 }
 
-              case 9:
+              case 10:
               case "end":
                 return _context2.stop();
             }
@@ -4553,7 +4564,7 @@ __webpack_require__.r(__webpack_exports__);
       var me = this;
       var url = '/datos';
       axios.get(url).then(function (response) {
-        if (response.data.id = 1) {
+        if (response.data.length == 1) {
           console.log('existem datos');
           console.log(response);
           me.tipoAccion = 2;
@@ -4563,7 +4574,9 @@ __webpack_require__.r(__webpack_exports__);
           me.email = respuesta['email'];
           me.direccion = respuesta['direccion'];
           me.telefono = respuesta['telefono'];
-        } else {
+          me.imagen = respuesta['image'];
+          console.log('nno existe informacion');
+          console.log(response);
           me.tipoAccion = 1;
         }
       })["catch"](function (error) {
@@ -5109,7 +5122,7 @@ __webpack_require__.r(__webpack_exports__);
       tipo_comprobante: 'BOLETA',
       serie_comprobante: '',
       num_comprobante: '',
-      impuesto: 0.18,
+      impuesto: 0.12,
       total: 0.0,
       totalImpuesto: 0.0,
       totalParcial: 0.0,
@@ -5230,6 +5243,7 @@ __webpack_require__.r(__webpack_exports__);
         if (me.arrayArticulo.length > 0) {
           me.articulo = me.arrayArticulo[0]['nombre'];
           me.idarticulo = me.arrayArticulo[0]['id'];
+          console.log(respuesta);
         } else {
           me.articulo = 'No existe este articulo';
           me.idarticulo = 0;
@@ -5336,7 +5350,7 @@ __webpack_require__.r(__webpack_exports__);
         me.tipo_comprobante = 'BOLETA';
         me.serie_comprobante = '';
         me.num_comprobante = '';
-        me.impuesto = 0.18;
+        me.impuesto = 0.12;
         me.total = 0.0;
         me.idarticulo = 0;
         me.articulo = '';
@@ -5367,7 +5381,7 @@ __webpack_require__.r(__webpack_exports__);
       me.tipo_comprobante = 'BOLETA';
       me.serie_comprobante = '';
       me.num_comprobante = '';
-      me.impuesto = 0.18;
+      me.impuesto = 0.12;
       me.total = 0.0;
       me.idarticulo = 0;
       me.articulo = '';
@@ -5411,7 +5425,7 @@ __webpack_require__.r(__webpack_exports__);
       this.tituloModal = '';
     },
     abrirModal: function abrirModal() {
-      this.arrayArticulo = [];
+      // this.arrayArticulo=[];
       this.modal = 1;
       this.tituloModal = 'Seleccione los articulos que desee';
     },
@@ -5444,6 +5458,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     this.listarIngreso(1, this.buscar, this.criterio);
+    this.listarArticulo(this.buscar, this.criterio);
   }
 });
 
@@ -5902,6 +5917,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -6028,7 +6051,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   Swal.fire("Guardado!", "El registro ha sido guardado con éxito.", "success");
                   me.listarPersona(1, "", "nombre");
                 })["catch"](function (error) {
-                  console.log(error);
+                  Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: "Algo salio mas!",
+                    footer: error
+                  });
+
+                  if (error.response.data) {
+                    _this2.errors = error.response.data.errors;
+                  }
                 });
 
               case 3:
@@ -6074,13 +6106,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 6:
                 _context3.prev = 6;
                 _context3.t0 = _context3["catch"](1);
-                console.log(_context3.t0);
                 Swal.fire({
-                  icon: 'error',
-                  title: 'Oops...',
-                  text: 'Algo salio mas!',
+                  icon: "error",
+                  title: "Oops...",
+                  text: "Algo salio mas!",
                   footer: _context3.t0
                 });
+
+                if (_context3.t0.response.data) {
+                  _this3.errors = _context3.t0.response.data.errors;
+                }
 
               case 10:
               case "end":
@@ -96336,7 +96371,7 @@ var render = function() {
                                   [_c("i", { staticClass: "fa fa-check" })]
                                 )
                               ],
-                          _vm._v("\n                                 "),
+                          _vm._v("\n                                     "),
                           _c(
                             "button",
                             {
@@ -102038,7 +102073,7 @@ var render = function() {
       [
         _c(
           "div",
-          { staticClass: "modal-dialog", attrs: { role: "document" } },
+          { staticClass: "modal-dialog modal-lg", attrs: { role: "document" } },
           [
             _c("div", { staticClass: "modal-content" }, [
               _c("div", { staticClass: "modal-header" }, [
@@ -102101,7 +102136,13 @@ var render = function() {
                             _vm.nombre = $event.target.value
                           }
                         }
-                      })
+                      }),
+                      _vm._v(" "),
+                      _vm.errors.nombre
+                        ? _c("label", { staticClass: "text-danger" }, [
+                            _vm._v("* " + _vm._s(_vm.errors.nombre[0]))
+                          ])
+                        : _vm._e()
                     ])
                   ]),
                   _vm._v(" "),
@@ -102136,7 +102177,13 @@ var render = function() {
                             _vm.direccion = $event.target.value
                           }
                         }
-                      })
+                      }),
+                      _vm._v(" "),
+                      _vm.errors.direccion
+                        ? _c("label", { staticClass: "text-danger" }, [
+                            _vm._v("* " + _vm._s(_vm.errors.direccion[0]))
+                          ])
+                        : _vm._e()
                     ])
                   ])
                 ]),
@@ -102264,7 +102311,13 @@ var render = function() {
                             _vm.email = $event.target.value
                           }
                         }
-                      })
+                      }),
+                      _vm._v(" "),
+                      _vm.errors.email
+                        ? _c("label", { staticClass: "text-danger" }, [
+                            _vm._v("* " + _vm._s(_vm.errors.email[0]))
+                          ])
+                        : _vm._e()
                     ])
                   ]),
                   _vm._v(" "),
@@ -102294,7 +102347,13 @@ var render = function() {
                             _vm.telefono = $event.target.value
                           }
                         }
-                      })
+                      }),
+                      _vm._v(" "),
+                      _vm.errors.telefono
+                        ? _c("label", { staticClass: "text-danger" }, [
+                            _vm._v("* " + _vm._s(_vm.errors.telefono[0]))
+                          ])
+                        : _vm._e()
                     ])
                   ])
                 ]),

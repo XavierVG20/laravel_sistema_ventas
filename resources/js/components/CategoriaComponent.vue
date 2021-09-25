@@ -138,7 +138,7 @@
             </ul>
           </nav>
 
-       
+
           <!-- /.modal -->
 
           <!--Fin del modal-->
@@ -307,43 +307,55 @@
 
         } catch (error) {
           // console.log(error)
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Algo salio mas!",
+            footer: error,
+          });
           if (error.response.data) {
 
             this.errors = error.response.data.errors;
             // console.log(this.errors)
+
           }
+
+
         }
       },
       async actualizarCategoria() {
-        // if (this.validarCategoria()) {
-        // return;
-        // }
-
         let me = this;
 
-     try {
-      await axios.put("/categoria/actualizar", {
+        try {
+          await axios.put("/categoria/actualizar", {
             nombre: this.nombre,
             descripcion: this.descripcion,
             id: this.categoria_id,
           })
-          .then(function (response) {
-            me.cerrarModal();
-            Swal.fire(
-              "Actualizado!",
-              "El registro ha sido actualizado con éxito.",
-              "success"
-            );
-            me.listarCategoria(1, "", "nombre");
-          })
-         
-     } catch (error) {
-      if (error.response.data) {
+            .then(function (response) {
+              me.cerrarModal();
+              Swal.fire(
+                "Actualizado!",
+                "El registro ha sido actualizado con éxito.",
+                "success"
+              );
+              me.listarCategoria(1, "", "nombre");
+            })
 
-this.errors = error.response.data.errors;
-// console.log(this.errors)
-}
-     }
+        } catch (error) {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Algo salio mas!",
+            footer: error,
+          });
+          if (error.response.data) {
+
+            this.errors = error.response.data.errors;
+
+            // console.log(this.errors)
+          }
+        }
       },
       eliminarCategoria(id) {
         Swal.fire({
@@ -372,15 +384,13 @@ this.errors = error.response.data.errors;
                 );
                 me.listarCategoria(1, "", "nombre");
               })
-              .catch(() => {
+              .catch((error) => {
                 Swal.fire({
                   icon: "error",
                   title: "Oops...",
                   text: "Algo salio mas!",
-                  footer: "<a href>Actualizar</a>",
+                  footer: error,
                 });
-
-                
               });
           }
         });
@@ -414,12 +424,12 @@ this.errors = error.response.data.errors;
                 );
                 me.listarCategoria(1, "", "nombre");
               })
-              .catch(() => {
+              .catch((error) => {
                 Swal.fire({
                   icon: "error",
                   title: "Oops...",
                   text: "Algo salio mas!",
-                  footer: "<a href>Actualizar</a>",
+                  footer: error,
                 });
               });
           }
@@ -455,7 +465,7 @@ this.errors = error.response.data.errors;
                   icon: "error",
                   title: "Oops...",
                   text: "Algo salio mas!",
-                  footer: "<a href>Actualizar</a>",
+                  footer: error,
                 });
               });
           }

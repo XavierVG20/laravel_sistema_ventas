@@ -126,7 +126,7 @@
         <!--Inicio del modal agregar/actualizar-->
         <div class="modal modal-primary" style="overflow: hidden" tabindex="-1" :class="{ mostrar: modal }"
             role="dialog" aria-labelledby="myModalLabel">
-            <div class="modal-dialog" role="document">
+            <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"
@@ -142,6 +142,8 @@
                                         <label class="control-label">Nombre (*)</label>
                                         <input type="text" v-model="nombre" class="form-control"
                                             placeholder="Nombre de la persona" />
+                                      <label v-if="errors.nombre" class="text-danger">* {{errors.nombre[0]}}</label>
+
 
                                     </div> 
                                 </div>
@@ -150,6 +152,8 @@
                                         <label class="control-label" for="email-input">Dirección</label>
                                         <input type="text" v-model="direccion" class="form-control"
                                             placeholder="Dirección" />
+                                     <label v-if="errors.direccion" class="text-danger">* {{errors.direccion[0]}}</label>
+
                                        
 
                                     </div>
@@ -185,6 +189,8 @@
                                     <div class="form-group">
                                         <label class="control-label">Email</label>
                                         <input type="email" v-model="email" class="form-control" placeholder="Email" />
+                                        <label v-if="errors.email" class="text-danger">* {{errors.email[0]}}</label>
+
 
                                     </div>
                                 </div>
@@ -193,6 +199,8 @@
                                         <label class="control-label">Teléfono</label>
                                         <input type="text" v-model="telefono" class="form-control"
                                             placeholder="Teléfono" />
+                                    <label v-if="errors.telefono" class="text-danger">* {{errors.telefono[0]}}</label>
+
                                      
 
                                     </div>
@@ -359,7 +367,17 @@
                             me.listarPersona(1, "", "nombre");
                     })
                     .catch(error =>{
-                        console.log(error)
+                           Swal.fire({
+                            icon: "error",
+                            title: "Oops...",
+                            text: "Algo salio mas!",
+                            footer: error,
+                        });
+                        if (error.response.data) {
+                             this.errors = error.response.data.errors;
+                        }
+                       
+                       
                     })
                         
              
@@ -391,14 +409,15 @@
                             me.listarPersona(1, "", "nombre");
                         })
                 } catch (error) {
-                     console.log(error)
-                  
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Oops...',
-                            text: 'Algo salio mas!',
-                            footer: error
-                        })
+                      Swal.fire({
+                            icon: "error",
+                            title: "Oops...",
+                            text: "Algo salio mas!",
+                            footer: error,
+                        });
+                        if (error.response.data) {
+                             this.errors = error.response.data.errors;
+                        }
                     
                 }
 

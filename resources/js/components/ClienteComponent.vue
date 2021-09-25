@@ -64,36 +64,36 @@
                         </div>
                     </div>
                     <div class="table-responsive">
-                    <table class="table table-bordered table-striped table-sm">
-                        <thead>
-                            <tr>
-                                <th>Opciones</th>
-                                <th>Nombre</th>
-                                <th>Tipo Documento</th>
-                                <th>Número</th>
-                                <th>Dirección</th>
-                                <th>Teléfono</th>
-                                <th>Email</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr v-for="persona in arrayPersona" :key="persona.id">
-                                <td>
-                                    <button type="button" @click="abrirModal('persona', 'actualizar', persona)"
-                                        class="btn btn-primary btn-sm">
-                                        <i class="fa fa-pencil"></i>
-                                    </button>
-                                </td>
-                                <td v-text="persona.nombre"></td>
-                                <td v-text="persona.tipo_documento"></td>
-                                <td v-text="persona.num_documento"></td>
-                                <td v-text="persona.direccion"></td>
-                                <td v-text="persona.telefono"></td>
-                                <td v-text="persona.email"></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                        <table class="table table-bordered table-striped table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Opciones</th>
+                                    <th>Nombre</th>
+                                    <th>Tipo Documento</th>
+                                    <th>Número</th>
+                                    <th>Dirección</th>
+                                    <th>Teléfono</th>
+                                    <th>Email</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="persona in arrayPersona" :key="persona.id">
+                                    <td>
+                                        <button type="button" @click="abrirModal('persona', 'actualizar', persona)"
+                                            class="btn btn-primary btn-sm">
+                                            <i class="fa fa-pencil"></i>
+                                        </button>
+                                    </td>
+                                    <td v-text="persona.nombre"></td>
+                                    <td v-text="persona.tipo_documento"></td>
+                                    <td v-text="persona.num_documento"></td>
+                                    <td v-text="persona.direccion"></td>
+                                    <td v-text="persona.telefono"></td>
+                                    <td v-text="persona.email"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                     <nav>
                         <ul class="pagination">
                             <li class="page-item" v-if="pagination.current_page > 1">
@@ -301,7 +301,12 @@
                         me.pagination = respuesta.pagination;
                     })
                     .catch(function (error) {
-                        console.log(error);
+                        Swal.fire({
+                            icon: "error",
+                            title: "Oops...",
+                            text: "Algo salio mas!",
+                            footer: error,
+                        });
                     });
             },
             cambiarPagina(page, buscar, criterio) {
@@ -335,18 +340,19 @@
                         })
                 } catch (error) {
                     // console.log(error)
+                    Swal.fire({
+                        icon: "error",
+                        title: "Oops...",
+                        text: "Algo salio mas!",
+                        footer: error,
+                    });
                     if (error.response.data) {
 
                         this.errors = error.response.data.errors;
-                        console.log(error.response.data.errors)
-                    } else {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Oops...',
-                            text: 'Algo salio mas!',
-                            footer: '<a href>Vuelve a intenatar</a>'
-                        })
+
                     }
+
+
                 }
 
             },
@@ -375,18 +381,19 @@
                         })
                 } catch (error) {
                     // console.log(error)
+                    Swal.fire({
+                        icon: "error",
+                        title: "Oops...",
+                        text: "Algo salio mas!",
+                        footer: error,
+                    });
                     if (error.response.data) {
 
                         this.errors = error.response.data.errors;
-                        console.log(error.response.data.errors)
-                    } else {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Oops...',
-                            text: 'Algo salio mas!',
-                            footer: '<a href>Vuelve a intenatar</a>'
-                        })
+
                     }
+
+
                 }
 
             },

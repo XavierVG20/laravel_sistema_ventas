@@ -101,11 +101,12 @@ class ArticuloController extends Controller
     public function buscarArticulo(Request $request ){
 
         $filtro = $request->filtro;
-        if($filtro){
+        if($filtro== ''){
+           
+            $articulos = Articulo::orderBy('nombre', 'asc');
+        }else{
             $articulos = Articulo::where('codigo','=', $filtro)
             ->select('id', 'nombre')->orderBy('nombre', 'asc')->take(1)->get();
-        }else{
-            $articulos = Articulo::orderBy('nombre', 'asc');
     
         }
         

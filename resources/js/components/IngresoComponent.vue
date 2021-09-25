@@ -151,7 +151,7 @@
                         <div class="form-group">
                             <label>Tipo Comprobante(*)</label>
                             <select class="form-control" v-model="tipo_comprobante">
-                                <option value="0">Seleccione</option>
+                                <option value="0">Seleccione</option>  
                                 <option value="BOLETA">Boleta</option>
                                 <option value="FACTURA">Factura</option>
                                 <option value="TICKET">Ticket</option>
@@ -445,7 +445,7 @@ data (){
         tipo_comprobante : 'BOLETA',
         serie_comprobante : '',
         num_comprobante : '',
-        impuesto: 0.18,
+        impuesto: 0.12,
         total:0.0,
         totalImpuesto: 0.0,
         totalParcial: 0.0,
@@ -567,6 +567,7 @@ methods : {
             if(me.arrayArticulo.length>0){
                 me.articulo=me.arrayArticulo[0]['nombre'];
                 me.idarticulo=me.arrayArticulo[0]['id'];
+                console.log(respuesta);
             }
             else{
                 me.articulo='No existe este articulo';
@@ -677,7 +678,7 @@ methods : {
             me.tipo_comprobante='BOLETA';
             me.serie_comprobante='';
             me.num_comprobante='';
-            me.impuesto=0.18;
+            me.impuesto=0.12;
             me.total=0.0;
             me.idarticulo=0;
             me.articulo='';
@@ -717,7 +718,7 @@ methods : {
             me.tipo_comprobante='BOLETA';
             me.serie_comprobante='';
             me.num_comprobante='';
-            me.impuesto=0.18;
+            me.impuesto=0.12;
             me.total=0.0;
             me.idarticulo=0;
             me.articulo='';
@@ -769,7 +770,9 @@ methods : {
         this.tituloModal='';
     },
     abrirModal(){
-        this.arrayArticulo=[];
+        
+       // this.arrayArticulo=[];
+        
         this.modal = 1;
         this.tituloModal = 'Seleccione los articulos que desee';
 
@@ -814,6 +817,7 @@ methods : {
 },
 mounted() {
     this.listarIngreso(1,this.buscar,this.criterio);
+    this.listarArticulo (this.buscar,this.criterio);
 }
 }
 </script>

@@ -54,10 +54,14 @@ class ProveedorController extends Controller
     public function store(Request $request)
     {         
  
-        DB::insert('insert into categorias ( nombre) values ( ?)', [ 'Marc']);
-
-        try{
-            DB::beginTransaction();
+        $request->validate([
+            'nombre'=> 'required',
+            'tipo_documento'=>'required',
+           // 'num_documento'=>'required|numeric|min:10',
+            'direccion'=>'required|',
+            'telefono'=>'required|',
+            'email'=>'required|email',
+        ]);        
             $proveedor = new Proveedor();
             $proveedor->contacto = $request->contacto;
             $proveedor->telefono_contacto = $request->telefono_contacto;
@@ -71,12 +75,7 @@ class ProveedorController extends Controller
            
             $proveedor->save();
  
-            DB::commit();
- 
-        } catch (Exception $e){
-            DB::rollBack();
-        }
- 
+       
 
          
          
