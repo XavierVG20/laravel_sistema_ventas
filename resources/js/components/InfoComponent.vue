@@ -210,7 +210,10 @@
 
                   <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-
+<img
+    
+    src="https://res.cloudinary.com/drrzmfkvx/image/upload/v1630547312/156522915_2815245062063150_337949607760751210_n_raz5wn.jpg"
+>
                       <img id="img1" src="#" height="100px" width="100px" border="solid 1px">
                       <input id="inputFile1" type="file" name="image" @change="getImage" accept="image/*">
                     </div>
@@ -253,6 +256,7 @@
         email: '',
         direccion: '',
         telefono: '',
+        link_image:'',
         imagen: null,
         datos: [],
         modal: 0,
@@ -311,7 +315,7 @@
         let me = this;
         var url = '/datos';
         axios.get(url).then(function (response) {
-         
+         console.log(response)
          
           if(response.data.length == 1){
             console.log('existem datos');
@@ -324,8 +328,7 @@
           me.email = respuesta['email'];
           me.direccion = respuesta['direccion'];
           me.telefono = respuesta['telefono'];
-          me.imagen = respuesta['image']
-            console.log('nno existe informacion');
+          me.link_image = respuesta['image']
   console.log(response)
             me.tipoAccion= 1;
           }

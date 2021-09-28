@@ -368,14 +368,25 @@
             <div class="modal-body">
                 <div class="form-group row">
                     <div class="col-md-6">
-                        <div class="input-group">
-                            <select class="form-control col-md-3" v-model="criterioA">
+                        <div >
+                            <tr>
+                                <td>
+<select class="form-control" v-model="criterioA">
                               <option value="nombre">Nombre</option>
                               <option value="descripcion">Descripción</option>
                               <option value="codigo">Código</option>
                             </select>
-                            <input type="text" v-model="buscarA" @keyup.enter="listarArticulo(buscarA,criterioA)" class="form-control" placeholder="Texto a buscar">
+                                </td>
+                                <td>
+                                 <input type="text" v-model="buscarA" @keyup.enter="listarArticulo(buscarA,criterioA)" class="form-control" placeholder="Texto a buscar">
+
+                                </td>
+                                <td>
                             <button type="submit" @click="listarArticulo(buscarA,criterioA)" class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
+
+                                </td>
+                            </tr>
+                            
                         </div>
                     </div>
                 </div>

@@ -258,13 +258,7 @@
     methods: {
       async listarCategoria(page, buscar, criterio) {
         let me = this;
-        var url =
-          "/categoria?page=" +
-          page +
-          "&buscar=" +
-          buscar +
-          "&criterio=" +
-          criterio;
+        var url ="/categoria?page=" + page +  "&buscar=" +  buscar + "&criterio=" +  criterio;
         await axios
           .get(url)
           .then(function (response) {

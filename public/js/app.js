@@ -4493,6 +4493,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -4505,6 +4508,7 @@ __webpack_require__.r(__webpack_exports__);
       email: '',
       direccion: '',
       telefono: '',
+      link_image: '',
       imagen: null,
       datos: [],
       modal: 0,
@@ -4564,6 +4568,8 @@ __webpack_require__.r(__webpack_exports__);
       var me = this;
       var url = '/datos';
       axios.get(url).then(function (response) {
+        console.log(response);
+
         if (response.data.length == 1) {
           console.log('existem datos');
           console.log(response);
@@ -4574,8 +4580,7 @@ __webpack_require__.r(__webpack_exports__);
           me.email = respuesta['email'];
           me.direccion = respuesta['direccion'];
           me.telefono = respuesta['telefono'];
-          me.imagen = respuesta['image'];
-          console.log('nno existe informacion');
+          me.link_image = respuesta['image'];
           console.log(response);
           me.tipoAccion = 1;
         }
@@ -4676,6 +4681,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-select */ "./node_modules/vue-select/dist/vue-select.js");
 /* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_select__WEBPACK_IMPORTED_MODULE_0__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -7134,6 +7150,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
@@ -7144,7 +7169,7 @@ __webpack_require__.r(__webpack_exports__);
       tipo_comprobante: 'BOLETA',
       serie_comprobante: '',
       num_comprobante: '',
-      impuesto: 0.18,
+      impuesto: 0.12,
       total: 0.0,
       totalImpuesto: 0.0,
       totalParcial: 0.0,
@@ -7392,7 +7417,7 @@ __webpack_require__.r(__webpack_exports__);
         me.tipo_comprobante = 'BOLETA';
         me.serie_comprobante = '';
         me.num_comprobante = '';
-        me.impuesto = 0.18;
+        me.impuesto = 0.12;
         me.total = 0.0;
         me.idarticulo = 0;
         me.articulo = '';
@@ -7402,7 +7427,8 @@ __webpack_require__.r(__webpack_exports__);
         me.codigo = '';
         me.descuento = 0;
         me.arrayDetalle = [];
-        Swal.fire('Guardado!', 'Datos guardados con éxito.', 'success'); // window.open('/venta/pdf/'+ response.data.id);
+        Swal.fire('Guardado!', 'Datos guardados con éxito.', 'success');
+        window.open('/venta/pdf/' + response.data.id);
       })["catch"](function (error) {
         console.log(error);
       });
@@ -7433,7 +7459,7 @@ __webpack_require__.r(__webpack_exports__);
       me.tipo_comprobante = 'BOLETA';
       me.serie_comprobante = '';
       me.num_comprobante = '';
-      me.impuesto = 0.18;
+      me.impuesto = 0.12;
       me.total = 0.0;
       me.idarticulo = 0;
       me.articulo = '';
@@ -7477,7 +7503,6 @@ __webpack_require__.r(__webpack_exports__);
       this.tituloModal = '';
     },
     abrirModal: function abrirModal() {
-      this.arrayArticulo = [];
       this.modal = 1;
       this.tituloModal = 'Seleccione los articulos que desee';
     },
@@ -7510,6 +7535,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     this.listarVenta(1, this.buscar, this.criterio);
+    this.listarArticulo(this.buscar, this.criterio);
   }
 });
 
@@ -99905,6 +99931,13 @@ var render = function() {
                           [
                             _c("img", {
                               attrs: {
+                                src:
+                                  "https://res.cloudinary.com/drrzmfkvx/image/upload/v1630547312/156522915_2815245062063150_337949607760751210_n_raz5wn.jpg"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("img", {
+                              attrs: {
                                 id: "img1",
                                 src: "#",
                                 height: "100px",
@@ -99982,7 +100015,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("section", { staticClass: "content-header" }, [
-      _c("h1", [_vm._v("\n      Informacion\n    ")]),
+      _c("h1", [_vm._v("\n        Informacion\n      ")]),
       _vm._v(" "),
       _c("ol", { staticClass: "breadcrumb" }, [
         _c("li", [
@@ -100057,7 +100090,7 @@ var staticRenderFns = [
           _vm._v(" "),
           _c("p", { staticClass: "text-muted" }, [
             _vm._v(
-              "\n              B.S. in Computer Science from the University of Tennessee at Knoxville\n            "
+              "\n                B.S. in Computer Science from the University of Tennessee at Knoxville\n              "
             )
           ]),
           _vm._v(" "),
@@ -100146,7 +100179,7 @@ var staticRenderFns = [
         },
         [
           _c("i", { staticClass: "fa fa-edit" }),
-          _vm._v(" Descagar informacion\n                ")
+          _vm._v(" Descagar informacion\n                  ")
         ]
       )
     ])
@@ -101246,109 +101279,123 @@ var render = function() {
               _c("div", { staticClass: "modal-body" }, [
                 _c("div", { staticClass: "form-group row" }, [
                   _c("div", { staticClass: "col-md-6" }, [
-                    _c("div", { staticClass: "input-group" }, [
-                      _c(
-                        "select",
-                        {
-                          directives: [
+                    _c("div", [
+                      _c("tr", [
+                        _c("td", [
+                          _c(
+                            "select",
                             {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.criterioA,
-                              expression: "criterioA"
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.criterioA,
+                                  expression: "criterioA"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              on: {
+                                change: function($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function(o) {
+                                      return o.selected
+                                    })
+                                    .map(function(o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.criterioA = $event.target.multiple
+                                    ? $$selectedVal
+                                    : $$selectedVal[0]
+                                }
+                              }
+                            },
+                            [
+                              _c("option", { attrs: { value: "nombre" } }, [
+                                _vm._v("Nombre")
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "option",
+                                { attrs: { value: "descripcion" } },
+                                [_vm._v("Descripción")]
+                              ),
+                              _vm._v(" "),
+                              _c("option", { attrs: { value: "codigo" } }, [
+                                _vm._v("Código")
+                              ])
+                            ]
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.buscarA,
+                                expression: "buscarA"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: {
+                              type: "text",
+                              placeholder: "Texto a buscar"
+                            },
+                            domProps: { value: _vm.buscarA },
+                            on: {
+                              keyup: function($event) {
+                                if (
+                                  !$event.type.indexOf("key") &&
+                                  _vm._k(
+                                    $event.keyCode,
+                                    "enter",
+                                    13,
+                                    $event.key,
+                                    "Enter"
+                                  )
+                                ) {
+                                  return null
+                                }
+                                return _vm.listarArticulo(
+                                  _vm.buscarA,
+                                  _vm.criterioA
+                                )
+                              },
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.buscarA = $event.target.value
+                              }
                             }
-                          ],
-                          staticClass: "form-control col-md-3",
-                          on: {
-                            change: function($event) {
-                              var $$selectedVal = Array.prototype.filter
-                                .call($event.target.options, function(o) {
-                                  return o.selected
-                                })
-                                .map(function(o) {
-                                  var val = "_value" in o ? o._value : o.value
-                                  return val
-                                })
-                              _vm.criterioA = $event.target.multiple
-                                ? $$selectedVal
-                                : $$selectedVal[0]
-                            }
-                          }
-                        },
-                        [
-                          _c("option", { attrs: { value: "nombre" } }, [
-                            _vm._v("Nombre")
-                          ]),
-                          _vm._v(" "),
-                          _c("option", { attrs: { value: "descripcion" } }, [
-                            _vm._v("Descripción")
-                          ]),
-                          _vm._v(" "),
-                          _c("option", { attrs: { value: "codigo" } }, [
-                            _vm._v("Código")
-                          ])
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.buscarA,
-                            expression: "buscarA"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        attrs: { type: "text", placeholder: "Texto a buscar" },
-                        domProps: { value: _vm.buscarA },
-                        on: {
-                          keyup: function($event) {
-                            if (
-                              !$event.type.indexOf("key") &&
-                              _vm._k(
-                                $event.keyCode,
-                                "enter",
-                                13,
-                                $event.key,
-                                "Enter"
-                              )
-                            ) {
-                              return null
-                            }
-                            return _vm.listarArticulo(
-                              _vm.buscarA,
-                              _vm.criterioA
-                            )
-                          },
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.buscarA = $event.target.value
-                          }
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-primary",
-                          attrs: { type: "submit" },
-                          on: {
-                            click: function($event) {
-                              return _vm.listarArticulo(
-                                _vm.buscarA,
-                                _vm.criterioA
-                              )
-                            }
-                          }
-                        },
-                        [
-                          _c("i", { staticClass: "fa fa-search" }),
-                          _vm._v(" Buscar")
-                        ]
-                      )
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-primary",
+                              attrs: { type: "submit" },
+                              on: {
+                                click: function($event) {
+                                  return _vm.listarArticulo(
+                                    _vm.buscarA,
+                                    _vm.criterioA
+                                  )
+                                }
+                              }
+                            },
+                            [
+                              _c("i", { staticClass: "fa fa-search" }),
+                              _vm._v(" Buscar")
+                            ]
+                          )
+                        ])
+                      ])
                     ])
                   ])
                 ]),
@@ -104106,66 +104153,9 @@ var render = function() {
                   _c("div", { staticClass: "form-group row border" }, [
                     _c("div", { staticClass: "col-md-4" }, [
                       _c("div", { staticClass: "form-group" }, [
-                        _c("label", [
-                          _vm._v("Artículo "),
-                          _c(
-                            "span",
-                            {
-                              directives: [
-                                {
-                                  name: "show",
-                                  rawName: "v-show",
-                                  value: _vm.idarticulo == 0,
-                                  expression: "idarticulo==0"
-                                }
-                              ],
-                              staticStyle: { color: "red" }
-                            },
-                            [_vm._v("(*Seleccione Articulo)")]
-                          )
-                        ]),
+                        _c("label", [_vm._v("Artículo ")]),
                         _vm._v(" "),
                         _c("div", { staticClass: "form-inline" }, [
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.codigo,
-                                expression: "codigo"
-                              }
-                            ],
-                            staticClass: "form-control",
-                            attrs: {
-                              type: "text",
-                              placeholder: "Ingrese artículo"
-                            },
-                            domProps: { value: _vm.codigo },
-                            on: {
-                              keyup: function($event) {
-                                if (
-                                  !$event.type.indexOf("key") &&
-                                  _vm._k(
-                                    $event.keyCode,
-                                    "enter",
-                                    13,
-                                    $event.key,
-                                    "Enter"
-                                  )
-                                ) {
-                                  return null
-                                }
-                                return _vm.buscarArticulo()
-                              },
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.codigo = $event.target.value
-                              }
-                            }
-                          }),
-                          _vm._v(" "),
                           _c(
                             "button",
                             {
@@ -104176,30 +104166,8 @@ var render = function() {
                                 }
                               }
                             },
-                            [_vm._v("Articulo")]
-                          ),
-                          _vm._v(" "),
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.articulo,
-                                expression: "articulo"
-                              }
-                            ],
-                            staticClass: "form-control",
-                            attrs: { type: "text", readonly: "" },
-                            domProps: { value: _vm.articulo },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.articulo = $event.target.value
-                              }
-                            }
-                          })
+                            [_vm._v("Agregar Articulo")]
+                          )
                         ])
                       ])
                     ])
@@ -104771,109 +104739,123 @@ var render = function() {
               _c("div", { staticClass: "modal-body" }, [
                 _c("div", { staticClass: "form-group row" }, [
                   _c("div", { staticClass: "col-md-6" }, [
-                    _c("div", { staticClass: "input-group" }, [
-                      _c(
-                        "select",
-                        {
-                          directives: [
+                    _c("div", [
+                      _c("tr", [
+                        _c("th", [
+                          _c(
+                            "select",
                             {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.criterioA,
-                              expression: "criterioA"
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.criterioA,
+                                  expression: "criterioA"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              on: {
+                                change: function($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function(o) {
+                                      return o.selected
+                                    })
+                                    .map(function(o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.criterioA = $event.target.multiple
+                                    ? $$selectedVal
+                                    : $$selectedVal[0]
+                                }
+                              }
+                            },
+                            [
+                              _c("option", { attrs: { value: "nombre" } }, [
+                                _vm._v("Nombre")
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "option",
+                                { attrs: { value: "descripcion" } },
+                                [_vm._v("Descripción")]
+                              ),
+                              _vm._v(" "),
+                              _c("option", { attrs: { value: "codigo" } }, [
+                                _vm._v("Código")
+                              ])
+                            ]
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("th", [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.buscarA,
+                                expression: "buscarA"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: {
+                              type: "text",
+                              placeholder: "Texto a buscar"
+                            },
+                            domProps: { value: _vm.buscarA },
+                            on: {
+                              keyup: function($event) {
+                                if (
+                                  !$event.type.indexOf("key") &&
+                                  _vm._k(
+                                    $event.keyCode,
+                                    "enter",
+                                    13,
+                                    $event.key,
+                                    "Enter"
+                                  )
+                                ) {
+                                  return null
+                                }
+                                return _vm.listarArticulo(
+                                  _vm.buscarA,
+                                  _vm.criterioA
+                                )
+                              },
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.buscarA = $event.target.value
+                              }
                             }
-                          ],
-                          staticClass: "form-control col-md-3",
-                          on: {
-                            change: function($event) {
-                              var $$selectedVal = Array.prototype.filter
-                                .call($event.target.options, function(o) {
-                                  return o.selected
-                                })
-                                .map(function(o) {
-                                  var val = "_value" in o ? o._value : o.value
-                                  return val
-                                })
-                              _vm.criterioA = $event.target.multiple
-                                ? $$selectedVal
-                                : $$selectedVal[0]
-                            }
-                          }
-                        },
-                        [
-                          _c("option", { attrs: { value: "nombre" } }, [
-                            _vm._v("Nombre")
-                          ]),
-                          _vm._v(" "),
-                          _c("option", { attrs: { value: "descripcion" } }, [
-                            _vm._v("Descripción")
-                          ]),
-                          _vm._v(" "),
-                          _c("option", { attrs: { value: "codigo" } }, [
-                            _vm._v("Código")
-                          ])
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.buscarA,
-                            expression: "buscarA"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        attrs: { type: "text", placeholder: "Texto a buscar" },
-                        domProps: { value: _vm.buscarA },
-                        on: {
-                          keyup: function($event) {
-                            if (
-                              !$event.type.indexOf("key") &&
-                              _vm._k(
-                                $event.keyCode,
-                                "enter",
-                                13,
-                                $event.key,
-                                "Enter"
-                              )
-                            ) {
-                              return null
-                            }
-                            return _vm.listarArticulo(
-                              _vm.buscarA,
-                              _vm.criterioA
-                            )
-                          },
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.buscarA = $event.target.value
-                          }
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-primary",
-                          attrs: { type: "submit" },
-                          on: {
-                            click: function($event) {
-                              return _vm.listarArticulo(
-                                _vm.buscarA,
-                                _vm.criterioA
-                              )
-                            }
-                          }
-                        },
-                        [
-                          _c("i", { staticClass: "fa fa-search" }),
-                          _vm._v(" Buscar")
-                        ]
-                      )
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("th", [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-primary",
+                              attrs: { type: "submit" },
+                              on: {
+                                click: function($event) {
+                                  return _vm.listarArticulo(
+                                    _vm.buscarA,
+                                    _vm.criterioA
+                                  )
+                                }
+                              }
+                            },
+                            [
+                              _c("i", { staticClass: "fa fa-search" }),
+                              _vm._v(" Buscar")
+                            ]
+                          )
+                        ])
+                      ])
                     ])
                   ])
                 ]),

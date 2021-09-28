@@ -183,11 +183,9 @@
                         <div class="form-group row border">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Artículo <span style="color: red;" v-show="idarticulo==0">(*Seleccione Articulo)</span></label>
+                                    <label>Artículo </label>
                                     <div class="form-inline">
-                                        <input type="text" class="form-control" v-model="codigo" @keyup.enter="buscarArticulo()" placeholder="Ingrese artículo">
-                                        <button @click="abrirModal()" class="btn btn-primary">Articulo</button>
-                                        <input type="text" readonly class="form-control" v-model="articulo">
+                                        <button @click="abrirModal()" class="btn btn-primary">Agregar Articulo</button>
                                     </div>                                    
                                 </div>
                             </div>
@@ -376,14 +374,25 @@
             <div class="modal-body">
                 <div class="form-group row">
                     <div class="col-md-6">
-                        <div class="input-group">
-                            <select class="form-control col-md-3" v-model="criterioA">
+                        <div>
+                            <tr>
+                                <th>
+<select class="form-control" v-model="criterioA">
                               <option value="nombre">Nombre</option>
                               <option value="descripcion">Descripción</option>
                               <option value="codigo">Código</option>
                             </select>
-                            <input type="text" v-model="buscarA" @keyup.enter="listarArticulo(buscarA,criterioA)" class="form-control" placeholder="Texto a buscar">
-                            <button type="submit" @click="listarArticulo(buscarA,criterioA)" class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
+                                </th>
+                                <th>
+                                                                <input type="text" v-model="buscarA" @keyup.enter="listarArticulo(buscarA,criterioA)" class="form-control" placeholder="Texto a buscar">
+
+                                </th>
+                                <th>
+                                                                <button type="submit" @click="listarArticulo(buscarA,criterioA)" class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
+
+                                </th>
+                            </tr>
+                            
                         </div>
                     </div>
                 </div>
@@ -452,7 +461,7 @@
                 tipo_comprobante : 'BOLETA',
                 serie_comprobante : '',
                 num_comprobante : '',
-                impuesto: 0.18,
+                impuesto: 0.12,
                 total:0.0,
                 totalImpuesto: 0.0,
                 totalParcial: 0.0,
@@ -702,7 +711,7 @@
                     me.tipo_comprobante='BOLETA';
                     me.serie_comprobante='';
                     me.num_comprobante='';
-                    me.impuesto=0.18;
+                    me.impuesto=0.12;
                     me.total=0.0;
                     me.idarticulo=0;
                     me.articulo='';
@@ -717,7 +726,7 @@
                 'Datos guardados con éxito.',
                 'success'
                 )
-                   // window.open('/venta/pdf/'+ response.data.id);
+                    window.open('/venta/pdf/'+ response.data.id);
 
 
                 }).catch(function (error) {
@@ -755,7 +764,7 @@
                     me.tipo_comprobante='BOLETA';
                     me.serie_comprobante='';
                     me.num_comprobante='';
-                    me.impuesto=0.18;
+                    me.impuesto=0.12;
                     me.total=0.0;
                     me.idarticulo=0;
                     me.articulo='';
@@ -807,7 +816,6 @@
                 this.tituloModal='';
             },
             abrirModal(){
-                this.arrayArticulo=[];
                 this.modal = 1;
                 this.tituloModal = 'Seleccione los articulos que desee';
  
@@ -853,6 +861,8 @@
         },
         mounted() {
             this.listarVenta(1,this.buscar,this.criterio);
+            this.listarArticulo (this.buscar,this.criterio);
+
         }
     }
 </script>

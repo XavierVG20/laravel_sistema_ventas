@@ -6,6 +6,7 @@ export default {
   mounted() {
     this.renderChart(
       {
+        
         labels: [
           "January",
           "February",
