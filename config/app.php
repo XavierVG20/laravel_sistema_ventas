@@ -163,6 +163,9 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         CloudinaryLabs\CloudinaryLaravel\CloudinaryServiceProvider::class,
         SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class,
+        /** cloudder con cloudinary  */
+        JD\Cloudder\CloudderServiceProvider::class,
+
 
 
         /*

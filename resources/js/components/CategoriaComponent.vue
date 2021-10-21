@@ -39,29 +39,25 @@
           </div>
           <br><br>
 
-          <div class="form-group row">
-            <div class="col-md-6">
-              <div>
-                <tr>
-                  <th>
-                    <select class="form-control" v-model="criterio">
-                      <option value="nombre">Nombre</option>
-                      <option value="descripcion">Descripción</option>
-                    </select>
-                  </th>
-                  <th>
-                    <input type="text" v-model="buscar" @keyup.enter="listarCategoria(1, buscar, criterio)"
-                      class="form-control" placeholder="Texto a buscar" />
-                  </th>
-                  <th>
-                    <button type="submit" @click="listarCategoria(1, buscar, criterio)" class="btn btn-primary">
-                      <i class="fa fa-search"></i> Buscar
-                    </button>
-                  </th>
-                </tr>
-              </div>
-            </div>
+          <div class="row">
+            <div class="col-xs-4 col-md-3">
+              <select class="form-control" v-model="criterio">
+                <option value="nombre">Nombre</option>
+                <option value="descripcion">Descripción</option>
+              </select>            </div>
+            <div class="col-xs-3">
+              <input type="text" v-model="buscar" @keyup.enter="listarCategoria(1, buscar, criterio)"
+              class="form-control" placeholder="Texto a buscar" />            </div>
+            <div class="col-xs-3">
+              <button type="submit" @click="listarCategoria(1, buscar, criterio)" class="btn btn-primary">
+                <i class="fa fa-search"></i> Buscar
+              </button>           
+           </div>
           </div>
+          </div>
+          <div class="loader"></div>
+          
+
           <table class="table table-bordered table-striped table-sm">
             <thead>
               <tr>
@@ -196,10 +192,15 @@
       </div>
       <!-- /.modal-dialog -->
     </div>
+
+
   </main>
 </template>
 
 <script>
+  import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
+import RingLoader from 'vue-spinner/src/RingLoader.vue'
+import BounceLoader from 'vue-spinner/src/BounceLoader.vue'
   export default {
     data() {
       return {
@@ -225,6 +226,12 @@
         offset: 3,
         criterio: "nombre",
         buscar: "",
+
+        color: '#cc181e',
+      color1: '#5bc0de',
+      size: '45px',
+      margin: '2px',
+      radius: '2px'
       };
     },
     computed: {
@@ -258,10 +265,9 @@
     methods: {
       async listarCategoria(page, buscar, criterio) {
         let me = this;
-        var url ="/categoria?page=" + page +  "&buscar=" +  buscar + "&criterio=" +  criterio;
-        await axios
-          .get(url)
-          .then(function (response) {
+        var url = "/categoria?page=" + page + "&buscar=" + buscar + "&criterio=" + criterio;
+        await axios.get(url)
+          .then(response=>{
             var respuesta = response.data;
             me.arrayCategoria = respuesta.categorias.data;
             me.pagination = respuesta.pagination;
@@ -504,3 +510,27 @@
     },
   };
 </script>
+
+<style>
+.loader {
+  display: inline-block;
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+</style>

@@ -17,78 +17,9 @@
 
     <section class="content">
       <div class="row">
-        <div class="col-md-3">
-
-          <!-- Profile Image -->
-          <div class="box box-primary">
-            <div class="box-body box-profile">
-              <img class="profile-user-img img-responsive img-circle" src="#" alt="User profile picture">
-
-              <h3 class="profile-username text-center">Nina Mcintire</h3>
-
-              <p class="text-muted text-center">Software Engineer</p>
-
-              <ul class="list-group list-group-unbordered">
-                <li class="list-group-item">
-                  <b>Followers</b> <a class="pull-right">1,322</a>
-                </li>
-                <li class="list-group-item">
-                  <b>Following</b> <a class="pull-right">543</a>
-                </li>
-                <li class="list-group-item">
-                  <b>Friends</b> <a class="pull-right">13,287</a>
-                </li>
-              </ul>
-
-              <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a>
-            </div>
-            <!-- /.box-body -->
-          </div>
-          <!-- /.box -->
-
-          <!-- About Me Box -->
-          <div class="box box-primary">
-            <div class="box-header with-border">
-              <h3 class="box-title">About Me</h3>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-              <strong><i class="fa fa-book margin-r-5"></i> Education</strong>
-
-              <p class="text-muted">
-                B.S. in Computer Science from the University of Tennessee at Knoxville
-              </p>
-
-              <hr>
-
-              <strong><i class="fa fa-map-marker margin-r-5"></i> Location</strong>
-
-              <p class="text-muted">Malibu, California</p>
-
-              <hr>
-
-              <strong><i class="fa fa-pencil margin-r-5"></i> Skills</strong>
-
-              <p>
-                <span class="label label-danger">UI Design</span>
-                <span class="label label-success">Coding</span>
-                <span class="label label-info">Javascript</span>
-                <span class="label label-warning">PHP</span>
-                <span class="label label-primary">Node.js</span>
-              </p>
-
-              <hr>
-
-              <strong><i class="fa fa-file-text-o margin-r-5"></i> Notes</strong>
-
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
-            </div>
-            <!-- /.box-body -->
-          </div>
-          <!-- /.box -->
-        </div>
+        
         <!-- /.col -->
-        <div class="col-md-9">
+        <div class="col-md-12">
           <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
               <li class="active"><a href="#activity" data-toggle="tab">Informacion</a></li>
@@ -208,25 +139,65 @@
                     </div>
                   </div>
 
+
+
                   <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-<img
-    
-    src="https://res.cloudinary.com/drrzmfkvx/image/upload/v1630547312/156522915_2815245062063150_337949607760751210_n_raz5wn.jpg"
->
-                      <img id="img1" src="#" height="100px" width="100px" border="solid 1px">
+                      <div v-if="getImage">
+                        <ul class="mailbox-attachments clearfix">
+
+                          <li>
+                            <span class="mailbox-attachment-icon has-img"><img :src="preview"  height="250px"
+                                width="200"></span>
+
+                            <div class="mailbox-attachment-info">
+                              <a :href="file_url" class="mailbox-attachment-name" target="_blank"><i
+                                  class="fa fa-camera"></i> </a>
+                              <span class="mailbox-attachment-size">
+                                
+                              </span>
+                            </div>
+                          </li>
+
+                        </ul>
+
+
+                      </div>
+
+                      <div v-else>
+                        <ul class="mailbox-attachments clearfix">
+
+                          <li>
+                            <span class="mailbox-attachment-icon has-img"><img :src="preview" height="250px"
+                              width="200"></span>
+
+                            <div class="mailbox-attachment-info">
+                              <a :href="file_url" class="mailbox-attachment-name" target="_blank"><i
+                                  class="fa fa-camera"></i> Ver imagen</a>
+                              <span class="mailbox-attachment-size">
+                                {{size}} KB
+                              </span>
+                            </div>
+                          </li>
+
+                        </ul>                      </div>
+
                       <input id="inputFile1" type="file" name="image" @change="getImage" accept="image/*">
                     </div>
                   </div>
                   <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-                      <button type="button"  v-if="tipoAccion == 1" class="btn btn-primary"  @click="registrarDatos()">Registrar Datos</button>
+                      <button type="button" v-if="tipoAccion == 1" class="btn btn-primary"
+                        @click="registrarDatos()">Registrar Datos</button>
 
-                      <button type="button"  v-if="tipoAccion == 2" class="btn btn-primary"  @click="actualizarDatos()">Actualizar Datos</button>
+                      <button type="button" v-if="tipoAccion == 2" class="btn btn-primary"
+                        @click="actualizarDatos()">Actualizar Datos</button>
                     </div>
                   </div>
                 </form>
-               
+
+
+
 
               </div>
               <!-- /.tab-pane -->
@@ -256,8 +227,15 @@
         email: '',
         direccion: '',
         telefono: '',
-        link_image:'',
+        file_url: '',
+        idmedia: '',
+        public_id:'',
+        size: '',
         imagen: null,
+        preview: null,
+      image: null,
+      preview_list: [],
+      image_list: [],
         datos: [],
         modal: 0,
         tituloModal: '',
@@ -307,30 +285,33 @@
     methods: {
 
 
-      getImage(event) {
-        //Asignamos la imagen a  nuestra data
-        this.imagen = event.target.files[0];
-      },
-      datos_empresa() {
+      
+      async datos_empresa() {
         let me = this;
         var url = '/datos';
-        axios.get(url).then(function (response) {
-         console.log(response)
-         
-          if(response.data.length == 1){
+        await axios.get(url).then(function (response) {
+          console.log(response)
+
+          if (response.data.length == 1) {
             console.log('existem datos');
             console.log(response)
             me.tipoAccion = 2;
             var respuesta = response.data[0];
-          me.datos = respuesta.data;
+            me.datos = respuesta.data;
+            me.nombre_empresa = respuesta['nombre_empresa'];
+            me.email = respuesta['email'];
+            me.direccion = respuesta['direccion'];
+            me.telefono = respuesta['telefono'];
+            me.preview = respuesta['file_url'];
+            me.size = respuesta['size'];
+            me.public_id = respuesta['public_id'];
+            me.idmedia = respuesta['idmedia'];
 
-          me.nombre_empresa = respuesta['nombre_empresa'];
-          me.email = respuesta['email'];
-          me.direccion = respuesta['direccion'];
-          me.telefono = respuesta['telefono'];
-          me.link_image = respuesta['image']
-  console.log(response)
-            me.tipoAccion= 1;
+
+          }
+          else {
+            me.tipoAccion = 1;
+
           }
 
         })
@@ -339,31 +320,58 @@
           });
 
       },
-     registrarDatos() {
 
-//Creamos el formData
-var data = new FormData();
-//Añadimos la imagen seleccionada
-data.append('avatar', this.imagen);
-data.append('nombre_empresa', this.nombre_empresa);
-data.append('email', this.email);
-data.append('direccion', this.direccion);
-data.append('telefono', this.telefono);
+      getImage(event) {
+        //Asignamos la imagen a  nuestra data
+        this.imagen = event.target.files[0];
+        var input = event.target;
+        if (input.files) {
+          var reader = new FileReader();
+          reader.onload = (e) => {
+            this.preview = e.target.result;
+          }
+          this.image = input.files[0];
+          reader.readAsDataURL(input.files[0]);
+        }
+      },
+      registrarDatos() {
 
-data.append('_method', 'POST');
+        //Creamos el formData
+        var data = new FormData();
+        //Añadimos la imagen seleccionada
+        data.append('avatar', this.imagen);
+        data.append('nombre_empresa', this.nombre_empresa);
+        data.append('email', this.email);
+        data.append('direccion', this.direccion);
+        data.append('telefono', this.telefono);
 
-//Añadimos el método PUT dentro del formData
-// Como lo hacíamos desde un formulario simple _(no ajax)_
+        data.append('_method', 'POST');
 
- axios.post('/datos/registrar', data)
-  .then(function (response) {
-    console.log(response)
-  })
+        //Añadimos el método PUT dentro del formData
+        // Como lo hacíamos desde un formulario simple _(no ajax)_
+
+        axios.post('/datos/registrar', data)
+          .then(function (response) {
+            Swal.fire(
+              "Guardado!",
+              "El registro ha sido guardado con éxito.",
+              "success"
+            );
+
+          })
+          .catch(error => {
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: "Algo salio mas!",
+              footer: error.message,
+            });
+          });
 
 
-},
+      },
 
-      actualizarDatos() {
+      async actualizarDatos() {
 
         //Creamos el formData
         var data = new FormData();
@@ -374,16 +382,30 @@ data.append('_method', 'POST');
         data.append('direccion', this.direccion);
         data.append('telefono', this.telefono);
         data.append('id', this.datos_id);
-
+        data.append('public_id', this.public_id);
+        data.append('idmedia', this.idmedia);
 
 
         //Añadimos el método PUT dentro del formData
         // Como lo hacíamos desde un formulario simple _(no ajax)_
         data.append('_method', 'PUT');
-        axios.post('/datos/actualizar', data)
+        await axios.post('/datos/actualizar', data)
           .then(function (response) {
             console.log(response)
+            Swal.fire(
+              "Guardado!",
+              "El registro ha sido guardado con éxito.",
+              "success"
+            );
           })
+          .catch(error => {
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: "Algo salio mas!",
+              footer: error.message,
+            });
+          });
 
 
       },
@@ -398,6 +420,7 @@ data.append('_method', 'POST');
         })
           .catch(function (error) {
             console.log(error);
+
           });
 
       },
@@ -429,7 +452,19 @@ data.append('_method', 'POST');
         axios.post('/datos/uploda_img', data
         )
           .then(response => {
-            console.log(response.data)
+            Swal.fire(
+              "Guardado!",
+              "El registro ha sido guardado con éxito.",
+              "success"
+            );
+          })
+          .catch(error => {
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: "Algo salio mas!",
+              footer: error.message,
+            });
           })
       }
     },

@@ -9,12 +9,12 @@ class CreateMediaTable extends Migration
     public function up()
     {
         Schema::create('media', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->morphs('medially');
-            $table->text('file_url');
+            $table->increments('id');
+            $table->string('public_id');
+            $table->string('file_url');
             $table->string('file_name');
-            $table->string('file_type')->nullable();
-            $table->unsignedBigInteger('size');
+            $table->string('file_type');
+            $table->string('size');
             $table->timestamps();
         });
     }

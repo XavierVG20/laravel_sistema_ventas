@@ -6,6 +6,7 @@ use App\Models\Categoria;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Support\Facades\DB;
+use App\Http\Requests\CategoriaRequest;
 use DataTables;
 
 class CategoriaController extends Controller
@@ -67,14 +68,10 @@ public function selectCategoria(Request $request){
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CategoriaRequest $request)
     {
         //
-          
-        $request->validate([
-            'nombre'=> 'required',
-            'descripcion'=>'max:50'
-        ]);
+        $validated=$request->validated();
         $categoria = new Categoria();
         $categoria->nombre = $request->nombre;
         $categoria->descripcion = $request->descripcion;
@@ -123,13 +120,9 @@ public function selectCategoria(Request $request){
      * @param  \App\Models\Categoria  $categoria
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Categoria $categoria)
+    public function update(CategoriaRequest $request, Categoria $categoria)
     {
-        //
-        $request->validate([
-            'nombre'=> 'required',
-            'descripcion'=>'max:50'
-        ]);
+       
         $categoria = Categoria::findOrFail($request->id);
         $categoria->nombre = $request->nombre;
         $categoria->descripcion = $request->descripcion;

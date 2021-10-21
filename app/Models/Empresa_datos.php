@@ -14,6 +14,10 @@ class Empresa_datos extends Model
         'email',
         'direccion',
         'telefono',
-        'image',
+        'idmedia'
+     
     ];
+    public function media(){
+        return $this->belongsTo('App\Models\Media');
+    }
 }

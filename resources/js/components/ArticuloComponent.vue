@@ -196,6 +196,16 @@
                                 </div>
                             </div>
 
+                            <div class="col-md-16">
+                                <div class="form-group">
+                                    <label class="control-label">Descripción</label>
+                                    <textarea name="" v-model="descripcion" class="form-control"
+                                        placeholder="Ingrese descripción" cols="40" rows="3"></textarea>
+                                    <label v-if="errors.descripcion" class="text-danger">*
+                                        {{errors.descripcion[0]}}</label>
+                                </div>
+                            </div>
+
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="form-group">
@@ -206,11 +216,9 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="control-label">Descripción</label>
-                                        <textarea name="" v-model="descripcion" class="form-control"
-                                            placeholder="Ingrese descripción" cols="40" rows="3"></textarea>
-                                        <label v-if="errors.descripcion" class="text-danger">*
-                                            {{errors.descripcion[0]}}</label>
+                                        <barcode :value="codigo" :options="{ format: 'EAN-13' }">
+                                            Generando código de barras.
+                                        </barcode>
                                     </div>
 
 
@@ -219,9 +227,36 @@
                                 <div class="col-sm-6">
 
                                     <div class="form-group">
-                                        <barcode :value="codigo" :options="{ format: 'EAN-13' }">
-                                            Generando código de barras.
-                                        </barcode>
+                                        <label for="my-file">Select Image</label>
+                                        <input type="file" accept="image/*" @change="previewImage"
+                                            class="form-control-file" id="my-file">
+
+                                        <ul class="mailbox-attachments clearfix">
+
+                                            <li>
+
+                                                <template v-if="preview">
+                                                    <span class="mailbox-attachment-icon has-img"><img :src="preview"
+                                                            height="100px" width="100"></span>
+
+                                                    <div class="mailbox-attachment-info">
+                                                        <a @click="reset" class="btn btn-danger" target="_blank"><i
+                                                                class="fa  fa-times"></i> Quitar</a>
+
+
+
+                                                    </div>
+                                                </template>
+
+
+                                            </li>
+
+                                        </ul>
+
+                                        <div class="border p-2 mt-3">
+                                            <p>Vist Previa:</p>
+
+                                        </div>
                                     </div>
                                 </div>
 
@@ -260,6 +295,11 @@
                 stock: 0,
                 descripcion: '',
                 arrayArticulo: [],
+                img: '',
+                preview: null,
+                image: null,
+                preview_list: [],
+                image_list: [],
                 modal: 0,
                 tituloModal: '',
                 tipoAccion: 0,
@@ -312,6 +352,24 @@
             }
         },
         methods: {
+            previewImage: function (event) {
+                var input = event.target;
+                if (input.files) {
+                    var reader = new FileReader();
+                    reader.onload = (e) => {
+                        this.preview = e.target.result;
+                    }
+                    this.image = input.files[0];
+                    reader.readAsDataURL(input.files[0]);
+                }
+            },
+
+            reset: function () {
+                this.image = null;
+                this.preview = null;
+                this.image_list = [];
+                this.preview_list = [];
+            },
             listarArticulo(page, buscar, criterio) {
                 let me = this;
                 var url = '/articulo?page=' + page + '&buscar=' + buscar + '&criterio=' + criterio;
@@ -362,14 +420,22 @@
                 let me = this;
 
                 try {
-                    await axios.post('/articulo', {
-                        'idcategoria': this.idcategoria,
-                        'codigo': this.codigo,
-                        'nombre': this.nombre,
-                        'stock': this.stock,
-                        'precio_venta': this.precio_venta,
-                        'descripcion': this.descripcion
-                    }).then(function (response) {
+
+                    var data = new FormData();
+                    data.append('idcategoria', this.idcategoria);
+
+                    data.append('codigo', this.codigo);
+                    data.append('nombre', this.nombre);
+                    data.append('stock', this.stock);
+                    data.append('precio_venta', this.precio_venta);
+                    data.append('descripcion', this.descripcion);
+                    data.append('image', this.image);
+
+
+
+                    await axios.post('/articulo', data).then(function (response) {
+
+                        console.log(response);
                         me.cerrarModal();
                         Swal.fire(
                             'Guardado!',

@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Support\Facades\DB;
 use DataTables;
+use Cloudinary;
+use App\Models\Media;
 
 
 class ArticuloController extends Controller
@@ -134,15 +136,51 @@ class ArticuloController extends Controller
 
            
         ]);
-         $articulo = new Articulo();
-        $articulo->idcategoria = $request->idcategoria;
-        $articulo->codigo = $request->codigo;
-        $articulo->nombre = $request->nombre;
-        $articulo->precio_venta = $request->precio_venta;
-        $articulo->stock = $request->stock;
-        $articulo->descripcion = $request->descripcion;
-        $articulo->condicion = '1';
-        $articulo->save();
+        if ($request->hasFile('image')) {
+            # code...
+
+          
+            $result = $request->image->storeOnCloudinary();
+            
+            $media = new Media();
+            // $media->id;
+             $media->public_id = $result->getPublicId();
+             $media->file_url =  $result->getSecurePath();
+             $media->file_name = $result->getFileName();
+             $media->file_type = $result->getFileType();
+             $media->size = $result->getSize();
+                        
+           $media->save();
+        
+
+             $articulo = new Articulo();
+             $articulo->idcategoria = $request->idcategoria;
+             $articulo->codigo = $request->codigo;
+             $articulo->nombre = $request->nombre;
+             $articulo->precio_venta = $request->precio_venta;
+             $articulo->stock = $request->stock;
+             $articulo->descripcion = $request->descripcion;
+             $articulo->condicion = '1';
+             $articulo->idmedia = $media->id;
+             $articulo->save();
+             
+            return $media;
+
+           
+        } else{
+            $articulo = new Articulo();
+            $articulo->idcategoria = $request->idcategoria;
+            $articulo->codigo = $request->codigo;
+            $articulo->nombre = $request->nombre;
+            $articulo->precio_venta = $request->precio_venta;
+            $articulo->stock = $request->stock;
+            $articulo->descripcion = $request->descripcion;
+            $articulo->condicion = '1';
+            $articulo->save();
+        }
+        
+
+
     }
     public function update(Request $request)
     {

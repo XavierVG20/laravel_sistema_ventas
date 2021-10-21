@@ -19,7 +19,8 @@ class CreateEmpresaDatosTable extends Migration
             $table->string('email');
             $table->string('direccion');
             $table->string('telefono');
-            $table->string('image');
+            $table->integer('idmedia')->nullable()->unsigned();
+            $table->foreign('idmedia')->nullable()->references('id')->on('media')->onDelete('cascade');;
             
             $table->timestamps();
         });

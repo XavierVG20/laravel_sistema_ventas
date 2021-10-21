@@ -73,6 +73,7 @@ Route::put('/categoria', [App\Http\Controllers\CategoriaController::class, 'elim
     Route::get('/venta/pdf/{id}',  [App\Http\Controllers\VentaController::class, 'pdf'])->name('pdf');
 
     Route::get('/info', [App\Http\Controllers\RolController::class, 'index'])->name('info.index');
+
     Route::get('/rol/selectRol', [App\Http\Controllers\RolController::class, 'selectRol'] );
 
     Route::get('/user',  [App\Http\Controllers\UserController::class, 'index'])->name('user.index');

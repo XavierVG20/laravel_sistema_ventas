@@ -22,6 +22,8 @@ class CreateArticulosTable extends Migration
             $table->integer('stock');
             $table->string('descripcion', 256)->nullable();
             $table->boolean('condicion')->default(1);
+            $table->integer('idmedia')->nullable()->unsigned();
+            $table->foreign('idmedia')->nullable()->references('id')->on('media')->onDelete('cascade');;
             $table->timestamps();
 
             $table->foreign('idcategoria')->references('id')->on('categorias');
