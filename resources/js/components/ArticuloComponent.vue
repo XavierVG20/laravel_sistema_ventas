@@ -36,28 +36,24 @@
                             <i class="icon-doc"></i>&nbsp;Reporte
                         </button>
                     </div> <br><br>
-                    <div class="form-group row">
-                        <div class="col-md-6">
-                            <div>
-                                <th>
-                                    <select class="form-control " v-model="criterio">
-                                        <option value="nombre">Nombre</option>
-                                        <option value="descripcion">Descripción</option>
-                                    </select>
-                                </th>
-                                <th>
-                                    <input type="text" v-model="buscar" @keyup.enter="listarArticulo(1,buscar,criterio)"
-                                        class="form-control" placeholder="Texto a buscar">
-
-                                </th>
-                                <th>
-                                    <button type="submit" @click="listarArticulo(1,buscar,criterio)"
-                                        class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
-
-                                </th>
-                            </div>
+                    <div class="row">
+                        <div class="col-xs-4 col-md-3">
+                            <select class="form-control " v-model="criterio">
+                                <option value="nombre">Nombre</option>
+                                <option value="descripcion">Descripción</option>
+                            </select>
+                        </div>
+                        <div class="col-xs-3">
+                            <input type="text" v-model="buscar" @keyup.enter="listarArticulo(1,buscar,criterio)"
+                                class="form-control" placeholder="Texto a buscar">
+                        </div>
+                        <div class="col-xs-3">
+                            <button type="submit" @click="listarArticulo(1,buscar,criterio)" class="btn btn-primary"><i
+                                    class="fa fa-search"></i> Buscar</button>
                         </div>
                     </div>
+
+                    <br>
                     <div class="table-responsive">
                         <table class="table table-bordered table-striped ">
                             <thead>
@@ -69,6 +65,7 @@
                                     <th>Precio Venta</th>
                                     <th>Stock</th>
                                     <th>Descripción</th>
+                                    <th>producto</th>
                                     <th>Estado</th>
                                 </tr>
                             </thead>
@@ -80,7 +77,7 @@
                                             <i class="fa fa-pencil"></i>
                                         </button>
                                         <template v-if="articulo.condicion">
-                                            <button type="button" class="btn btn-warning btn-sm"
+                                            <button type="button" class="btn btn-danger btn-sm"
                                                 @click="desactivarArticulo(articulo.id)" title="Desactivar">
                                                 <i class="fa fa-times"></i>
                                             </button>
@@ -91,10 +88,11 @@
                                                 <i class="fa fa-check"></i>
                                             </button>
                                         </template>
-                                        &nbsp;<button type="button" class="btn btn-danger btn-sm"
+                                       <!-- &nbsp;<button type="button" class="btn btn-danger btn-sm"
                                             @click="eliminarArticulo(articulo.id)" title="Eliminar">
                                             <i class="fa fa-trash"></i>
                                         </button>
+                                        -->
                                     </td>
                                     <td v-text="articulo.codigo"></td>
                                     <td v-text="articulo.nombre"></td>
@@ -102,6 +100,20 @@
                                     <td v-text="articulo.precio_venta"></td>
                                     <td v-text="articulo.stock"></td>
                                     <td v-text="articulo.descripcion"></td>
+                                    <td>
+                                        <!--
+                                            <div v-if="articulo.idmedia">
+                                            <img :src="articulo.file_url" height="100px" width="100px">
+                                        </div>
+                                        <div v-else>
+                                            <img :src="'https://res.cloudinary.com/drrzmfkvx/image/upload/v1634782978/logo/318277_80538-Sin_imagen_disponible_cul5ns.jpg'"
+                                                height="100px" width="100px">
+                                        </div>
+                                       -->
+
+
+                                    </td>
+
                                     <td>
                                         <div v-if="articulo.condicion">
                                             <span class="badge badge-success">Activo</span>
@@ -150,7 +162,7 @@
                         <h4 class="modal-title" v-text="tituloModal"></h4>
                     </div>
                     <div class="modal-body">
-                        <form>
+                        <form enctype="multipart/form-data">
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="form-group">
@@ -160,8 +172,10 @@
                                             <option v-for="categoria in arrayCategoria" :key="categoria.id"
                                                 :value="categoria.id" v-text="categoria.nombre"></option>
                                         </select>
-                                        <label v-if="errors.idcategoria" class="text-danger">*
+                                        <!--
+                                            <label v-if="errors.idcategoria" class="text-danger">*
                                             {{errors.idcategoria[0]}}</label>
+                                       -->
                                     </div>
                                 </div>
 
@@ -180,10 +194,11 @@
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label class="control-label">Precio Venta</label>
-                                        <input type="number" v-model="precio_venta" class="form-control"
-                                            placeholder="$$">
+                                        <input type="number" v-model="precio_venta" class="form-control">
+
                                         <label v-if="errors.precio_venta" class="text-danger">*
                                             {{errors.precio_venta[0]}}</label>
+
                                     </div>
                                 </div>
 
@@ -201,6 +216,7 @@
                                     <label class="control-label">Descripción</label>
                                     <textarea name="" v-model="descripcion" class="form-control"
                                         placeholder="Ingrese descripción" cols="40" rows="3"></textarea>
+
                                     <label v-if="errors.descripcion" class="text-danger">*
                                         {{errors.descripcion[0]}}</label>
                                 </div>
@@ -223,8 +239,8 @@
 
 
                                 </div>
-
-                                <div class="col-sm-6">
+                                <!--
+      <div class="col-sm-6">
 
                                     <div class="form-group">
                                         <label for="my-file">Select Image</label>
@@ -240,15 +256,11 @@
                                                             height="100px" width="100"></span>
 
                                                     <div class="mailbox-attachment-info">
-                                                        <a @click="reset" class="btn btn-danger" target="_blank"><i
-                                                                class="fa  fa-times"></i> Quitar</a>
-
-
+                                                        <a @click="reset" class="btn btn-danger btn-block btn-social "
+                                                            target="_blank"> Quitar imagen</a>
 
                                                     </div>
                                                 </template>
-
-
                                             </li>
 
                                         </ul>
@@ -259,11 +271,7 @@
                                         </div>
                                     </div>
                                 </div>
-
-
-
-
-
+-->
                             </div>
                         </form>
                     </div>
@@ -295,15 +303,16 @@
                 stock: 0,
                 descripcion: '',
                 arrayArticulo: [],
-                img: '',
                 preview: null,
                 image: null,
+                no_image: '',
                 preview_list: [],
                 image_list: [],
                 modal: 0,
                 tituloModal: '',
                 tipoAccion: 0,
-
+                errorArticulo: 0,
+                errorMostrarMsjArticulo: [],
                 pagination: {
                     'total': 0,
                     'current_page': 0,
@@ -313,7 +322,7 @@
                     'to': 0,
                 },
                 errors: {},
-                offset: 5,
+                offset: 3,
                 criterio: 'nombre',
                 buscar: '',
                 arrayCategoria: []
@@ -352,60 +361,31 @@
             }
         },
         methods: {
-            previewImage: function (event) {
-                var input = event.target;
-                if (input.files) {
-                    var reader = new FileReader();
-                    reader.onload = (e) => {
-                        this.preview = e.target.result;
-                    }
-                    this.image = input.files[0];
-                    reader.readAsDataURL(input.files[0]);
-                }
-            },
-
-            reset: function () {
-                this.image = null;
-                this.preview = null;
-                this.image_list = [];
-                this.preview_list = [];
-            },
-            listarArticulo(page, buscar, criterio) {
+            async listarArticulo(page, buscar, criterio) {
                 let me = this;
                 var url = '/articulo?page=' + page + '&buscar=' + buscar + '&criterio=' + criterio;
-                axios.get(url).then(function (response) {
+                await axios.get(url).then(function (response) {
                     var respuesta = response.data;
                     me.arrayArticulo = respuesta.articulos.data;
                     me.pagination = respuesta.pagination;
                 })
                     .catch(function (error) {
                         console.log(error);
-                        Swal.fire({
-                            icon: "error",
-                            title: "Oops...",
-                            text: "Algo salio mas!",
-                            footer: error,
-                        });
                     });
             },
             cargarPdf() {
                 window.open('/articulo/listarPdf', '_blank');
             },
-            selectCategoria() {
+            async selectCategoria() {
                 let me = this;
                 var url = '/categoria/selectCategoria';
-                axios.get(url).then(function (response) {
+                await axios.get(url).then(function (response) {
                     console.log(response);
                     var respuesta = response.data;
                     me.arrayCategoria = respuesta.categorias;
                 })
                     .catch(function (error) {
-                        Swal.fire({
-                            icon: "error",
-                            title: "Oops...",
-                            text: "Algo salio mas!",
-                            footer: error,
-                        });
+                        console.log(error);
                     });
             },
             cambiarPagina(page, buscar, criterio) {
@@ -416,204 +396,159 @@
                 me.listarArticulo(page, buscar, criterio);
             },
             async registrarArticulo() {
-
                 let me = this;
 
                 try {
-
-                    var data = new FormData();
-                    data.append('idcategoria', this.idcategoria);
-
-                    data.append('codigo', this.codigo);
-                    data.append('nombre', this.nombre);
-                    data.append('stock', this.stock);
-                    data.append('precio_venta', this.precio_venta);
-                    data.append('descripcion', this.descripcion);
-                    data.append('image', this.image);
-
-
-
-                    await axios.post('/articulo', data).then(function (response) {
-
-                        console.log(response);
-                        me.cerrarModal();
-                        Swal.fire(
-                            'Guardado!',
-                            'El registro ha sido guardado con éxito.',
-                            'success'
-                        )
-                        me.listarArticulo(1, '', 'nombre');
-                    })
-                } catch (error) {
-                    // console.log(error)
-                    Swal.fire({
-                        icon: "error",
-                        title: "Oops...",
-                        text: "Algo salio mas!",
-                        footer: error,
-                    });
-                    if (error.response.data) {
-
-                        this.errors = error.response.data.errors;
-
-                    }
-
-
-                }
-
-            },
-            async actualizarArticulo() {
-
-
-                let me = this;
-
-                try {
-                    await axios.put('/articulo/actualizar', {
+                    await axios.post('/articulo/', {
                         'idcategoria': this.idcategoria,
                         'codigo': this.codigo,
                         'nombre': this.nombre,
                         'stock': this.stock,
                         'precio_venta': this.precio_venta,
-                        'descripcion': this.descripcion,
-                        'id': this.articulo_id
+                        'descripcion': this.descripcion
                     }).then(function (response) {
                         me.cerrarModal();
+                        me.cerrarModal();
                         Swal.fire(
-                            'Actualizado!',
-                            'El registro ha sido actualizado con éxito.',
+                            'Guardado!',
+                            'El registro ha sido guardado con éxito.',
                             'success'
-                        )
+                        );
                         me.listarArticulo(1, '', 'nombre');
                     })
                 } catch (error) {
+                    console.log(error.response.data);
                     Swal.fire({
                         icon: "error",
                         title: "Oops...",
                         text: "Algo salio mas!",
-                        footer: error,
+                         footer: error.response.data.message,
                     });
                     if (error.response.data) {
-
                         this.errors = error.response.data.errors;
-
                     }
+                }
 
-
+            },
+          async  actualizarArticulo() {
+                let me = this;
+                try {
+                    await   axios.put('/articulo/actualizar', {
+                    'idcategoria': this.idcategoria,
+                    'codigo': this.codigo,
+                    'nombre': this.nombre,
+                    'stock': this.stock,
+                    'precio_venta': this.precio_venta,
+                    'descripcion': this.descripcion,
+                    'id': this.articulo_id
+                }).then(function (response) {
+                    me.cerrarModal();
+                    Swal.fire(
+                        'Actualizado!',
+                        'El registro ha sido actualizado con éxito.',
+                        'success'
+                    );
+                    me.listarArticulo(1, '', 'nombre');
+                })
+                } catch (error) {
+                    console.log(error);
+                    Swal.fire({
+                        icon: "error",
+                        title: "Oops...",
+                        text: "Algo salio mas!",
+                         footer: error.response.data.message,
+                    });
+                    if (error.response.data) {
+                        this.errors = error.response.data.errors;
+                    }
                 }
             },
             desactivarArticulo(id) {
-
                 Swal.fire({
-                    title: 'Esta seguro de desactivar el articulo?',
-                    text: "No podra utilizar esta informacion",
+          title: "Esta seguro de desactivar esta categoría?",
+          text: "No podra utilizar esta informacion",
 
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    cancelButtonText: 'Cancelar',
-                    confirmButtonText: 'Aceptar'
-                }).then((result) => {
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          cancelButtonText: "Cancelar",
+          confirmButtonText: "Aceptar",
+        }).then((result) => {
+                    if (result.value) {
+                        let me = this;
 
-                    let me = this;
-
-                    axios.put('/articulo/desactivar', {
-                        'id': id
-                    }).then((response) => {
-                        Swal.fire(
-                            'Desactivado!',
-                            'El registro ha sido desactivado con éxito.',
-                            'success'
-                        )
-                        me.listarArticulo(1, '', 'nombre');
-
-                    }).catch((error) => {
-                        Swal.fire({
-                            icon: "error",
-                            title: "Oops...",
-                            text: "Algo salio mas!",
-                            footer: error,
+                        axios.put('/articulo/desactivar', {
+                            'id': id
+                        }).then(function (response) {
+                            me.listarArticulo(1, '', 'nombre');
+                            
+                Swal.fire(
+                  "Desactivado!",
+                  "El registro ha sido desactivado con éxito.",
+                  "success"
+                );
+                        }).catch(function (error) {
+                            console.log(error);
+                             Swal.fire({
+                  icon: "error",
+                  title: "Oops...",
+                  text: "Algo salio mas!",
+                   footer: error.response.data.message,
+                });
                         });
-                    })
 
+
+                    } else if (
+                        // Read more about handling dismissals
+                        result.dismiss === swal.DismissReason.cancel
+                    ) {
+
+                    }
                 })
-
             },
             activarArticulo(id) {
-
                 Swal.fire({
-                    title: 'Esta seguro de activar el articulo?',
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    cancelButtonText: 'Cancelar',
-                    confirmButtonText: 'Aceptar'
-                }).then((result) => {
-
+          title: "Esta seguro de activar esta categoría?",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          cancelButtonText: "Cancelar",
+          confirmButtonText: "Aceptar",
+        }).then((result) => {
                     if (result.value) {
                         let me = this;
 
                         axios.put('/articulo/activar', {
                             'id': id
-                        }).then((response) => {
-                            Swal.fire(
-                                'Activado!',
-                                'El registro ha sido activado con éxito.',
-                                'success'
-                            )
-                            me.listarArticulo(1, '', 'nombre');
-
-                        }).catch((error) => {
-                            Swal.fire({
-                                icon: "error",
-                                title: "Oops...",
-                                text: "Algo salio mas!",
-                                footer: error,
-                            });
-                        })
-                    }
-
-                })
-            },
-            eliminarArticulo(id) {
-
-                Swal.fire({
-                    title: 'Esta seguro de eliminar el articuo?',
-                    text: "Se elimnara toda la informacion",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    cancelButtonText: 'Cancelar',
-                    confirmButtonText: 'Aceptar'
-                }).then((result) => {
-
-                    if (result.value) {
-                        let me = this;
-
-                        axios.put('/articulo', {
-                            'id': id
                         }).then(function (response) {
                             me.listarArticulo(1, '', 'nombre');
-                            Swal.fire(
-                                'Eliminado!',
-                                'El registro ha sido eliminado con éxito.',
-                                'success'
-                            )
-
+                             Swal.fire(
+                  "Activado!",
+                  "El registro ha sido activado con éxito.",
+                  "success"
+                );
                         }).catch(function (error) {
-                            Swal.fire({
-                                icon: "error",
-                                title: "Oops...",
-                                text: "Algo salio mas!",
-                                footer: error,
-                            });
-                        })
-                    }
+                            console.log(error);
+                                Swal.fire({
+                  icon: "error",
+                  title: "Oops...",
+                  text: "Algo salio mas!",
+                   footer: error.response.data.message,
+                });
+                        });
 
+
+                    } else if (
+                        // Read more about handling dismissals
+                        result.dismiss === swal.DismissReason.cancel
+                    ) {
+
+                    }
                 })
             },
+           
             cerrarModal() {
                 this.modal = 0;
                 this.tituloModal = '';
@@ -624,7 +559,7 @@
                 this.precio_venta = 0;
                 this.stock = 0;
                 this.descripcion = '';
-                this.errors = {};
+                this.errorArticulo = 0;
             },
             abrirModal(modelo, accion, data = []) {
                 switch (modelo) {

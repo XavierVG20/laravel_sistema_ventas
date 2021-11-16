@@ -38,8 +38,8 @@
        
         <li class="treeview {{ ! Route:: is('cliente.index') ?: 'active' }} "><a href="{{ route('cliente.index') }}"><i class="fa fa-user"></i> <span>Clientes</span></a></li>
         <li class="treeview {{ ! Route:: is('proveedor.index') ?: 'active' }} "><a href="{{ route('proveedor.index') }}"><i class="fa fa-users"></i> <span>Proveedores</span></a></li>
-        <li class="treeview {{ ! Route:: is('ingreso.index') ?: 'active' }} "><a href="{{ route('ingreso.index') }}"><i class="fa fa-box"></i> <span>Ingresos</span></a></li>
-        <li class="treeview {{ ! Route:: is('venta.index') ?: 'active' }} "><a href="{{ route('venta.index') }}"><i class="fa fa-box"></i> <span>Ventas</span></a></li>
+        <li class="treeview {{ ! Route:: is('ingreso.index') ?: 'active' }} "><a href="{{ route('ingreso.index') }}"><i class="fa fa-inbox"></i> <span>Ingresos</span></a></li>
+        <li class="treeview {{ ! Route:: is('venta.index') ?: 'active' }} "><a href="{{ route('venta.index') }}"><i class="fa fa-cart-plus"></i> <span>Ventas</span></a></li>
 
         <li class="header">Administracion</li>
         <li class="treeview {{ ! Route:: is('user.index') ?: 'active' }}"><a href="{{ route('user.index') }}"><i class="fa fa-circle-o text-red"></i> <span>Usuarios</span></a></li>

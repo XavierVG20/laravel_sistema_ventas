@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
  
 use App\Models\Proveedor;
+use App\Http\Requests\ProveedorRequest;
 
 
 class ProveedorController extends Controller
@@ -51,17 +52,8 @@ class ProveedorController extends Controller
         return ['proveedores' => $proveedores];
     }
  
-    public function store(Request $request)
+    public function store(ProveedorRequest $request)
     {         
- 
-        $request->validate([
-            'nombre'=> 'required',
-            'tipo_documento'=>'required',
-           // 'num_documento'=>'required|numeric|min:10',
-            'direccion'=>'required|',
-            'telefono'=>'required|',
-            'email'=>'required|email',
-        ]);        
             $proveedor = new Proveedor();
             $proveedor->contacto = $request->contacto;
             $proveedor->telefono_contacto = $request->telefono_contacto;
@@ -81,7 +73,7 @@ class ProveedorController extends Controller
          
     }
  
-    public function update(Request $request , Proveedor $proveedor)
+    public function update(ProveedorRequest $request , Proveedor $proveedor)
     {
         if (!$request->ajax()) return redirect('/');
          

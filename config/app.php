@@ -80,7 +80,8 @@ return [
     |
     */
 
-    'locale' => 'en',
+   // 'locale' => 'en',
+    'locale'          => 'es',
 
     /*
     |--------------------------------------------------------------------------
@@ -93,7 +94,7 @@ return [
     |
     */
 
-    'fallback_locale' => 'en',
+    'fallback_locale' => 'es',
 
     /*
     |--------------------------------------------------------------------------
@@ -165,6 +166,8 @@ return [
         SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class,
         /** cloudder con cloudinary  */
         JD\Cloudder\CloudderServiceProvider::class,
+
+        Laraveles\Spanish\SpanishServiceProvider::class,
 
 
 

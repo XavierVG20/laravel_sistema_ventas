@@ -36,66 +36,61 @@
                         </button>
                     </div>
                     <br /><br />
-                    <div class="form-group row">
-                        <div class="col-md-6">
-                            <div class="">
-                                <tr>
-                                    <th>
-                                        <select class="form-control" v-model="criterio">
-                                            <option value="nombre">Nombre</option>
-                                            <option value="num_documento">Documento</option>
-                                            <option value="email">Email</option>
-                                            <option value="telefono">Teléfono</option>
-                                        </select>
-                                    </th>
-                                    <th>
-                                        <input type="text" v-model="buscar"
-                                            @keyup.enter="listarPersona(1, buscar, criterio)" class="form-control"
-                                            placeholder="Texto a buscar" />
-                                    </th>
-                                    <th>
-                                        <button type="submit" @click="listarPersona(1, buscar, criterio)"
-                                            class="btn btn-primary">
-                                            <i class="fa fa-search"></i> Buscar
-                                        </button>
-                                    </th>
-                                </tr>
-                            </div>
+                    <div class="row">
+                        <div class="col-xs-4 col-md-3">
+                            <select class="form-control" v-model="criterio">
+                                <option value="nombre">Nombre</option>
+                                <option value="num_documento">Documento</option>
+                                <option value="email">Email</option>
+                                <option value="telefono">Teléfono</option>
+                            </select>
+                        </div>
+                        <div class="col-xs-3">
+                            <input type="text" v-model="buscar" @keyup.enter="listarPersona(1, buscar, criterio)"
+                                class="form-control" placeholder="Texto a buscar" />
+                        </div>
+                        <div class="col-xs-3">
+                            <button type="submit" @click="listarPersona(1, buscar, criterio)" class="btn btn-primary">
+                                <i class="fa fa-search"></i> Buscar
+                            </button>
                         </div>
                     </div>
+
+                    <br>
+
                     <div class="table-responsive">
 
-                    <table class="table table-bordered table-striped table-sm">
-                        <thead>
-                            <tr>
-                                <th>Opciones</th>
-                                <th>Nombre</th>
-                                <th>Tipo Documento</th>
-                                <th>Número</th>
-                                <th>Dirección</th>
-                                <th>Teléfono</th>
-                                <th>Email</th>
-                                <th>Contacto</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr v-for="persona in arrayPersona" :key="persona.id">
-                                <td>
-                                    <button type="button" @click="abrirModal('persona','actualizar',persona)"
-                                        class="btn btn-primary btn-sm">
-                                        <i class="fa fa-pencil"></i>
-                                    </button>
-                                </td>
-                                <td v-text="persona.nombre"></td>
-                                <td v-text="persona.tipo_documento"></td>
-                                <td v-text="persona.num_documento"></td>
-                                <td v-text="persona.direccion"></td>
-                                <td v-text="persona.telefono"></td>
-                                <td v-text="persona.email"></td>
-                                <td v-text="persona.contacto"></td>
-                            </tr>
-                        </tbody>
-                    </table>
+                        <table class="table table-bordered table-striped table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Opciones</th>
+                                    <th>Nombre</th>
+                                    <th>Tipo Documento</th>
+                                    <th>Número</th>
+                                    <th>Dirección</th>
+                                    <th>Teléfono</th>
+                                    <th>Email</th>
+                                    <th>Contacto</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="persona in arrayPersona" :key="persona.id">
+                                    <td>
+                                        <button type="button" @click="abrirModal('persona','actualizar',persona)"
+                                            class="btn btn-primary btn-sm">
+                                            <i class="fa fa-pencil"></i>
+                                        </button>
+                                    </td>
+                                    <td v-text="persona.nombre"></td>
+                                    <td v-text="persona.tipo_documento"></td>
+                                    <td v-text="persona.num_documento"></td>
+                                    <td v-text="persona.direccion"></td>
+                                    <td v-text="persona.telefono"></td>
+                                    <td v-text="persona.email"></td>
+                                    <td v-text="persona.contacto"></td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                     <nav>
                         <ul class="pagination">
@@ -136,101 +131,97 @@
                         <h4 class="modal-title" v-text="tituloModal"></h4>
                     </div>
                     <div class="modal-body">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="control-label">Nombre (*)</label>
-                                        <input type="text" v-model="nombre" class="form-control"
-                                            placeholder="Nombre de la persona" />
-                                      <label v-if="errors.nombre" class="text-danger">* {{errors.nombre[0]}}</label>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Nombre (*)</label>
+                                    <input type="text" v-model="nombre" class="form-control"
+                                        placeholder="Nombre de la empresa" />
+                                    <label v-if="errors.nombre" class="text-danger">* {{errors.nombre[0]}}</label>
 
 
-                                    </div> 
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="control-label" for="email-input">Dirección</label>
-                                        <input type="text" v-model="direccion" class="form-control"
-                                            placeholder="Dirección" />
-                                     <label v-if="errors.direccion" class="text-danger">* {{errors.direccion[0]}}</label>
-
-                                       
-
-                                    </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="control-label" for="text-input">Tipo Documento</label>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label" for="email-input">Dirección</label>
+                                    <input type="text" v-model="direccion" class="form-control"
+                                        placeholder="Dirección" />
+                                    <label v-if="errors.direccion" class="text-danger">* {{errors.direccion[0]}}</label>
 
-                                        <select v-model="tipo_documento" class="form-control">
-                                            <option value="C.I">C.I</option>
-                                            <option value="RUC">RUC</option>
-                                            <option value="PASS">PASS</option>
-                                        </select>
-                                    
 
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="control-label" for="text-input">Número</label>
-                                        <input type="text" v-model="num_documento" class="form-control"
-                                            placeholder="Número de documento" />
-                                      
 
-                                    </div>
                                 </div>
                             </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label" for="text-input">Tipo Documento</label>
 
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="control-label">Email</label>
-                                        <input type="email" v-model="email" class="form-control" placeholder="Email" />
-                                        <label v-if="errors.email" class="text-danger">* {{errors.email[0]}}</label>
+                                    <select v-model="tipo_documento" class="form-control">
+                                        <option value="C.I">C.I</option>
+                                        <option value="RUC">RUC</option>
+                                        <option value="PASS">PASS</option>
+                                    </select>
 
 
-                                    </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="control-label">Teléfono</label>
-                                        <input type="text" v-model="telefono" class="form-control"
-                                            placeholder="Teléfono" />
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label" for="text-input">Número</label>
+                                    <input type="text" v-model="num_documento" class="form-control"
+                                        placeholder="Número de documento" />
+                                        <label v-if="errors.num_documento" class="text-danger">* {{errors.num_documento[0]}}</label>
+
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Email</label>
+                                    <input type="email" v-model="email" class="form-control" placeholder="Email" />
+                                    <label v-if="errors.email" class="text-danger">* {{errors.email[0]}}</label>
+
+
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Teléfono</label>
+                                    <input type="text" v-model="telefono" class="form-control" placeholder="Teléfono" />
                                     <label v-if="errors.telefono" class="text-danger">* {{errors.telefono[0]}}</label>
 
-                                     
 
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="control-label">Contacto</label>
-                                        <input type="text" v-model="contacto" class="form-control"
-                                            placeholder="Nombre del contacto">
-                                   
-
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group ">
-                                        <label class="control-label">Teléfono de
-                                            contacto</label>
-                                        <input type="text" v-model="telefono_contacto" class="form-control"
-                                            placeholder="Teléfono del contacto">
-                                   
-
-                                    </div>
 
                                 </div>
                             </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Contacto</label>
+                                    <input type="text" v-model="contacto" class="form-control"
+                                        placeholder="Nombre del contacto">
+                                        <label v-if="errors.contacto" class="text-danger">* {{errors.contacto[0]}}</label>
 
 
-
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group ">
+                                    <label class="control-label">Teléfono de
+                                        contacto</label>
+                                    <input type="text" v-model="telefono_contacto" class="form-control"
+                                        placeholder="Teléfono del contacto">
+                                        <label v-if="errors.telefono_contacto" class="text-danger">* {{errors.telefono_contacto[0]}}</label>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-outline pull-left" @click="cerrarModal()">
@@ -256,7 +247,7 @@
 
 <script>
     export default {
-        
+
         data() {
 
             return {
@@ -345,42 +336,42 @@
 
                 let me = this;
 
-         
-                    await axios.post("/proveedor/registrar", {
+
+                await axios.post("/proveedor/registrar", {
                     'nombre': this.nombre,
                     'tipo_documento': this.tipo_documento,
-                    'num_documento' : this.num_documento,
-                    'direccion' : this.direccion,
-                    'telefono' : this.telefono,
-                    'email' : this.email,
+                    'num_documento': this.num_documento,
+                    'direccion': this.direccion,
+                    'telefono': this.telefono,
+                    'email': this.email,
                     'contacto': this.contacto,
                     'telefono_contacto': this.telefono_contacto
+                })
+                    .then(response => {
+                        console.log(response)
+                        me.cerrarModal();
+                        Swal.fire(
+                            "Guardado!",
+                            "El registro ha sido guardado con éxito.",
+                            "success"
+                        );
+                        me.listarPersona(1, "", "nombre");
                     })
-                    .then(response =>{
-                    console.log(response)
-                            me.cerrarModal();
-                            Swal.fire(
-                                "Guardado!",
-                                "El registro ha sido guardado con éxito.",
-                                "success"
-                            );
-                            me.listarPersona(1, "", "nombre");
-                    })
-                    .catch(error =>{
-                           Swal.fire({
+                    .catch(error => {
+                        Swal.fire({
                             icon: "error",
                             title: "Oops...",
                             text: "Algo salio mas!",
-                            footer: error,
+                            footer: error.response.data.message,
                         });
                         if (error.response.data) {
-                             this.errors = error.response.data.errors;
+                            this.errors = error.response.data.errors;
                         }
-                       
-                       
+
+
                     })
-                        
-             
+
+
 
             },
             async actualizarPersona() {
@@ -390,14 +381,14 @@
                 try {
                     await axios.put("/proveedor/actualizar", {
                         'nombre': this.nombre,
-                    'tipo_documento': this.tipo_documento,
-                    'num_documento' : this.num_documento,
-                    'direccion' : this.direccion,
-                    'telefono' : this.telefono,
-                    'email' : this.email,
-                    'contacto': this.contacto,
-                    'telefono_contacto': this.telefono_contacto,
-                    'id': this.persona_id
+                        'tipo_documento': this.tipo_documento,
+                        'num_documento': this.num_documento,
+                        'direccion': this.direccion,
+                        'telefono': this.telefono,
+                        'email': this.email,
+                        'contacto': this.contacto,
+                        'telefono_contacto': this.telefono_contacto,
+                        'id': this.persona_id
                     })
                         .then(function (response) {
                             me.cerrarModal();
@@ -409,16 +400,17 @@
                             me.listarPersona(1, "", "nombre");
                         })
                 } catch (error) {
-                      Swal.fire({
-                            icon: "error",
-                            title: "Oops...",
-                            text: "Algo salio mas!",
-                            footer: error,
-                        });
-                        if (error.response.data) {
-                             this.errors = error.response.data.errors;
-                        }
-                    
+                    console.log(error.response)
+                    Swal.fire({
+                        icon: "error",
+                        title: "Oops...",
+                        text: "Algo salio mas!",
+                        footer: error.response.data.message,
+                    });
+                    if (error.response.data) {
+                        this.errors = error.response.data.errors;
+                    }
+
                 }
 
             },
@@ -442,23 +434,23 @@
                             case "registrar": {
                                 this.modal = 1;
                                 this.tituloModal = 'Registrar Proveedor';
-                                this.nombre= '';
-                                this.tipo_documento='RUC';
-                                this.num_documento='';
-                                this.direccion='';
-                                this.telefono='';
-                                this.email='';
-                                this.contacto='';
-                                this.telefono_contacto='';
+                                this.nombre = '';
+                                this.tipo_documento = 'RUC';
+                                this.num_documento = '';
+                                this.direccion = '';
+                                this.telefono = '';
+                                this.email = '';
+                                this.contacto = '';
+                                this.telefono_contacto = '';
                                 this.tipoAccion = 1;
                                 break;
                             }
                             case "actualizar": {
                                 //console.log(data);
-                                this.modal=1;
-                                this.tituloModal='Actualizar Proveedor';
-                                this.tipoAccion=2;
-                                this.persona_id=data['id'];
+                                this.modal = 1;
+                                this.tituloModal = 'Actualizar Proveedor';
+                                this.tipoAccion = 2;
+                                this.persona_id = data['id'];
                                 this.nombre = data['nombre'];
                                 this.tipo_documento = data['tipo_documento'];
                                 this.num_documento = data['num_documento'];

@@ -306,8 +306,6 @@
             me.size = respuesta['size'];
             me.public_id = respuesta['public_id'];
             me.idmedia = respuesta['idmedia'];
-
-
           }
           else {
             me.tipoAccion = 1;
@@ -335,6 +333,7 @@
         }
       },
       registrarDatos() {
+        
 
         //Creamos el formData
         var data = new FormData();

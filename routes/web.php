@@ -87,5 +87,9 @@ Route::put('/categoria', [App\Http\Controllers\CategoriaController::class, 'elim
     Route::put('/datos/actualizar', [App\Http\Controllers\EmpresaDatosController::class, 'update'] ) ->name('datos.update');
     Route::put('/datos/uploda_img', [App\Http\Controllers\EmpresaDatosController::class, 'Upload_img'] ) ->name('datos.upload');
 
+
+    Route::get('/perfil', [App\Http\Controllers\PerfilController::class, 'index'] ) ->name('perfil.index');
+
+
 //Route::resource('/books', BooksController::class);
 

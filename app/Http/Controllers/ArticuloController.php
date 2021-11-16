@@ -9,25 +9,29 @@ use Illuminate\Support\Facades\DB;
 use DataTables;
 use Cloudinary;
 use App\Models\Media;
+use App\Http\Requests\ArticuloRequest;
+
 
 
 class ArticuloController extends Controller
 {
     public function index(Request $request)
     {
-        if (!$request->ajax()) return view('articulo');
+       if (!$request->ajax()) return view('articulo');
 
         $buscar = $request->buscar;
         $criterio = $request->criterio;
       
         if ($buscar==''){
             $articulos = Articulo::join('categorias','articulos.idcategoria','=','categorias.id')
-            ->select('articulos.id','articulos.idcategoria','articulos.codigo','articulos.nombre','categorias.nombre as nombre_categoria','articulos.precio_venta','articulos.stock','articulos.descripcion','articulos.condicion')
+            ->leftjoin('media', 'articulos.idmedia', '=', 'media.id' )
+            ->select('articulos.id', 'articulos.idmedia','articulos.idcategoria','articulos.codigo','articulos.nombre','categorias.nombre as nombre_categoria','articulos.precio_venta','articulos.stock','articulos.descripcion','articulos.condicion','media.public_id','media.file_url','media.file_name')
             ->orderBy('articulos.id', 'desc')->paginate(5);
         }
         else{
             $articulos = Articulo::join('categorias','articulos.idcategoria','=','categorias.id')
-            ->select('articulos.id','articulos.idcategoria','articulos.codigo','articulos.nombre','categorias.nombre as nombre_categoria','articulos.precio_venta','articulos.stock','articulos.descripcion','articulos.condicion')
+            ->leftjoin('media', 'articulos.idmedia', '=', 'media.id' )
+            ->select('articulos.id', 'articulos.idmedia','articulos.idcategoria','articulos.codigo','articulos.nombre','categorias.nombre as nombre_categoria','articulos.precio_venta','articulos.stock','articulos.descripcion','articulos.condicion','media.public_id','media.file_url','media.file_name')
             ->where('articulos.'.$criterio, 'like', '%'. $buscar . '%')
             ->orderBy('articulos.id', 'desc')->paginate(5);
         }
@@ -124,50 +128,9 @@ class ArticuloController extends Controller
 
         return ['articulos' => $articulos];
     }
-    public function store(Request $request)
+    public function store(ArticuloRequest $request)
     {
-        $request->validate([
-            'idcategoria'=> 'required',
-            'nombre'=>'required',
-            'precio_venta'=>'numeric|min:1',
-            'stock'=>'numeric|min:1',
-            'codigo'=>'required|numeric',
-            'descripcion'=>'min:4',
-
-           
-        ]);
-        if ($request->hasFile('image')) {
-            # code...
-
-          
-            $result = $request->image->storeOnCloudinary();
-            
-            $media = new Media();
-            // $media->id;
-             $media->public_id = $result->getPublicId();
-             $media->file_url =  $result->getSecurePath();
-             $media->file_name = $result->getFileName();
-             $media->file_type = $result->getFileType();
-             $media->size = $result->getSize();
-                        
-           $media->save();
         
-
-             $articulo = new Articulo();
-             $articulo->idcategoria = $request->idcategoria;
-             $articulo->codigo = $request->codigo;
-             $articulo->nombre = $request->nombre;
-             $articulo->precio_venta = $request->precio_venta;
-             $articulo->stock = $request->stock;
-             $articulo->descripcion = $request->descripcion;
-             $articulo->condicion = '1';
-             $articulo->idmedia = $media->id;
-             $articulo->save();
-             
-            return $media;
-
-           
-        } else{
             $articulo = new Articulo();
             $articulo->idcategoria = $request->idcategoria;
             $articulo->codigo = $request->codigo;
@@ -177,23 +140,14 @@ class ArticuloController extends Controller
             $articulo->descripcion = $request->descripcion;
             $articulo->condicion = '1';
             $articulo->save();
-        }
         
 
 
     }
-    public function update(Request $request)
+    public function update(ArticuloRequest $request)
     {
-        $request->validate([
-            'idcategoria'=> 'required',
-            'nombre'=>'required',
-            'precio_venta'=>'numeric|min:1',
-            'stock'=>'numeric|min:1',
-            'codigo'=>'required|numeric',
-            'descripcion'=>'min:4',
-           
-        ]);
-                $articulo = Articulo::findOrFail($request->id);
+        
+        $articulo = Articulo::findOrFail($request->id);
         $articulo->idcategoria = $request->idcategoria;
         $articulo->codigo = $request->codigo;
         $articulo->nombre = $request->nombre;
@@ -202,6 +156,7 @@ class ArticuloController extends Controller
         $articulo->descripcion = $request->descripcion;
         $articulo->condicion = '1';
         $articulo->save();
+        return $request;
     }
 
     public function desactivar(Request $request)

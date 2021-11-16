@@ -36,33 +36,28 @@
                         </button>
                     </div>
                     <br /><br />
-                    <div class="form-group row">
-                        <div class="col-md-6">
-                            <div class="">
-                                <tr>
-                                    <th>
-                                        <select class="form-control" v-model="criterio">
-                                            <option value="nombre">Nombre</option>
-                                            <option value="num_documento">Documento</option>
-                                            <option value="email">Email</option>
-                                            <option value="telefono">Teléfono</option>
-                                        </select>
-                                    </th>
-                                    <th>
-                                        <input type="text" v-model="buscar"
-                                            @keyup.enter="listarPersona(1, buscar, criterio)" class="form-control"
-                                            placeholder="Texto a buscar" />
-                                    </th>
-                                    <th>
-                                        <button type="submit" @click="listarPersona(1, buscar, criterio)"
-                                            class="btn btn-primary">
-                                            <i class="fa fa-search"></i> Buscar
-                                        </button>
-                                    </th>
-                                </tr>
-                            </div>
+
+                    <div class="row">
+                        <div class="col-xs-4 col-md-3">
+                            <select class="form-control" v-model="criterio">
+                                <option value="nombre">Nombre</option>
+                                <option value="num_documento">Documento</option>
+                                <option value="email">Email</option>
+                                <option value="telefono">Teléfono</option>
+                            </select>
+                        </div>
+                        <div class="col-xs-3">
+                            <input type="text" v-model="buscar" @keyup.enter="listarPersona(1, buscar, criterio)"
+                                class="form-control" placeholder="Texto a buscar" />
+                        </div>
+                        <div class="col-xs-3">
+                            <button type="submit" @click="listarPersona(1, buscar, criterio)" class="btn btn-primary">
+                                <i class="fa fa-search"></i> Buscar
+                            </button>
                         </div>
                     </div>
+                    
+                    <br>
                     <div class="table-responsive">
                         <table class="table table-bordered table-striped table-sm">
                             <thead>
@@ -305,7 +300,7 @@
                             icon: "error",
                             title: "Oops...",
                             text: "Algo salio mas!",
-                            footer: error,
+                             footer: error.response.data.message,
                         });
                     });
             },
@@ -344,7 +339,7 @@
                         icon: "error",
                         title: "Oops...",
                         text: "Algo salio mas!",
-                        footer: error,
+                         footer: error.response.data.message,
                     });
                     if (error.response.data) {
 
@@ -385,7 +380,7 @@
                         icon: "error",
                         title: "Oops...",
                         text: "Algo salio mas!",
-                        footer: error,
+                         footer: error.response.data.message,
                     });
                     if (error.response.data) {
 

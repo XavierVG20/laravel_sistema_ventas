@@ -19,9 +19,9 @@
           <!-- small box -->
           <div class="small-box bg-aqua">
             <div class="inner">
-              <h3>150</h3>
+              <h3>{{total_ventas}}</h3>
 
-              <p>Ventas</p>
+              <p>Ventas Registradas</p>
             </div>
             <div class="icon">
               <i class="ion ion-bag"></i>
@@ -34,9 +34,9 @@
           <!-- small box -->
           <div class="small-box bg-green">
             <div class="inner">
-              <h3>53<sup style="font-size: 20px">%</sup></h3>
+              <h3> {{total_articulos}}<sup style="font-size: 20px">%</sup></h3>
 
-              <p>Articulos</p>
+              <p>Articulos Registrados</p>
             </div>
             <div class="icon">
               <i class="ion ion-stats-bars"></i>
@@ -51,7 +51,7 @@
             <div class="inner">
               <h3>44</h3>
 
-              <p>Usuarios</p>
+              <p>Clientes Registrados</p>
             </div>
             <div class="icon">
               <i class="ion ion-person-add"></i>
@@ -64,14 +64,14 @@
           <!-- small box -->
           <div class="small-box bg-red">
             <div class="inner">
-              <h3>65</h3>
+              <h3>{{total_ingresos}}</h3>
 
-              <p>Ingresos</p>
+              <p>Ingresos Registrados</p>
             </div>
             <div class="icon">
               <i class="ion ion-pie-graph"></i>
             </div>
-            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="#" class="small-box-footer">Ver <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
@@ -94,7 +94,6 @@
               <div class="chart tab-pane active" id="revenue-chart" style="position: relative; height: 400px;">
  <div style="position: relative; height: 300px;">
      
- <BarChart/>
  </div>
             
              
@@ -255,6 +254,7 @@
         <!-- right col -->
       </div>
       <!-- /.row (main row) -->
+    <doughnut-chart/>
 
       </section>
 
@@ -268,25 +268,57 @@ import LineChart from "./LineChart.vue"
 import AreaChart from "./AreaChart.vue"
 import BarChart from "./BarChart.vue"
 import PieChart from "./PieChart.vue"
+import DoughnutChart from "./DoughnutChart.vue"
 
 
 export default {
-  name: "App",
+ 
   components: {
     AreaChart,
     BarChart,
     LineChart,
-    PieChart
+    PieChart,
+     DoughnutChart
   },
   data() {
     return {
-      chartData: {
-        Books: 24,
-        Magazine: 30,
-        Newspapers: 10
-      }
+      total_articulos:0,
+      total_ventas:0,
+      total_ingresos:0
+
+
+
+      
+     
     };
-  }
+  },
+   methods: {
+    async listarventas() {
+        let me = this;
+        var url = "/dashboard";
+        await axios.get(url)
+          .then(response=>{
+             
+            response.data.articulos.forEach(element => {
+               console.log(element.total_articulos);
+               this.total_articulos = element.total_articulos
+             });
+               response.data.ventas.forEach(element => {
+               this.total_ventas = element.total_ventas
+             });
+               response.data.ingresos.forEach(element => {
+               this.total_ingresos = element.total_ingresos
+             });
+          
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      },
+   },
+   mounted() {
+      this.listarventas();
+    }
 };
 </script>
 

@@ -83,9 +83,12 @@ class VentaController extends Controller
         'ventas.num_comprobante','ventas.created_at','ventas.impuesto','ventas.total',
         'ventas.estado','personas.nombre','personas.tipo_documento','personas.num_documento',
         'personas.direccion','personas.email',
-        'personas.telefono','users.name')
+        'personas.telefono','users.name','users.num_documento as num_documento_user','users.direccion as direccion_user', 'users.telefono as telefono_user', 'users.email as email_user')
         ->where('ventas.id','=',$id)
         ->orderBy('ventas.id','desc')->take(1)->get();
+
+        $empresa_datos = Empresa_datos::leftjoin('media', 'empresa_datos.idmedia', '=', 'media.id' )
+        ->get();
         
         \QrCode::size(100)->generate('MyNotePaper');
 
@@ -96,9 +99,9 @@ class VentaController extends Controller
         ->where('detalle_ventas.idventa','=',$id)
         ->orderBy('detalle_ventas.id','desc')->get();
 
-        $empresa_datos = Empresa_datos::take(1)->get();
 
         $numventa=Venta::select('num_comprobante')->where('id',$id)->get();
+       // return $venta;
 
         $pdf = \PDF::loadView('pdf.reporte_venta',['venta'=>$venta,'detalles'=>$detalles, 'empresa_datos'=> $empresa_datos]);
         return $pdf->download( 'venta-'.$numventa[0]->num_comprobante.'.pdf');
@@ -108,8 +111,8 @@ class VentaController extends Controller
     {
       //  if (!$request->ajax()) return redirect('/');
  
-       // try{
-           // DB::beginTransaction();
+        try{
+            DB::beginTransaction();
  
            $mytime = Carbon::now();
  
@@ -139,13 +142,13 @@ class VentaController extends Controller
                 $detalle->save();
             }          
         
-           // DB::commit();
+            DB::commit();
             return [
-                'id'=> $venta
+                'id'=> $venta->id
             ];
-      //  } catch (Exception $e){
-        //    DB::rollBack();
-       // }
+        } catch (Exception $e){
+            DB::rollBack();
+        }
     }
  
     public function desactivar(Request $request)

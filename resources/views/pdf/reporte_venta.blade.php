@@ -1,15 +1,60 @@
-<!DOCTYPE html>
+<!DOCTYPE>
 <html>
     <head>
-        <meta charset="utf-8">
-        <title>factura</title>
-        <style>
-            * {
-                -webkit-box-sizing: border-box;
-                -moz-box-sizing: border-box;
-                box-sizing: border-box;
-            }
-            h1,h2,h3,h4,h5,h6,p,span,div { 
+        <title>Factura</title>
+        <link rel="stylesheet" type="text/css" href="css/fac.css">
+    </head>
+    <style>
+        body {
+  /*position: relative;*/
+  /*width: 16cm;  */
+  /*height: 29.7cm; */
+  /*margin: 0 auto; */
+  /*color: #555555;*/
+  /*background: #FFFFFF; */
+  font-family: Arial, sans-serif; 
+  /*font-size: 15px; */
+  /*font-family: SourceSansPro;*/
+}
+
+#logo{
+  float: left;
+  margin-top: 1%;
+  margin-left: 1%;
+  margin-right: 1%;
+}
+
+#imagen{
+  width: 150px;
+}
+
+#datos{
+  float: left;
+  margin-top: 1%;
+  margin-left: 1%;
+  margin-right: 1%;
+  /*text-align: justify;*/
+}
+
+#encabezado{
+  text-align: center;
+  margin-left: 10px;
+  margin-right:350px;
+  font-family: DejaVu Sans; 
+  font-size:10px;
+        font-weight: normal;
+}
+
+#fact{
+  /*position: relative;*/
+  float: right;
+  margin-top: 2%;
+  margin-left: 2%;
+  margin-right: 2%;
+  font-size: 20px;
+}
+
+h1,h2,h3,h4,h5,h6,p,span,div { 
                 font-family: DejaVu Sans; 
                 font-size:10px;
                 font-weight: normal;
@@ -30,7 +75,7 @@
                 border-color: #ddd;
             }
             .panel-body {
-                padding: 15px;
+                padding: 10px;
             }
             table {
                 width: 100%;
@@ -59,37 +104,32 @@
                 -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
                 box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
             }
-        </style>
-            <style>
-                @page { margin-top: 140px;}
-                header {
-                    top: -100px;
-                    position: fixed;
-                }
-            </style>
-
-    </head>
+    </style>
     <body>
+    @foreach ( $empresa_datos as $e )
         <header>
-            <div style="position:absolute; left:0pt; width:250pt;">
-                <img class="img-rounded" height="" src="">
+            <div id="logo">
+                <img src="{{$e->file_url}}" alt="Compuzoft" id="imagen">
             </div>
+            <div id="datos">
+                <p id="encabezado">
+                    <b>{{$e->nombre_empresa}}</b><br>{{$e->direccion}}<br>Telefono:{{$e->telefono}}<br>Email:{{$e->email}}
+                </p>
+            </div>
+            <div id="fact">
             <div style="margin-left:300pt;">
-                <b>Fecha: </b><br />
+                <b>Fecha: {{ date('d-m-Y ') }} </b><br />
            
-                    <b>Fecha de vencimiento: </b><br />
+                    <b>Fecha de vencimiento: {{ date('d-m-Y ') }} </b><br />
 
               
                     <b>Factura : </b>  
           
                 <br />
             </div>
-            <br />
-            <h2>
-            {!! QrCode::generate('Make me into a QrCode!'); !!}
-    <p>Escanéame para volver a la página principal.</p>
-            </h2>
+            </div>
         </header>
+        @endforeach
         <main>
         @foreach ($venta as $v)
             <div style="clear:both; position:relative;">
@@ -110,11 +150,11 @@
                     <div class="panel panel-default">
                         <div class="panel-body">
                           
-                        Sr(a). {{$v->nombre}}<br>
-                            {{$v->tipo_documento}}: {{$v->num_documento}}<br>
-                            Dirección: {{$v->direccion}}<br>
-                            Teléfono: {{$v->telefono}}<br>
-                            Email: {{$v->email}}<br>
+                        Sr(a). {{$v->name}}<br>
+                            {{$v->tipo_documento}}: {{$v->num_documento_user}}<br>
+                            Dirección: {{$v->direccion_user}}<br>
+                            Teléfono: {{$v->telefono_user}}<br>
+                            Email: {{$v->email_user}}<br>
                         </div>
                     </div>
                 </div>
@@ -183,6 +223,5 @@
            
         </main>
 
-       
     </body>
 </html>

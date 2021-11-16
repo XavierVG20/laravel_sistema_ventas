@@ -34,7 +34,7 @@
         <div class="box-body">
           <div class="pull-right">
             <button type="button" class="btn btn-primary btn-secondary" @click="abrirModal('categoria', 'registrar')">
-              <i class="fa fa-edit"></i> Registrar
+            Nuevo
             </button>
           </div>
           <br><br>
@@ -54,8 +54,11 @@
               </button>           
            </div>
           </div>
-          </div>
-          <div class="loader"></div>
+          
+<br>
+         
+            <div v-if="load" class="loader"></div>
+         
           
 
           <table class="table table-bordered table-striped table-sm">
@@ -227,6 +230,8 @@ import BounceLoader from 'vue-spinner/src/BounceLoader.vue'
         criterio: "nombre",
         buscar: "",
 
+        load: false,
+
         color: '#cc181e',
       color1: '#5bc0de',
       size: '45px',
@@ -304,6 +309,9 @@ import BounceLoader from 'vue-spinner/src/BounceLoader.vue'
               );
               me.listarCategoria(1, "", "nombre");
             })
+            .finally(res=>{
+              console.log('finalizado')
+            })
 
         } catch (error) {
           // console.log(error)
@@ -311,7 +319,7 @@ import BounceLoader from 'vue-spinner/src/BounceLoader.vue'
             icon: "error",
             title: "Oops...",
             text: "Algo salio mas!",
-            footer: error,
+             footer: error.response.data.message,
           });
           if (error.response.data) {
 
@@ -347,7 +355,7 @@ import BounceLoader from 'vue-spinner/src/BounceLoader.vue'
             icon: "error",
             title: "Oops...",
             text: "Algo salio mas!",
-            footer: error,
+             footer: error.response.data.message,
           });
           if (error.response.data) {
 
@@ -389,7 +397,7 @@ import BounceLoader from 'vue-spinner/src/BounceLoader.vue'
                   icon: "error",
                   title: "Oops...",
                   text: "Algo salio mas!",
-                  footer: error,
+                   footer: error.response.data.message,
                 });
               });
           }
@@ -429,7 +437,7 @@ import BounceLoader from 'vue-spinner/src/BounceLoader.vue'
                   icon: "error",
                   title: "Oops...",
                   text: "Algo salio mas!",
-                  footer: error,
+                   footer: error.response.data.message,
                 });
               });
           }
@@ -465,7 +473,7 @@ import BounceLoader from 'vue-spinner/src/BounceLoader.vue'
                   icon: "error",
                   title: "Oops...",
                   text: "Algo salio mas!",
-                  footer: error,
+                   footer: error.response.data.message,
                 });
               });
           }

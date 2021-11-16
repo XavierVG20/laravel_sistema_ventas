@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Persona;
 use Illuminate\Support\Facades\DB;
+use App\Http\Requests\ClienteRequest;
+
 
 
 class ClienteController extends Controller
@@ -50,16 +52,9 @@ class ClienteController extends Controller
         return ['clientes' => $clientes];
     }
 
-    public function store(Request $request)
+    public function store(ClienteRequest $request)
     {
-        $request->validate([
-            'nombre'=> 'required',
-            'tipo_documento'=>'required',
-           // 'num_documento'=>'required|numeric|min:10',
-            'direccion'=>'required|',
-            'telefono'=>'required|',
-            'email'=>'required|email',
-        ]);        
+            
         $persona = new Persona();
         $persona->nombre = $request->nombre;
         $persona->tipo_documento = $request->tipo_documento;
@@ -72,7 +67,7 @@ class ClienteController extends Controller
       return ($persona);
     }
 
-    public function update(Request $request)
+    public function update(ClienteRequest $request)
     {
         if (!$request->ajax()) return redirect('/');
         $persona = Persona::findOrFail($request->id);

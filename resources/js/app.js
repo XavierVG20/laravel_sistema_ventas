@@ -51,6 +51,8 @@ Vue.component('info-component', require('./components/InfoComponent.vue').defaul
 Vue.component('usuario-component', require('./components/UsuarioComponent.vue').default);
 Vue.component('dashboard-component', require('./components/DashboardComponent.vue').default);
 Vue.component('datos_empresa-component', require('./components/Datos_EmpresaComponent.vue').default);
+Vue.component('perfil-component', require('./components/PerfilComponent.vue').default);
+
 
 
 
