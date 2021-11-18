@@ -302,6 +302,7 @@ import BounceLoader from 'vue-spinner/src/BounceLoader.vue'
           })
             .then(function (response) {
               me.cerrarModal();
+              console.log(response)
               Swal.fire(
                 "Guardado!",
                 "El registro ha sido guardado con éxito.",
@@ -309,9 +310,7 @@ import BounceLoader from 'vue-spinner/src/BounceLoader.vue'
               );
               me.listarCategoria(1, "", "nombre");
             })
-            .finally(res=>{
-              console.log('finalizado')
-            })
+           
 
         } catch (error) {
           // console.log(error)
