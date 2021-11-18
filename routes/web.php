@@ -27,7 +27,7 @@ Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, '__in
 
 //Route::resource('/categoria',App\Http\Controllers\CategoriaController::class);
 Route::get('/categoria', [App\Http\Controllers\CategoriaController::class, 'index'])->name('categoria.index');
-Route::post('/categoria', [App\Http\Controllers\CategoriaController::class, 'store'])->name('categoria.store');
+Route::post('/categoria/registrar', [App\Http\Controllers\CategoriaController::class, 'store'])->name('categoria.store');
 Route::put('/categoria/actualizar', [App\Http\Controllers\CategoriaController::class, 'update'])->name('categoria.update');
 Route::put('/categoria/activar', [App\Http\Controllers\CategoriaController::class, 'activar'])->name('categoria.activar');
 Route::put('/categoria/desactivar', [App\Http\Controllers\CategoriaController::class, 'desactivar'])->name('categoria.desactivar');
@@ -39,7 +39,7 @@ Route::put('/categoria', [App\Http\Controllers\CategoriaController::class, 'elim
     //Route::apiResource('/articulo', ArticuloController::class);
     Route::get('/articulo', [App\Http\Controllers\ArticuloController::class, 'index'])->name('articulo.index');
 
-    Route::post('/articulo', [App\Http\Controllers\ArticuloController::class, 'store'])->name('articulo.store');
+    Route::post('/articulo/registrar', [App\Http\Controllers\ArticuloController::class, 'store'])->name('articulo.store');
     Route::put('/articulo/actualizar', [App\Http\Controllers\ArticuloController::class, 'update'])->name('articulo.update');
     Route::put('/articulo/desactivar', [App\Http\Controllers\ArticuloController::class, 'desactivar'])->name('articulo.desactivar');
     Route::get('/articulo/listarPdf',  [App\Http\Controllers\ArticuloController::class, 'listarPdf'])->name('articulos_pdf');

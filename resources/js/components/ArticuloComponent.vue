@@ -399,7 +399,7 @@
                 let me = this;
 
                 try {
-                    await axios.post('/articulo/', {
+                    await axios.post('/articulo/registrar', {
                         'idcategoria': this.idcategoria,
                         'codigo': this.codigo,
                         'nombre': this.nombre,

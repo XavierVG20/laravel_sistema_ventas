@@ -296,7 +296,7 @@ import BounceLoader from 'vue-spinner/src/BounceLoader.vue'
         let me = this;
 
         try {
-          await axios.post("/categoria/", {
+          await axios.post("/categoria/registrar", {
             nombre: this.nombre,
             descripcion: this.descripcion,
           })
