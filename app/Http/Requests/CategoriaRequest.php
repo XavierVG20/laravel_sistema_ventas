@@ -25,7 +25,6 @@ class CategoriaRequest extends FormRequest
     {
         return [
         'nombre'        => 'required|min:5|max:30',
-        'descripcion'    => 'required|min:5|max:30',    
         ];
     }
 
@@ -36,9 +35,7 @@ class CategoriaRequest extends FormRequest
         'nombre.min'        => 'El campo :attribute debe contener mas de una letra.',
         'nombre.max'        => 'El campo :attribute debe contener max 30 letras.',
  
-        'descripcion.required'   => 'El campo :attribute es obligatorio.',
-        'descripcion.min'        => 'El campo :attribute debe contener mas de una letra.',
-        'descripcion.max'        => 'El campo :attribute debe contener max 30 letras.',
+   
  
         ];
     }
@@ -46,7 +43,6 @@ class CategoriaRequest extends FormRequest
     {
         return [
             'nombre'        => 'nombre',
-            'descripcion'    => 'descripcion',
         ];
     }
 }

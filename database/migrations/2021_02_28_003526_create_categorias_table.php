@@ -21,6 +21,11 @@ class CreateCategoriasTable extends Migration
           
             $table->timestamps();
         });
+
+        DB::table('categorias')->insert(array('id'=>'1',
+        'nombre'=>'Administrador',
+         'descripcion'=>'kjaviervelasque@hotmail.com'
+        ));
     }
 
     /**
