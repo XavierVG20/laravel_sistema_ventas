@@ -31,8 +31,12 @@ class CreateUsersTable extends Migration
         });
         DB::table('users')->insert(array('id'=>'1',
         'name'=>'Administrador',
-         'email'=>'kjaviervelasque@hotmail.com', 
+         'email'=>'admin@admin.com', 
          'password'=>'$2y$12$fQVExSFUFZCNs.9xClllau9VAWQGMJZq7KNTQ14DgpO2djOIiEeVi',
+         'tipo_documento'=>'C.I',
+         'num_documento'=>'05467834',
+         'direccion' => 'Quito',
+         'telefono'=>'05467834',
           'idrol'=>'1'));
 
 /*

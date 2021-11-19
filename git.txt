@@ -5,3 +5,5 @@ git commit -m "first commit"
 git branch -M main
 git remote add origin https://github.com/XavierVG20/laravel_sistema_ventas.git
 git push -u origin main
+
+heroku run php artisan migrate:fresh  --app siventas

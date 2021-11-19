@@ -3829,178 +3829,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -100078,111 +99906,58 @@ var render = function() {
   return _c("main", { staticClass: "main" }, [
     _vm._m(0),
     _vm._v(" "),
-    _c(
-      "section",
-      { staticClass: "content" },
-      [
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-lg-3 col-xs-6" }, [
-            _c("div", { staticClass: "small-box bg-aqua" }, [
-              _c("div", { staticClass: "inner" }, [
-                _c("h3", [_vm._v(_vm._s(_vm.total_ventas))]),
-                _vm._v(" "),
-                _c("p", [_vm._v("Ventas Registradas")])
-              ]),
+    _c("section", { staticClass: "content" }, [
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-lg-3 col-xs-6" }, [
+          _c("div", { staticClass: "small-box bg-aqua" }, [
+            _c("div", { staticClass: "inner" }, [
+              _c("h3", [_vm._v(_vm._s(_vm.total_ventas))]),
               _vm._v(" "),
-              _vm._m(1),
-              _vm._v(" "),
-              _vm._m(2)
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-lg-3 col-xs-6" }, [
-            _c("div", { staticClass: "small-box bg-green" }, [
-              _c("div", { staticClass: "inner" }, [
-                _c("h3", [
-                  _vm._v(" " + _vm._s(_vm.total_articulos)),
-                  _c("sup", { staticStyle: { "font-size": "20px" } }, [
-                    _vm._v("%")
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("p", [_vm._v("Articulos Registrados")])
-              ]),
-              _vm._v(" "),
-              _vm._m(3),
-              _vm._v(" "),
-              _vm._m(4)
-            ])
-          ]),
-          _vm._v(" "),
-          _vm._m(5),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-lg-3 col-xs-6" }, [
-            _c("div", { staticClass: "small-box bg-red" }, [
-              _c("div", { staticClass: "inner" }, [
-                _c("h3", [_vm._v(_vm._s(_vm.total_ingresos))]),
-                _vm._v(" "),
-                _c("p", [_vm._v("Ingresos Registrados")])
-              ]),
-              _vm._v(" "),
-              _vm._m(6),
-              _vm._v(" "),
-              _vm._m(7)
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "row" }, [
-          _c("section", { staticClass: "col-lg-7 connectedSortable" }, [
-            _c("div", { staticClass: "nav-tabs-custom" }, [
-              _vm._m(8),
-              _vm._v(" "),
-              _c("div", { staticClass: "tab-content no-padding" }, [
-                _vm._m(9),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  {
-                    staticClass: "chart tab-pane",
-                    staticStyle: { position: "relative", height: "300px" },
-                    attrs: { id: "sales-chart" }
-                  },
-                  [_c("LineChart")],
-                  1
-                )
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("section", { staticClass: "col-lg-5 connectedSortable" }, [
-            _c("div", { staticClass: "box box-solid bg-teal-gradient" }, [
-              _vm._m(10),
-              _vm._v(" "),
-              _c("div", { staticClass: "box-body border-radius-none" }, [
-                _c(
-                  "div",
-                  {
-                    staticClass: "chart",
-                    staticStyle: { height: "250px" },
-                    attrs: { id: "line-chart" }
-                  },
-                  [_c("PieChart")],
-                  1
-                )
-              ]),
-              _vm._v(" "),
-              _vm._m(11)
+              _c("p", [_vm._v("Ventas Registradas")])
             ]),
             _vm._v(" "),
-            _vm._m(12)
+            _vm._m(1),
+            _vm._v(" "),
+            _vm._m(2)
           ])
         ]),
         _vm._v(" "),
-        _c("doughnut-chart")
-      ],
-      1
-    )
+        _c("div", { staticClass: "col-lg-3 col-xs-6" }, [
+          _c("div", { staticClass: "small-box bg-green" }, [
+            _c("div", { staticClass: "inner" }, [
+              _c("h3", [
+                _vm._v(" " + _vm._s(_vm.total_articulos)),
+                _c("sup", { staticStyle: { "font-size": "20px" } })
+              ]),
+              _vm._v(" "),
+              _c("p", [_vm._v("Articulos Registrados")])
+            ]),
+            _vm._v(" "),
+            _vm._m(3),
+            _vm._v(" "),
+            _vm._m(4)
+          ])
+        ]),
+        _vm._v(" "),
+        _vm._m(5),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-lg-3 col-xs-6" }, [
+          _c("div", { staticClass: "small-box bg-red" }, [
+            _c("div", { staticClass: "inner" }, [
+              _c("h3", [_vm._v(_vm._s(_vm.total_ingresos))]),
+              _vm._v(" "),
+              _c("p", [_vm._v("Ingresos Registrados")])
+            ]),
+            _vm._v(" "),
+            _vm._m(6),
+            _vm._v(" "),
+            _vm._m(7)
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "row" }, [_c("doughnut-chart")], 1)
+    ])
   ])
 }
 var staticRenderFns = [
@@ -100192,7 +99967,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("section", { staticClass: "content-header" }, [
       _c("h1", [
-        _vm._v("\n         Dashboard\n         "),
+        _vm._v("\n        Dashboard\n        "),
         _c("small", [_vm._v("Control panel")])
       ]),
       _vm._v(" "),
@@ -100280,273 +100055,6 @@ var staticRenderFns = [
     return _c("a", { staticClass: "small-box-footer", attrs: { href: "#" } }, [
       _vm._v("Ver "),
       _c("i", { staticClass: "fa fa-arrow-circle-right" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("ul", { staticClass: "nav nav-tabs pull-right" }, [
-      _c("li", { staticClass: "active" }, [
-        _c("a", { attrs: { href: "#revenue-chart", "data-toggle": "tab" } }, [
-          _vm._v("Area")
-        ])
-      ]),
-      _vm._v(" "),
-      _c("li", [
-        _c("a", { attrs: { href: "#sales-chart", "data-toggle": "tab" } }, [
-          _vm._v("Donut")
-        ])
-      ]),
-      _vm._v(" "),
-      _c("li", { staticClass: "pull-left header" }, [
-        _c("i", { staticClass: "fa fa-inbox" }),
-        _vm._v(" Sales")
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass: "chart tab-pane active",
-        staticStyle: { position: "relative", height: "400px" },
-        attrs: { id: "revenue-chart" }
-      },
-      [_c("div", { staticStyle: { position: "relative", height: "300px" } })]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "box-header" }, [
-      _c("i", { staticClass: "fa fa-th" }),
-      _vm._v(" "),
-      _c("h3", { staticClass: "box-title" }, [_vm._v("Sales Graph")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "box-tools pull-right" }, [
-        _c(
-          "button",
-          {
-            staticClass: "btn bg-teal btn-sm",
-            attrs: { type: "button", "data-widget": "collapse" }
-          },
-          [_c("i", { staticClass: "fa fa-minus" })]
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass: "btn bg-teal btn-sm",
-            attrs: { type: "button", "data-widget": "remove" }
-          },
-          [_c("i", { staticClass: "fa fa-times" })]
-        )
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "box-footer no-border" }, [
-      _c("div", { staticClass: "row" }, [
-        _c(
-          "div",
-          {
-            staticClass: "col-xs-4 text-center",
-            staticStyle: { "border-right": "1px solid #f4f4f4" }
-          },
-          [
-            _c("input", {
-              staticClass: "knob",
-              attrs: {
-                type: "text",
-                "data-readonly": "true",
-                value: "20",
-                "data-width": "60",
-                "data-height": "60",
-                "data-fgColor": "#39CCCC"
-              }
-            }),
-            _vm._v(" "),
-            _c("div", { staticClass: "knob-label" }, [_vm._v("Mail-Orders")])
-          ]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass: "col-xs-4 text-center",
-            staticStyle: { "border-right": "1px solid #f4f4f4" }
-          },
-          [
-            _c("input", {
-              staticClass: "knob",
-              attrs: {
-                type: "text",
-                "data-readonly": "true",
-                value: "50",
-                "data-width": "60",
-                "data-height": "60",
-                "data-fgColor": "#39CCCC"
-              }
-            }),
-            _vm._v(" "),
-            _c("div", { staticClass: "knob-label" }, [_vm._v("Online")])
-          ]
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-xs-4 text-center" }, [
-          _c("input", {
-            staticClass: "knob",
-            attrs: {
-              type: "text",
-              "data-readonly": "true",
-              value: "30",
-              "data-width": "60",
-              "data-height": "60",
-              "data-fgColor": "#39CCCC"
-            }
-          }),
-          _vm._v(" "),
-          _c("div", { staticClass: "knob-label" }, [_vm._v("In-Store")])
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "box box-solid bg-green-gradient" }, [
-      _c("div", { staticClass: "box-header" }, [
-        _c("i", { staticClass: "fa fa-calendar" }),
-        _vm._v(" "),
-        _c("h3", { staticClass: "box-title" }, [_vm._v("Calendar")]),
-        _vm._v(" "),
-        _c("div", { staticClass: "pull-right box-tools" }, [
-          _c("div", { staticClass: "btn-group" }, [
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-success btn-sm dropdown-toggle",
-                attrs: { type: "button", "data-toggle": "dropdown" }
-              },
-              [_c("i", { staticClass: "fa fa-bars" })]
-            ),
-            _vm._v(" "),
-            _c(
-              "ul",
-              {
-                staticClass: "dropdown-menu pull-right",
-                attrs: { role: "menu" }
-              },
-              [
-                _c("li", [
-                  _c("a", { attrs: { href: "#" } }, [_vm._v("Add new event")])
-                ]),
-                _vm._v(" "),
-                _c("li", [
-                  _c("a", { attrs: { href: "#" } }, [_vm._v("Clear events")])
-                ]),
-                _vm._v(" "),
-                _c("li", { staticClass: "divider" }),
-                _vm._v(" "),
-                _c("li", [
-                  _c("a", { attrs: { href: "#" } }, [_vm._v("View calendar")])
-                ])
-              ]
-            )
-          ]),
-          _vm._v(" "),
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-success btn-sm",
-              attrs: { type: "button", "data-widget": "collapse" }
-            },
-            [_c("i", { staticClass: "fa fa-minus" })]
-          ),
-          _vm._v(" "),
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-success btn-sm",
-              attrs: { type: "button", "data-widget": "remove" }
-            },
-            [_c("i", { staticClass: "fa fa-times" })]
-          )
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "box-body no-padding" }, [
-        _c("div", { staticStyle: { width: "100%" }, attrs: { id: "calendar" } })
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "box-footer text-black" }, [
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-sm-6" }, [
-            _c("div", { staticClass: "clearfix" }, [
-              _c("span", { staticClass: "pull-left" }, [_vm._v("Task #1")]),
-              _vm._v(" "),
-              _c("small", { staticClass: "pull-right" }, [_vm._v("90%")])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "progress xs" }, [
-              _c("div", {
-                staticClass: "progress-bar progress-bar-green",
-                staticStyle: { width: "90%" }
-              })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "clearfix" }, [
-              _c("span", { staticClass: "pull-left" }, [_vm._v("Task #2")]),
-              _vm._v(" "),
-              _c("small", { staticClass: "pull-right" }, [_vm._v("70%")])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "progress xs" }, [
-              _c("div", {
-                staticClass: "progress-bar progress-bar-green",
-                staticStyle: { width: "70%" }
-              })
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-sm-6" }, [
-            _c("div", { staticClass: "clearfix" }, [
-              _c("span", { staticClass: "pull-left" }, [_vm._v("Task #3")]),
-              _vm._v(" "),
-              _c("small", { staticClass: "pull-right" }, [_vm._v("60%")])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "progress xs" }, [
-              _c("div", {
-                staticClass: "progress-bar progress-bar-green",
-                staticStyle: { width: "60%" }
-              })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "clearfix" }, [
-              _c("span", { staticClass: "pull-left" }, [_vm._v("Task #4")]),
-              _vm._v(" "),
-              _c("small", { staticClass: "pull-right" }, [_vm._v("40%")])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "progress xs" }, [
-              _c("div", {
-                staticClass: "progress-bar progress-bar-green",
-                staticStyle: { width: "40%" }
-              })
-            ])
-          ])
-        ])
-      ])
     ])
   }
 ]
