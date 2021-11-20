@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
+use App\Http\Requests\UsuarioRequest;
+
 class UserController extends Controller
 {
     public function index(Request $request)
@@ -41,9 +43,8 @@ class UserController extends Controller
         ];
     }
 
-    public function store(Request $request)
+    public function store(UsuarioRequest $request)
     {
-        if (!$request->ajax()) return redirect('/');
 
         try{
             DB::beginTransaction();
@@ -66,7 +67,7 @@ class UserController extends Controller
         }
     }
 
-    public function update(Request $request)
+    public function update(UsuarioRequest $request)
     {
         if (!$request->ajax()) return redirect('/');
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Empresa_datos;
 use App\Models\Media;
 use Illuminate\Support\Facades\DB;
+use App\Http\Requests\EmpresaDatosRequest;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -32,7 +33,7 @@ class EmpresaDatosController extends Controller
         
     }
 
-     public function store(Request $request)
+     public function store(EmpresaDatosRequest $request)
     {
       
         
@@ -79,7 +80,7 @@ class EmpresaDatosController extends Controller
          
 
     }
-     public function update(Request $request)
+     public function update(EmpresaDatosRequest $request)
     {
      //   DB::beginTransaction();
 
@@ -122,7 +123,6 @@ class EmpresaDatosController extends Controller
             $empresa_datos -> email = $request-> email;
             $empresa_datos -> direccion = $request-> direccion ; 
             $empresa_datos ->  telefono = $request-> telefono;
-            $empresa_datos -> idmedia =$request-> idmedia;
             $empresa_datos->save();
 
             

@@ -37,7 +37,7 @@
 
                     <div class="box-body">
                         <div class="pull-right">
-                            <button type="button" @click="mostrarDetalle()" class="btn btn-secondary">
+                            <button type="button" @click="mostrarDetalle()" class="btn btn-primary">
                                 <i class="fa fa-plus"></i>&nbsp;Nuevo
                             </button>
                         </div>

@@ -115,6 +115,8 @@
                     <div class="col-sm-10">
                       <input type="text" v-model="nombre_empresa" class="form-control"
                         placeholder="Nombre de la empresa">
+                      <label v-if="errors.nombre_empresa" class="text-danger">* {{errors.nombre_empresa[0]}}</label>
+
                     </div>
                   </div>
                   <div class="form-group">
@@ -122,6 +124,8 @@
 
                     <div class="col-sm-10">
                       <input type="email" class="form-control" v-model="email" placeholder="Email">
+                                            <label v-if="errors.email" class="text-danger">* {{errors.email[0]}}</label>
+
                     </div>
                   </div>
                   <div class="form-group">
@@ -129,6 +133,8 @@
 
                     <div class="col-sm-10">
                       <input type="text" class="form-control" v-model="direccion" placeholder="Direccion">
+                                            <label v-if="errors.direccion" class="text-danger">* {{errors.direccion[0]}}</label>
+
                     </div>
                   </div>
                   <div class="form-group">
@@ -136,6 +142,8 @@
 
                     <div class="col-sm-10">
                       <input type="text" class="form-control" v-model="telefono" placeholder="Telefono">
+                                            <label v-if="errors.telefono" class="text-danger">* {{errors.telefono[0]}}</label>
+
                     </div>
                   </div>
 
@@ -248,6 +256,7 @@
           'from': 0,
           'to': 0,
         },
+        errors:{},
         offset: 3,
         criterio: 'nombre',
         buscar: ''
@@ -283,13 +292,10 @@
       }
     },
     methods: {
-
-
-      
       async datos_empresa() {
         let me = this;
         var url = '/datos';
-        await axios.get(url).then(function (response) {
+        await axios.get(url).then(response=> {
           console.log(response)
 
           if (response.data.length == 1) {
@@ -313,7 +319,7 @@
           }
 
         })
-          .catch(function (error) {
+          .catch(error=> {
             console.log(error);
           });
 
@@ -332,7 +338,7 @@
           reader.readAsDataURL(input.files[0]);
         }
       },
-      registrarDatos() {
+     async  registrarDatos() {
         
 
         //Creamos el formData
@@ -349,22 +355,28 @@
         //Añadimos el método PUT dentro del formData
         // Como lo hacíamos desde un formulario simple _(no ajax)_
 
-        axios.post('/datos/registrar', data)
-          .then(function (response) {
+     await   axios.post('/datos/registrar', data)
+          .then(response=> {
             Swal.fire(
               "Guardado!",
               "El registro ha sido guardado con éxito.",
               "success"
             );
+            this.errors={}
 
           })
           .catch(error => {
-            Swal.fire({
-              icon: "error",
-              title: "Oops...",
-              text: "Algo salio mas!",
-              footer: error.message,
-            });
+         Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Algo salio mas!",
+             footer: error.response.data.message,
+          });
+          if (error.response.data) {
+
+            this.errors = error.response.data.errors;
+
+          }
           });
 
 
@@ -389,8 +401,9 @@
         // Como lo hacíamos desde un formulario simple _(no ajax)_
         data.append('_method', 'PUT');
         await axios.post('/datos/actualizar', data)
-          .then(function (response) {
-            console.log(response)
+          .then(response=> {
+                        this.errors={}
+
             Swal.fire(
               "Guardado!",
               "El registro ha sido guardado con éxito.",
@@ -398,12 +411,17 @@
             );
           })
           .catch(error => {
-            Swal.fire({
-              icon: "error",
-              title: "Oops...",
-              text: "Algo salio mas!",
-              footer: error.message,
-            });
+           Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Algo salio mas!",
+             footer: error.response.data.message,
+          });
+          if (error.response.data) {
+
+            this.errors = error.response.data.errors;
+
+          }
           });
 
 

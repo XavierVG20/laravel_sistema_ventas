@@ -4293,6 +4293,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -4326,6 +4334,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         'from': 0,
         'to': 0
       },
+      errors: {},
       offset: 3,
       criterio: 'nombre',
       buscar: ''
@@ -4427,29 +4436,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
     },
     registrarDatos: function registrarDatos() {
-      //Creamos el formData
-      var data = new FormData(); //Añadimos la imagen seleccionada
-
-      data.append('avatar', this.imagen);
-      data.append('nombre_empresa', this.nombre_empresa);
-      data.append('email', this.email);
-      data.append('direccion', this.direccion);
-      data.append('telefono', this.telefono);
-      data.append('_method', 'POST'); //Añadimos el método PUT dentro del formData
-      // Como lo hacíamos desde un formulario simple _(no ajax)_
-
-      axios.post('/datos/registrar', data).then(function (response) {
-        Swal.fire("Guardado!", "El registro ha sido guardado con éxito.", "success");
-      })["catch"](function (error) {
-        Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: "Algo salio mas!",
-          footer: error.message
-        });
-      });
-    },
-    actualizarDatos: function actualizarDatos() {
       var _this3 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
@@ -4466,31 +4452,80 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 data.append('email', _this3.email);
                 data.append('direccion', _this3.direccion);
                 data.append('telefono', _this3.telefono);
-                data.append('id', _this3.datos_id);
-                data.append('public_id', _this3.public_id);
-                data.append('idmedia', _this3.idmedia); //Añadimos el método PUT dentro del formData
+                data.append('_method', 'POST'); //Añadimos el método PUT dentro del formData
+                // Como lo hacíamos desde un formulario simple _(no ajax)_
+
+                _context2.next = 9;
+                return axios.post('/datos/registrar', data).then(function (response) {
+                  Swal.fire("Guardado!", "El registro ha sido guardado con éxito.", "success");
+                  _this3.errors = {};
+                })["catch"](function (error) {
+                  Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: "Algo salio mas!",
+                    footer: error.response.data.message
+                  });
+
+                  if (error.response.data) {
+                    _this3.errors = error.response.data.errors;
+                  }
+                });
+
+              case 9:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }))();
+    },
+    actualizarDatos: function actualizarDatos() {
+      var _this4 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
+        var data;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                //Creamos el formData
+                data = new FormData(); //Añadimos la imagen seleccionada
+
+                data.append('avatar', _this4.imagen);
+                data.append('nombre_empresa', _this4.nombre_empresa);
+                data.append('email', _this4.email);
+                data.append('direccion', _this4.direccion);
+                data.append('telefono', _this4.telefono);
+                data.append('id', _this4.datos_id);
+                data.append('public_id', _this4.public_id);
+                data.append('idmedia', _this4.idmedia); //Añadimos el método PUT dentro del formData
                 // Como lo hacíamos desde un formulario simple _(no ajax)_
 
                 data.append('_method', 'PUT');
-                _context2.next = 12;
+                _context3.next = 12;
                 return axios.post('/datos/actualizar', data).then(function (response) {
-                  console.log(response);
+                  _this4.errors = {};
                   Swal.fire("Guardado!", "El registro ha sido guardado con éxito.", "success");
                 })["catch"](function (error) {
                   Swal.fire({
                     icon: "error",
                     title: "Oops...",
                     text: "Algo salio mas!",
-                    footer: error.message
+                    footer: error.response.data.message
                   });
+
+                  if (error.response.data) {
+                    _this4.errors = error.response.data.errors;
+                  }
                 });
 
               case 12:
               case "end":
-                return _context2.stop();
+                return _context3.stop();
             }
           }
-        }, _callee2);
+        }, _callee3);
       }))();
     },
     listarRol: function listarRol(page, buscar, criterio) {
@@ -6479,6 +6514,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -6697,7 +6746,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       persona_id: 0,
       name: '',
-      tipo_documento: '',
+      tipo_documento: 'CI',
       num_documento: '',
       direccion: '',
       telefono: '',
@@ -6719,6 +6768,7 @@ __webpack_require__.r(__webpack_exports__);
         'from': 0,
         'to': 0
       },
+      errors: {},
       offset: 3,
       criterio: 'name',
       buscar: ''
@@ -6787,31 +6837,51 @@ __webpack_require__.r(__webpack_exports__);
       me.listarPersona(page, buscar, criterio);
     },
     registrarPersona: function registrarPersona() {
-      if (this.validarPersona()) {
-        return;
-      }
+      var _this = this;
 
-      var me = this;
-      axios.post('/user/registrar', {
-        'name': this.name,
-        'tipo_documento': this.tipo_documento,
-        'num_documento': this.num_documento,
-        'direccion': this.direccion,
-        'telefono': this.telefono,
-        'email': this.email,
-        'idrol': this.idrol,
-        'password': this.password
-      }).then(function (response) {
-        me.cerrarModal();
-        me.listarPersona(1, '', 'nombre');
-      })["catch"](function (error) {
-        console.log(error);
-      });
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+        var me;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                me = _this;
+                _context.next = 3;
+                return axios.post('/user/registrar', {
+                  'name': _this.name,
+                  'tipo_documento': _this.tipo_documento,
+                  'num_documento': _this.num_documento,
+                  'direccion': _this.direccion,
+                  'telefono': _this.telefono,
+                  'email': _this.email,
+                  'idrol': _this.idrol,
+                  'password': _this.password
+                }).then(function (response) {
+                  me.cerrarModal();
+                  me.listarPersona(1, '', 'nombre');
+                })["catch"](function (error) {
+                  Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: "Algo salio mas!",
+                    footer: error.response.data.message
+                  });
+
+                  if (error.response.data) {
+                    _this.errors = error.response.data.errors;
+                  }
+                });
+
+              case 3:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
     },
     actualizarPersona: function actualizarPersona() {
-      if (this.validarPersona()) {
-        return;
-      }
+      var _this2 = this;
 
       var me = this;
       axios.put('/user/actualizar', {
@@ -6828,16 +6898,17 @@ __webpack_require__.r(__webpack_exports__);
         me.cerrarModal();
         me.listarPersona(1, '', 'nombre');
       })["catch"](function (error) {
-        console.log(error);
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Algo salio mas!",
+          footer: error.response.data.message
+        });
+
+        if (error.response.data) {
+          _this2.errors = error.response.data.errors;
+        }
       });
-    },
-    validarPersona: function validarPersona() {
-      this.errorPersona = 0;
-      this.errorMostrarMsjPersona = [];
-      if (!this.password) this.errorMostrarMsjPersona.push("La password del usuario no puede estar vacía.");
-      if (this.idrol == 0) this.errorMostrarMsjPersona.push("Seleccione una Role.");
-      if (this.errorMostrarMsjPersona.length) this.errorPersona = 1;
-      return this.errorPersona;
     },
     cerrarModal: function cerrarModal() {
       this.modal = 0;
@@ -6851,6 +6922,7 @@ __webpack_require__.r(__webpack_exports__);
       this.password = '';
       this.idrol = 0;
       this.errorPersona = 0;
+      this.errors = {};
     },
     abrirModal: function abrirModal(modelo, accion) {
       var data = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
@@ -6898,7 +6970,7 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     desactivarUsuario: function desactivarUsuario(id) {
-      var _this = this;
+      var _this3 = this;
 
       Swal.fire({
         title: 'Esta seguro de desactivar este usuario?',
@@ -6910,7 +6982,7 @@ __webpack_require__.r(__webpack_exports__);
         confirmButtonText: 'Aceptar'
       }).then(function (result) {
         if (result.value) {
-          var me = _this;
+          var me = _this3;
           axios.put('/user/desactivar', {
             'id': id
           }).then(function (response) {
@@ -6924,7 +6996,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     activarUsuario: function activarUsuario(id) {
-      var _this2 = this;
+      var _this4 = this;
 
       Swal.fire({
         title: 'Esta seguro de activar este usuario?',
@@ -6936,7 +7008,7 @@ __webpack_require__.r(__webpack_exports__);
         confirmButtonText: 'Aceptar'
       }).then(function (result) {
         if (result.value) {
-          var me = _this2;
+          var me = _this4;
           axios.put('/user/activar', {
             'id': id
           }).then(function (response) {
@@ -100496,7 +100568,15 @@ var render = function() {
                                 _vm.nombre_empresa = $event.target.value
                               }
                             }
-                          })
+                          }),
+                          _vm._v(" "),
+                          _vm.errors.nombre_empresa
+                            ? _c("label", { staticClass: "text-danger" }, [
+                                _vm._v(
+                                  "* " + _vm._s(_vm.errors.nombre_empresa[0])
+                                )
+                              ])
+                            : _vm._e()
                         ])
                       ]),
                       _vm._v(" "),
@@ -100531,7 +100611,13 @@ var render = function() {
                                 _vm.email = $event.target.value
                               }
                             }
-                          })
+                          }),
+                          _vm._v(" "),
+                          _vm.errors.email
+                            ? _c("label", { staticClass: "text-danger" }, [
+                                _vm._v("* " + _vm._s(_vm.errors.email[0]))
+                              ])
+                            : _vm._e()
                         ])
                       ]),
                       _vm._v(" "),
@@ -100566,7 +100652,13 @@ var render = function() {
                                 _vm.direccion = $event.target.value
                               }
                             }
-                          })
+                          }),
+                          _vm._v(" "),
+                          _vm.errors.direccion
+                            ? _c("label", { staticClass: "text-danger" }, [
+                                _vm._v("* " + _vm._s(_vm.errors.direccion[0]))
+                              ])
+                            : _vm._e()
                         ])
                       ]),
                       _vm._v(" "),
@@ -100601,7 +100693,13 @@ var render = function() {
                                 _vm.telefono = $event.target.value
                               }
                             }
-                          })
+                          }),
+                          _vm._v(" "),
+                          _vm.errors.telefono
+                            ? _c("label", { staticClass: "text-danger" }, [
+                                _vm._v("* " + _vm._s(_vm.errors.telefono[0]))
+                              ])
+                            : _vm._e()
                         ])
                       ]),
                       _vm._v(" "),
@@ -100916,7 +101014,7 @@ var render = function() {
                     _c(
                       "button",
                       {
-                        staticClass: "btn btn-secondary",
+                        staticClass: "btn btn-primary",
                         attrs: { type: "button" },
                         on: {
                           click: function($event) {
@@ -103845,7 +103943,7 @@ var render = function() {
             _c(
               "button",
               {
-                staticClass: "btn btn-secondary",
+                staticClass: "btn btn-primary\n                  ",
                 attrs: { type: "button" },
                 on: {
                   click: function($event) {
@@ -104251,7 +104349,7 @@ var render = function() {
                           staticClass: "form-control",
                           attrs: {
                             type: "text",
-                            placeholder: "Nombre de la persona"
+                            placeholder: "Nombre del usuario"
                           },
                           domProps: { value: _vm.name },
                           on: {
@@ -104262,7 +104360,13 @@ var render = function() {
                               _vm.name = $event.target.value
                             }
                           }
-                        })
+                        }),
+                        _vm._v(" "),
+                        _vm.errors.name
+                          ? _c("label", { staticClass: "text-danger" }, [
+                              _vm._v("* " + _vm._s(_vm.errors.name[0]))
+                            ])
+                          : _vm._e()
                       ])
                     ]),
                     _vm._v(" "),
@@ -104356,7 +104460,13 @@ var render = function() {
                               _vm.num_documento = $event.target.value
                             }
                           }
-                        })
+                        }),
+                        _vm._v(" "),
+                        _vm.errors.num_documento
+                          ? _c("label", { staticClass: "text-danger" }, [
+                              _vm._v("* " + _vm._s(_vm.errors.num_documento[0]))
+                            ])
+                          : _vm._e()
                       ])
                     ]),
                     _vm._v(" "),
@@ -104381,7 +104491,7 @@ var render = function() {
                             }
                           ],
                           staticClass: "form-control",
-                          attrs: { type: "email", placeholder: "Dirección" },
+                          attrs: { type: "text", placeholder: "Dirección" },
                           domProps: { value: _vm.direccion },
                           on: {
                             input: function($event) {
@@ -104391,7 +104501,13 @@ var render = function() {
                               _vm.direccion = $event.target.value
                             }
                           }
-                        })
+                        }),
+                        _vm._v(" "),
+                        _vm.errors.direccion
+                          ? _c("label", { staticClass: "text-danger" }, [
+                              _vm._v("* " + _vm._s(_vm.errors.direccion[0]))
+                            ])
+                          : _vm._e()
                       ])
                     ]),
                     _vm._v(" "),
@@ -104426,7 +104542,13 @@ var render = function() {
                               _vm.telefono = $event.target.value
                             }
                           }
-                        })
+                        }),
+                        _vm._v(" "),
+                        _vm.errors.telefono
+                          ? _c("label", { staticClass: "text-danger" }, [
+                              _vm._v("* " + _vm._s(_vm.errors.telefono[0]))
+                            ])
+                          : _vm._e()
                       ])
                     ]),
                     _vm._v(" "),
@@ -104461,7 +104583,13 @@ var render = function() {
                               _vm.email = $event.target.value
                             }
                           }
-                        })
+                        }),
+                        _vm._v(" "),
+                        _vm.errors.email
+                          ? _c("label", { staticClass: "text-danger" }, [
+                              _vm._v("* " + _vm._s(_vm.errors.email[0]))
+                            ])
+                          : _vm._e()
                       ])
                     ]),
                     _vm._v(" "),
@@ -104533,7 +104661,7 @@ var render = function() {
                           staticClass: "col-md-3 form-control-label",
                           attrs: { for: "email-input" }
                         },
-                        [_vm._v("password")]
+                        [_vm._v("Password")]
                       ),
                       _vm._v(" "),
                       _c("div", { staticClass: "col-md-9" }, [
@@ -104549,7 +104677,7 @@ var render = function() {
                           staticClass: "form-control",
                           attrs: {
                             type: "password",
-                            placeholder: "password del usuario"
+                            placeholder: "Password del usuario"
                           },
                           domProps: { value: _vm.password },
                           on: {
@@ -104560,37 +104688,15 @@ var render = function() {
                               _vm.password = $event.target.value
                             }
                           }
-                        })
+                        }),
+                        _vm._v(" "),
+                        _vm.errors.password
+                          ? _c("label", { staticClass: "text-danger" }, [
+                              _vm._v("* " + _vm._s(_vm.errors.password[0]))
+                            ])
+                          : _vm._e()
                       ])
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        directives: [
-                          {
-                            name: "show",
-                            rawName: "v-show",
-                            value: _vm.errorPersona,
-                            expression: "errorPersona"
-                          }
-                        ],
-                        staticClass: "form-group row div-error"
-                      },
-                      [
-                        _c(
-                          "div",
-                          { staticClass: "text-center text-error" },
-                          _vm._l(_vm.errorMostrarMsjPersona, function(error) {
-                            return _c("div", {
-                              key: error,
-                              domProps: { textContent: _vm._s(error) }
-                            })
-                          }),
-                          0
-                        )
-                      ]
-                    )
+                    ])
                   ]
                 )
               ]),
@@ -104774,7 +104880,7 @@ var render = function() {
                     _c(
                       "button",
                       {
-                        staticClass: "btn btn-secondary",
+                        staticClass: "btn btn-primary",
                         attrs: { type: "button" },
                         on: {
                           click: function($event) {
