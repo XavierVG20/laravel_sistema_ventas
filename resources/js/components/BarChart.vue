@@ -1,31 +1,28 @@
 <script>
- import { Bar } from 'vue-chartjs'
+  import { Bar } from 'vue-chartjs'
 
   export default {
     extends: Bar,
     data() {
       return {
-        chartData: {
-          labels: ["2015-01", "2015-02", "2015-03", "2015-04", "2015-05", "2015-06", "2015-07", "2015-08", "2015-09",
-            "2015-10", "2015-11", "2015-12"
-          ],
-          datasets: [{
-            label: 'Bar Chart',
-            borderWidth: 1,
-            backgroundColor: [
+          etiquetas: [  ],
+     
+            etiqueta: 'Bar Chart',
+            borderWidth1: 1,
+            backgroundColor1: [
               'rgba(255, 99, 132, 0.2)',
               'rgba(54, 162, 235, 0.2)',
+           
+            ],
+            borderColor1: [
+              'rgba(255,99,132,1)',
+              'rgba(54, 162, 235, 1)',
          
             ],
-            borderColor: [
-              'rgba(255,99,132,1)',
-             
-             
-            ],
-            pointBorderColor: '#2554FF',
-            data: [1, 1]
-          }]
-        },
+            pointBorderColor1: '#2554FF',
+            datos: [],
+        
+        
         options: {
           scales: {
             yAxes: [{
@@ -50,8 +47,38 @@
         }
       }
     },
-    mounted() {
-      this.renderChart(this.chartData,)
+   async mounted() {
+     let me = this;
+
+        var url = "/dashboard";
+      await  axios.get(url)
+          .then(response=>{
+             me.etiquetas.push("Ventas")
+             me.etiquetas.push("Ingresos")            
+             response.data.ventas.forEach(element => {
+
+               // me.backgroundColor2.push("gba(255, 99, 132, 0.2)")
+                me.datos.push(element.total)
+            }) 
+            response.data.ingresos.forEach(element => {
+
+              // me.backgroundColor2.push(" 'rgba(54, 162, 235, 0.2)'")
+
+                me.datos.push(element.total)
+            })  
+              
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+
+      this.renderChart({
+        labels: this.etiquetas,
+        datasets:[{
+            backgroundColor : this.borderColor1,
+           
+              data : this.datos
+        }],} , this.options)
     }
   }
 </script>

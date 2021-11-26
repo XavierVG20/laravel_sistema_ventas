@@ -1856,48 +1856,87 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var vue_chartjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-chartjs */ "./node_modules/vue-chartjs/es/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vue_chartjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-chartjs */ "./node_modules/vue-chartjs/es/index.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  "extends": vue_chartjs__WEBPACK_IMPORTED_MODULE_0__.Line,
+  "extends": vue_chartjs__WEBPACK_IMPORTED_MODULE_1__.Line,
   data: function data() {
     return {
+      etiquetas: [],
+      datos: [],
       gradient: null,
       gradient2: null
     };
   },
   mounted: function mounted() {
-    this.gradient = this.$refs.canvas.getContext("2d").createLinearGradient(0, 0, 0, 450);
-    this.gradient2 = this.$refs.canvas.getContext("2d").createLinearGradient(0, 0, 0, 450);
-    this.gradient.addColorStop(0, "rgba(255, 0,0, 0.5)");
-    this.gradient.addColorStop(0.5, "rgba(255, 0, 0, 0.25)");
-    this.gradient.addColorStop(1, "rgba(255, 0, 0, 0)");
-    this.gradient2.addColorStop(0, "rgba(0, 231, 255, 0.9)");
-    this.gradient2.addColorStop(0.5, "rgba(0, 231, 255, 0.25)");
-    this.gradient2.addColorStop(1, "rgba(0, 231, 255, 0)");
-    this.renderChart({
-      labels: ["January", "February", "March", "April", "May", "June", "July"],
-      datasets: [{
-        label: "Data One",
-        borderColor: "#FC2525",
-        pointBackgroundColor: "white",
-        borderWidth: 1,
-        pointBorderColor: "white",
-        backgroundColor: this.gradient,
-        data: [40, 39, 10, 40, 39, 80, 40]
-      }, {
-        label: "Data Two",
-        borderColor: "#05CBE1",
-        pointBackgroundColor: "white",
-        pointBorderColor: "white",
-        borderWidth: 1,
-        backgroundColor: this.gradient2,
-        data: [60, 55, 32, 10, 2, 12, 53]
-      }]
-    }, {
-      responsive: true,
-      maintainAspectRatio: false
-    });
+    var _this = this;
+
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+      var me, url;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _this.gradient = _this.$refs.canvas.getContext("2d").createLinearGradient(0, 0, 0, 450);
+              _this.gradient2 = _this.$refs.canvas.getContext("2d").createLinearGradient(0, 0, 0, 450);
+
+              _this.gradient.addColorStop(0, "rgba(255, 0,0, 0.5)");
+
+              _this.gradient.addColorStop(0.5, "rgba(255, 0, 0, 0.25)");
+
+              _this.gradient.addColorStop(1, "rgba(255, 0, 0, 0)");
+
+              _this.gradient2.addColorStop(0, "rgba(0, 231, 255, 0.9)");
+
+              _this.gradient2.addColorStop(0.5, "rgba(0, 231, 255, 0.25)");
+
+              _this.gradient2.addColorStop(1, "rgba(0, 231, 255, 0)");
+
+              me = _this;
+              url = "/lineal";
+              _context.next = 12;
+              return axios.get(url).then(function (response) {
+                console.log(response);
+                response.data.ventas.forEach(function (element) {
+                  me.etiquetas.push(element.mes);
+                  me.datos.push(element.total);
+                });
+              })["catch"](function (error) {
+                console.log(error);
+              });
+
+            case 12:
+              _this.renderChart({
+                labels: _this.etiquetas,
+                datasets: [{
+                  label: "Total Ventas",
+                  borderColor: "#FC2525",
+                  pointBackgroundColor: "white",
+                  borderWidth: 1,
+                  pointBorderColor: "white",
+                  backgroundColor: _this.gradient,
+                  data: _this.datos
+                }]
+              }, {
+                responsive: true,
+                maintainAspectRatio: false
+              });
+
+            case 13:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }))();
   }
 });
 
@@ -2600,23 +2639,27 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var vue_chartjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-chartjs */ "./node_modules/vue-chartjs/es/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vue_chartjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-chartjs */ "./node_modules/vue-chartjs/es/index.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  "extends": vue_chartjs__WEBPACK_IMPORTED_MODULE_0__.Bar,
+  "extends": vue_chartjs__WEBPACK_IMPORTED_MODULE_1__.Bar,
   data: function data() {
     return {
-      chartData: {
-        labels: ["2015-01", "2015-02", "2015-03", "2015-04", "2015-05", "2015-06", "2015-07", "2015-08", "2015-09", "2015-10", "2015-11", "2015-12"],
-        datasets: [{
-          label: 'Bar Chart',
-          borderWidth: 1,
-          backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)'],
-          borderColor: ['rgba(255,99,132,1)'],
-          pointBorderColor: '#2554FF',
-          data: [1, 1]
-        }]
-      },
+      etiquetas: [],
+      etiqueta: 'Bar Chart',
+      borderWidth1: 1,
+      backgroundColor1: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)'],
+      borderColor1: ['rgba(255,99,132,1)', 'rgba(54, 162, 235, 1)'],
+      pointBorderColor1: '#2554FF',
+      datos: [],
       options: {
         scales: {
           yAxes: [{
@@ -2642,7 +2685,48 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   mounted: function mounted() {
-    this.renderChart(this.chartData);
+    var _this = this;
+
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+      var me, url;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              me = _this;
+              url = "/dashboard";
+              _context.next = 4;
+              return axios.get(url).then(function (response) {
+                me.etiquetas.push("Ventas");
+                me.etiquetas.push("Ingresos");
+                response.data.ventas.forEach(function (element) {
+                  // me.backgroundColor2.push("gba(255, 99, 132, 0.2)")
+                  me.datos.push(element.total);
+                });
+                response.data.ingresos.forEach(function (element) {
+                  // me.backgroundColor2.push(" 'rgba(54, 162, 235, 0.2)'")
+                  me.datos.push(element.total);
+                });
+              })["catch"](function (error) {
+                console.log(error);
+              });
+
+            case 4:
+              _this.renderChart({
+                labels: _this.etiquetas,
+                datasets: [{
+                  backgroundColor: _this.borderColor1,
+                  data: _this.datos
+                }]
+              }, _this.options);
+
+            case 5:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }))();
   }
 });
 
@@ -3829,6 +3913,462 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -3864,7 +4404,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _context.next = 4;
                 return axios.get(url).then(function (response) {
                   response.data.articulos.forEach(function (element) {
-                    console.log(element.total_articulos);
                     _this.total_articulos = element.total_articulos;
                   });
                   response.data.ventas.forEach(function (element) {
@@ -3999,10 +4538,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var vue_chartjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-chartjs */ "./node_modules/vue-chartjs/es/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vue_chartjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-chartjs */ "./node_modules/vue-chartjs/es/index.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  "extends": vue_chartjs__WEBPACK_IMPORTED_MODULE_0__.Doughnut,
+  "extends": vue_chartjs__WEBPACK_IMPORTED_MODULE_1__.Doughnut,
   data: function data() {
     return {
       labels1: [],
@@ -4019,41 +4566,51 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   mounted: function mounted() {
-    this.listarventas();
-    this.renderChart({
-      labels: this.labels1,
-      datasets: [{
-        label: 'ingresos y ventas',
-        backgroundColor: this.borderColor2,
-        data: this.datos
-      }]
-    }, this.options);
-  },
-  methods: {
-    listarventas: function listarventas() {
-      var _this = this;
+    var _this = this;
 
-      var me = this;
-      var url = "/dashboard";
-      axios.get(url).then(function (response) {
-        response.data.ventas.forEach(function (element) {
-          me.labels1.push("Ventas");
-          me.backgroundColor2.push("gba(255, 99, 132, 0.2)");
-          me.datos.push(element.total);
-          console.log(element);
-        });
-        response.data.ingresos.forEach(function (element) {
-          me.labels1.push("Ingresos");
-          me.backgroundColor2.push(" 'rgba(54, 162, 235, 0.2)'");
-          me.datos.push(element.total);
-          console.log("hola");
-        });
-        console.log(_this.datos);
-      })["catch"](function (error) {
-        console.log(error);
-      });
-    }
-  }
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+      var me, url;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              me = _this;
+              url = "/dashboard";
+              _context.next = 4;
+              return axios.get(url).then(function (response) {
+                me.labels1.push("Ventas");
+                me.labels1.push("Ingresos");
+                response.data.ventas.forEach(function (element) {
+                  me.backgroundColor2.push("gba(255, 99, 132, 0.2)");
+                  me.datos.push(element.total);
+                });
+                response.data.ingresos.forEach(function (element) {
+                  me.backgroundColor2.push(" 'rgba(54, 162, 235, 0.2)'");
+                  me.datos.push(element.total);
+                });
+              })["catch"](function (error) {
+                console.log(error);
+              });
+
+            case 4:
+              _this.renderChart({
+                labels: _this.labels1,
+                datasets: [{
+                  label: 'ingresos y ventas',
+                  backgroundColor: _this.borderColor2,
+                  data: _this.datos
+                }]
+              }, _this.options);
+
+            case 5:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }))();
+  },
+  methods: {}
 });
 
 /***/ }),
@@ -5422,34 +5979,46 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var vue_chartjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-chartjs */ "./node_modules/vue-chartjs/es/index.js");
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   "extends": vue_chartjs__WEBPACK_IMPORTED_MODULE_0__.Line,
+  data: function data() {
+    return {
+      gradient: null,
+      gradient2: null
+    };
+  },
   mounted: function mounted() {
-    this.renderChart(_defineProperty({
-      labels: ["January", "February", "March", "April", "May", "June", "July"],
+    this.gradient = this.$refs.canvas.getContext("2d").createLinearGradient(0, 0, 0, 450);
+    this.gradient2 = this.$refs.canvas.getContext("2d").createLinearGradient(0, 0, 0, 450);
+    this.gradient.addColorStop(0, "rgba(255, 0,0, 0.5)");
+    this.gradient.addColorStop(0.5, "rgba(255, 0, 0, 0.25)");
+    this.gradient.addColorStop(1, "rgba(255, 0, 0, 0)");
+    this.gradient2.addColorStop(0, "rgba(0, 231, 255, 0.9)");
+    this.gradient2.addColorStop(0.5, "rgba(0, 231, 255, 0.25)");
+    this.gradient2.addColorStop(1, "rgba(0, 231, 255, 0)");
+    this.renderChart({
+      labels: ["February", "March", "April", "May", "June", "July"],
       datasets: [{
-        label: "Ingresos",
-        data: [2, 10, 5, 9, 0, 6, 20],
-        backgroundColor: "transparent",
-        borderColor: "rgba(1, 116, 188, 0.50)",
-        pointBackgroundColor: "rgba(171, 71, 188, 1)"
+        label: "Data One",
+        borderColor: "#FC2525",
+        pointBackgroundColor: "white",
+        borderWidth: 1,
+        pointBorderColor: "white",
+        backgroundColor: this.gradient,
+        data: [40, 39, 10, 40, 39, 80, 40]
+      }, {
+        label: "Data Two",
+        borderColor: "#05CBE1",
+        pointBackgroundColor: "white",
+        pointBorderColor: "white",
+        borderWidth: 1,
+        backgroundColor: this.gradient2,
+        data: [60, 55, 32, 10, 2, 12, 53]
       }]
-    }, "datasets", [{
-      label: "Ventas",
-      data: [2, 10, 5, 9, 0, 6, 20],
-      backgroundColor: "transparent",
-      borderColor: "rgba(1, 116, 188, 0.50)",
-      pointBackgroundColor: "rgba(171, 71, 188, 1)"
-    }]), {
+    }, {
       responsive: true,
-      maintainAspectRatio: false,
-      title: {
-        display: true,
-        text: "My Data"
-      }
+      maintainAspectRatio: false
     });
   }
 });
@@ -5882,91 +6451,32 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var vue_chartjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-chartjs */ "./node_modules/vue-chartjs/es/index.js");
-
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
+/* harmony import */ var vue_chartjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-chartjs */ "./node_modules/vue-chartjs/es/index.js");
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  "extends": vue_chartjs__WEBPACK_IMPORTED_MODULE_1__.Pie,
+  "extends": vue_chartjs__WEBPACK_IMPORTED_MODULE_0__.Pie,
   data: function data() {
     return {
-      etiquetas: [],
-      datos: []
+      chartData: {
+        labels: ["Italy", "India", "Japan", "USA"],
+        datasets: [{
+          borderWidth: 1,
+          borderColor: ['rgba(255,99,132,1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)'],
+          backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)'],
+          data: [1000, 500, 1500, 1000]
+        }]
+      },
+      options: {
+        legend: {
+          display: true
+        },
+        responsive: true,
+        maintainAspectRatio: false
+      }
     };
   },
-  methods: {
-    listarventas: function listarventas() {
-      var _this = this;
-
-      var me = this;
-      var url = "/dashboard";
-      axios.get(url).then(function (response) {
-        response.data.ventas.forEach(function (element) {
-          me.etiquetas.push("Ventas");
-          me.datos.push(element.total);
-          console.log(element);
-        });
-        response.data.ingresos.forEach(function (element) {
-          me.etiquetas.push("Ingresos");
-          me.datos.push(element.total);
-          console.log("hola");
-        });
-        console.log(_this.datos);
-      })["catch"](function (error) {
-        console.log(error);
-      });
-    }
-  },
   mounted: function mounted() {
-    var _this2 = this;
-
-    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              _this2.listarventas();
-
-              _this2.gradient = _this2.$refs.canvas.getContext("2d").createLinearGradient(0, 0, 0, 450);
-              _this2.gradient2 = _this2.$refs.canvas.getContext("2d").createLinearGradient(0, 0, 0, 450);
-
-              _this2.gradient.addColorStop(0, "rgba(255, 0,0, 0.5)");
-
-              _this2.gradient.addColorStop(0.5, "rgba(255, 0, 0, 0.25)");
-
-              _this2.gradient.addColorStop(1, "rgba(255, 0, 0, 0)");
-
-              _this2.gradient2.addColorStop(0, "rgba(0, 231, 255, 0.9)");
-
-              _this2.gradient2.addColorStop(0.5, "rgba(0, 231, 255, 0.25)");
-
-              _this2.gradient2.addColorStop(1, "rgba(0, 231, 255, 0)");
-
-              _context.next = 11;
-              return _this2.renderChart({
-                labels: _this2.etiquetas,
-                datasets: [{
-                  backgroundColor: [_this2.gradient, _this2.gradient2, "#00D8FF"],
-                  data: _this2.datos
-                }]
-              }, {
-                responsive: true,
-                maintainAspectRatio: false
-              });
-
-            case 11:
-            case "end":
-              return _context.stop();
-          }
-        }
-      }, _callee);
-    }))();
+    this.renderChart(this.chartData, this.options);
   }
 });
 
@@ -99978,58 +100488,137 @@ var render = function() {
   return _c("main", { staticClass: "main" }, [
     _vm._m(0),
     _vm._v(" "),
-    _c("section", { staticClass: "content" }, [
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-lg-3 col-xs-6" }, [
-          _c("div", { staticClass: "small-box bg-aqua" }, [
-            _c("div", { staticClass: "inner" }, [
-              _c("h3", [_vm._v(_vm._s(_vm.total_ventas))]),
-              _vm._v(" "),
-              _c("p", [_vm._v("Ventas Registradas")])
-            ]),
-            _vm._v(" "),
-            _vm._m(1),
-            _vm._v(" "),
-            _vm._m(2)
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-lg-3 col-xs-6" }, [
-          _c("div", { staticClass: "small-box bg-green" }, [
-            _c("div", { staticClass: "inner" }, [
-              _c("h3", [
-                _vm._v(" " + _vm._s(_vm.total_articulos)),
-                _c("sup", { staticStyle: { "font-size": "20px" } })
+    _c(
+      "section",
+      { staticClass: "content" },
+      [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-lg-3 col-xs-6" }, [
+            _c("div", { staticClass: "small-box bg-aqua" }, [
+              _c("div", { staticClass: "inner" }, [
+                _c("h3", [_vm._v(_vm._s(_vm.total_ventas))]),
+                _vm._v(" "),
+                _c("p", [_vm._v("Ventas Registradas")])
               ]),
               _vm._v(" "),
-              _c("p", [_vm._v("Articulos Registrados")])
-            ]),
-            _vm._v(" "),
-            _vm._m(3),
-            _vm._v(" "),
-            _vm._m(4)
+              _vm._m(1),
+              _vm._v(" "),
+              _vm._m(2)
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-lg-3 col-xs-6" }, [
+            _c("div", { staticClass: "small-box bg-green" }, [
+              _c("div", { staticClass: "inner" }, [
+                _c("h3", [
+                  _vm._v(" " + _vm._s(_vm.total_articulos)),
+                  _c("sup", { staticStyle: { "font-size": "20px" } })
+                ]),
+                _vm._v(" "),
+                _c("p", [_vm._v("Articulos Registrados")])
+              ]),
+              _vm._v(" "),
+              _vm._m(3),
+              _vm._v(" "),
+              _vm._m(4)
+            ])
+          ]),
+          _vm._v(" "),
+          _vm._m(5),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-lg-3 col-xs-6" }, [
+            _c("div", { staticClass: "small-box bg-red" }, [
+              _c("div", { staticClass: "inner" }, [
+                _c("h3", [_vm._v(_vm._s(_vm.total_ingresos))]),
+                _vm._v(" "),
+                _c("p", [_vm._v("Ingresos Registrados")])
+              ]),
+              _vm._v(" "),
+              _vm._m(6),
+              _vm._v(" "),
+              _vm._m(7)
+            ])
           ])
         ]),
         _vm._v(" "),
-        _vm._m(5),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-lg-3 col-xs-6" }, [
-          _c("div", { staticClass: "small-box bg-red" }, [
-            _c("div", { staticClass: "inner" }, [
-              _c("h3", [_vm._v(_vm._s(_vm.total_ingresos))]),
+        _c("div", { staticClass: "row" }, [
+          _c("section", { staticClass: "col-lg-7 connectedSortable" }, [
+            _c("div", { staticClass: "nav-tabs-custom" }, [
+              _vm._m(8),
               _vm._v(" "),
-              _c("p", [_vm._v("Ingresos Registrados")])
+              _c("div", { staticClass: "tab-content no-padding" }, [
+                _c(
+                  "div",
+                  {
+                    staticClass: "chart tab-pane active",
+                    staticStyle: {
+                      "min-width": "375px",
+                      "max-width": "1024px",
+                      "/* margin": "30px",
+                      "*/\n  position": "relative",
+                      width: "100%",
+                      height: "40vw"
+                    },
+                    attrs: { id: "revenue-chart" }
+                  },
+                  [_c("doughnut-chart")],
+                  1
+                ),
+                _vm._v(" "),
+                _c("div", {
+                  staticClass: "chart tab-pane",
+                  staticStyle: { position: "relative", height: "600px" },
+                  attrs: { id: "sales-chart" }
+                })
+              ])
             ]),
             _vm._v(" "),
-            _vm._m(6),
+            _vm._m(9),
             _vm._v(" "),
-            _vm._m(7)
+            _vm._m(10),
+            _vm._v(" "),
+            _vm._m(11)
+          ]),
+          _vm._v(" "),
+          _c("section", { staticClass: "col-lg-5 connectedSortable" }, [
+            _vm._m(12),
+            _vm._v(" "),
+            _c("div", { staticClass: "box box-solid bg-teal-gradient" }, [
+              _vm._m(13),
+              _vm._v(" "),
+              _c("div", { staticClass: "box-body border-radius-none" }, [
+                _c(
+                  "div",
+                  {
+                    staticClass: "chart",
+                    staticStyle: {
+                      "min-width": "375px",
+                      "max-width": "1024px",
+                      "/* margin": "30px",
+                      "*/\n  position": "relative",
+                      width: "100%",
+                      height: "40vw"
+                    },
+                    attrs: { id: "line-chart" }
+                  },
+                  [_c("AreaChart")],
+                  1
+                )
+              ]),
+              _vm._v(" "),
+              _vm._m(14)
+            ]),
+            _vm._v(" "),
+            _vm._m(15)
           ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row" }, [_c("doughnut-chart")], 1)
-    ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row" }),
+        _vm._v(" "),
+        _c("PieChart")
+      ],
+      1
+    )
   ])
 }
 var staticRenderFns = [
@@ -100127,6 +100716,764 @@ var staticRenderFns = [
     return _c("a", { staticClass: "small-box-footer", attrs: { href: "#" } }, [
       _vm._v("Ver "),
       _c("i", { staticClass: "fa fa-arrow-circle-right" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("ul", { staticClass: "nav nav-tabs pull-right" }, [
+      _c("li", { staticClass: "active" }, [
+        _c("a", { attrs: { href: "#revenue-chart", "data-toggle": "tab" } }, [
+          _vm._v("Area")
+        ])
+      ]),
+      _vm._v(" "),
+      _c("li", [
+        _c("a", { attrs: { href: "#sales-chart", "data-toggle": "tab" } }, [
+          _vm._v("Donut")
+        ])
+      ]),
+      _vm._v(" "),
+      _c("li", { staticClass: "pull-left header" }, [
+        _c("i", { staticClass: "fa fa-inbox" }),
+        _vm._v(" Sales")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "box box-success" }, [
+      _c("div", { staticClass: "box-header" }, [
+        _c("i", { staticClass: "fa fa-comments-o" }),
+        _vm._v(" "),
+        _c("h3", { staticClass: "box-title" }, [_vm._v("Chat")]),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "box-tools pull-right",
+            attrs: { "data-toggle": "tooltip", title: "Status" }
+          },
+          [
+            _c(
+              "div",
+              {
+                staticClass: "btn-group",
+                attrs: { "data-toggle": "btn-toggle" }
+              },
+              [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-default btn-sm active",
+                    attrs: { type: "button" }
+                  },
+                  [_c("i", { staticClass: "fa fa-square text-green" })]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-default btn-sm",
+                    attrs: { type: "button" }
+                  },
+                  [_c("i", { staticClass: "fa fa-square text-red" })]
+                )
+              ]
+            )
+          ]
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "box-body chat", attrs: { id: "chat-box" } }, [
+        _c("div", { staticClass: "item" }, [
+          _c("img", {
+            staticClass: "online",
+            attrs: { src: "dist/img/user4-128x128.jpg", alt: "user image" }
+          }),
+          _vm._v(" "),
+          _c("p", { staticClass: "message" }, [
+            _c("a", { staticClass: "name", attrs: { href: "#" } }, [
+              _c("small", { staticClass: "text-muted pull-right" }, [
+                _c("i", { staticClass: "fa fa-clock-o" }),
+                _vm._v(" 2:15")
+              ]),
+              _vm._v("\n                  Mike Doe\n                ")
+            ]),
+            _vm._v(
+              "\n                I would like to meet you to discuss the latest news about\n                the arrival of the new theme. They say it is going to be one the\n                best themes on the market\n              "
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "attachment" }, [
+            _c("h4", [_vm._v("Attachments:")]),
+            _vm._v(" "),
+            _c("p", { staticClass: "filename" }, [
+              _vm._v(
+                "\n                  Theme-thumbnail-image.jpg\n                "
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "pull-right" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-primary btn-sm btn-flat",
+                  attrs: { type: "button" }
+                },
+                [_vm._v("Open")]
+              )
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "item" }, [
+          _c("img", {
+            staticClass: "offline",
+            attrs: { src: "dist/img/user3-128x128.jpg", alt: "user image" }
+          }),
+          _vm._v(" "),
+          _c("p", { staticClass: "message" }, [
+            _c("a", { staticClass: "name", attrs: { href: "#" } }, [
+              _c("small", { staticClass: "text-muted pull-right" }, [
+                _c("i", { staticClass: "fa fa-clock-o" }),
+                _vm._v(" 5:15")
+              ]),
+              _vm._v("\n                  Alexander Pierce\n                ")
+            ]),
+            _vm._v(
+              "\n                I would like to meet you to discuss the latest news about\n                the arrival of the new theme. They say it is going to be one the\n                best themes on the market\n              "
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "item" }, [
+          _c("img", {
+            staticClass: "offline",
+            attrs: { src: "dist/img/user2-160x160.jpg", alt: "user image" }
+          }),
+          _vm._v(" "),
+          _c("p", { staticClass: "message" }, [
+            _c("a", { staticClass: "name", attrs: { href: "#" } }, [
+              _c("small", { staticClass: "text-muted pull-right" }, [
+                _c("i", { staticClass: "fa fa-clock-o" }),
+                _vm._v(" 5:30")
+              ]),
+              _vm._v("\n                  Susan Doe\n                ")
+            ]),
+            _vm._v(
+              "\n                I would like to meet you to discuss the latest news about\n                the arrival of the new theme. They say it is going to be one the\n                best themes on the market\n              "
+            )
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "box-footer" }, [
+        _c("div", { staticClass: "input-group" }, [
+          _c("input", {
+            staticClass: "form-control",
+            attrs: { placeholder: "Type message..." }
+          }),
+          _vm._v(" "),
+          _c("div", { staticClass: "input-group-btn" }, [
+            _c(
+              "button",
+              { staticClass: "btn btn-success", attrs: { type: "button" } },
+              [_c("i", { staticClass: "fa fa-plus" })]
+            )
+          ])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "box box-primary" }, [
+      _c("div", { staticClass: "box-header" }, [
+        _c("i", { staticClass: "ion ion-clipboard" }),
+        _vm._v(" "),
+        _c("h3", { staticClass: "box-title" }, [_vm._v("To Do List")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "box-tools pull-right" }, [
+          _c("ul", { staticClass: "pagination pagination-sm inline" }, [
+            _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("«")])]),
+            _vm._v(" "),
+            _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("1")])]),
+            _vm._v(" "),
+            _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("2")])]),
+            _vm._v(" "),
+            _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("3")])]),
+            _vm._v(" "),
+            _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("»")])])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "box-body" }, [
+        _c("ul", { staticClass: "todo-list" }, [
+          _c("li", [
+            _c("span", { staticClass: "handle" }, [
+              _c("i", { staticClass: "fa fa-ellipsis-v" }),
+              _vm._v(" "),
+              _c("i", { staticClass: "fa fa-ellipsis-v" })
+            ]),
+            _vm._v(" "),
+            _c("input", { attrs: { type: "checkbox", value: "" } }),
+            _vm._v(" "),
+            _c("span", { staticClass: "text" }, [
+              _vm._v("Design a nice theme")
+            ]),
+            _vm._v(" "),
+            _c("small", { staticClass: "label label-danger" }, [
+              _c("i", { staticClass: "fa fa-clock-o" }),
+              _vm._v(" 2 mins")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "tools" }, [
+              _c("i", { staticClass: "fa fa-edit" }),
+              _vm._v(" "),
+              _c("i", { staticClass: "fa fa-trash-o" })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("li", [
+            _c("span", { staticClass: "handle" }, [
+              _c("i", { staticClass: "fa fa-ellipsis-v" }),
+              _vm._v(" "),
+              _c("i", { staticClass: "fa fa-ellipsis-v" })
+            ]),
+            _vm._v(" "),
+            _c("input", { attrs: { type: "checkbox", value: "" } }),
+            _vm._v(" "),
+            _c("span", { staticClass: "text" }, [
+              _vm._v("Make the theme responsive")
+            ]),
+            _vm._v(" "),
+            _c("small", { staticClass: "label label-info" }, [
+              _c("i", { staticClass: "fa fa-clock-o" }),
+              _vm._v(" 4 hours")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "tools" }, [
+              _c("i", { staticClass: "fa fa-edit" }),
+              _vm._v(" "),
+              _c("i", { staticClass: "fa fa-trash-o" })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("li", [
+            _c("span", { staticClass: "handle" }, [
+              _c("i", { staticClass: "fa fa-ellipsis-v" }),
+              _vm._v(" "),
+              _c("i", { staticClass: "fa fa-ellipsis-v" })
+            ]),
+            _vm._v(" "),
+            _c("input", { attrs: { type: "checkbox", value: "" } }),
+            _vm._v(" "),
+            _c("span", { staticClass: "text" }, [
+              _vm._v("Let theme shine like a star")
+            ]),
+            _vm._v(" "),
+            _c("small", { staticClass: "label label-warning" }, [
+              _c("i", { staticClass: "fa fa-clock-o" }),
+              _vm._v(" 1 day")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "tools" }, [
+              _c("i", { staticClass: "fa fa-edit" }),
+              _vm._v(" "),
+              _c("i", { staticClass: "fa fa-trash-o" })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("li", [
+            _c("span", { staticClass: "handle" }, [
+              _c("i", { staticClass: "fa fa-ellipsis-v" }),
+              _vm._v(" "),
+              _c("i", { staticClass: "fa fa-ellipsis-v" })
+            ]),
+            _vm._v(" "),
+            _c("input", { attrs: { type: "checkbox", value: "" } }),
+            _vm._v(" "),
+            _c("span", { staticClass: "text" }, [
+              _vm._v("Let theme shine like a star")
+            ]),
+            _vm._v(" "),
+            _c("small", { staticClass: "label label-success" }, [
+              _c("i", { staticClass: "fa fa-clock-o" }),
+              _vm._v(" 3 days")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "tools" }, [
+              _c("i", { staticClass: "fa fa-edit" }),
+              _vm._v(" "),
+              _c("i", { staticClass: "fa fa-trash-o" })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("li", [
+            _c("span", { staticClass: "handle" }, [
+              _c("i", { staticClass: "fa fa-ellipsis-v" }),
+              _vm._v(" "),
+              _c("i", { staticClass: "fa fa-ellipsis-v" })
+            ]),
+            _vm._v(" "),
+            _c("input", { attrs: { type: "checkbox", value: "" } }),
+            _vm._v(" "),
+            _c("span", { staticClass: "text" }, [
+              _vm._v("Check your messages and notifications")
+            ]),
+            _vm._v(" "),
+            _c("small", { staticClass: "label label-primary" }, [
+              _c("i", { staticClass: "fa fa-clock-o" }),
+              _vm._v(" 1 week")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "tools" }, [
+              _c("i", { staticClass: "fa fa-edit" }),
+              _vm._v(" "),
+              _c("i", { staticClass: "fa fa-trash-o" })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("li", [
+            _c("span", { staticClass: "handle" }, [
+              _c("i", { staticClass: "fa fa-ellipsis-v" }),
+              _vm._v(" "),
+              _c("i", { staticClass: "fa fa-ellipsis-v" })
+            ]),
+            _vm._v(" "),
+            _c("input", { attrs: { type: "checkbox", value: "" } }),
+            _vm._v(" "),
+            _c("span", { staticClass: "text" }, [
+              _vm._v("Let theme shine like a star")
+            ]),
+            _vm._v(" "),
+            _c("small", { staticClass: "label label-default" }, [
+              _c("i", { staticClass: "fa fa-clock-o" }),
+              _vm._v(" 1 month")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "tools" }, [
+              _c("i", { staticClass: "fa fa-edit" }),
+              _vm._v(" "),
+              _c("i", { staticClass: "fa fa-trash-o" })
+            ])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "box-footer clearfix no-border" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-default pull-right",
+            attrs: { type: "button" }
+          },
+          [_c("i", { staticClass: "fa fa-plus" }), _vm._v(" Add item")]
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "box box-info" }, [
+      _c("div", { staticClass: "box-header" }, [
+        _c("i", { staticClass: "fa fa-envelope" }),
+        _vm._v(" "),
+        _c("h3", { staticClass: "box-title" }, [_vm._v("Quick Email")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "pull-right box-tools" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-info btn-sm",
+              attrs: {
+                type: "button",
+                "data-widget": "remove",
+                "data-toggle": "tooltip",
+                title: "Remove"
+              }
+            },
+            [_c("i", { staticClass: "fa fa-times" })]
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "box-body" }, [
+        _c("form", { attrs: { action: "#", method: "post" } }, [
+          _c("div", { staticClass: "form-group" }, [
+            _c("input", {
+              staticClass: "form-control",
+              attrs: {
+                type: "email",
+                name: "emailto",
+                placeholder: "Email to:"
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c("input", {
+              staticClass: "form-control",
+              attrs: { type: "text", name: "subject", placeholder: "Subject" }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", [
+            _c("textarea", {
+              staticClass: "textarea",
+              staticStyle: {
+                width: "100%",
+                height: "125px",
+                "font-size": "14px",
+                "line-height": "18px",
+                border: "1px solid #dddddd",
+                padding: "10px"
+              },
+              attrs: { placeholder: "Message" }
+            })
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "box-footer clearfix" }, [
+        _c(
+          "button",
+          {
+            staticClass: "pull-right btn btn-default",
+            attrs: { type: "button", id: "sendEmail" }
+          },
+          [
+            _vm._v("Send\n              "),
+            _c("i", { staticClass: "fa fa-arrow-circle-right" })
+          ]
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "box box-solid bg-light-blue-gradient" }, [
+      _c("div", { staticClass: "box-header" }, [
+        _c("div", { staticClass: "pull-right box-tools" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-primary btn-sm daterange pull-right",
+              attrs: {
+                type: "button",
+                "data-toggle": "tooltip",
+                title: "Date range"
+              }
+            },
+            [_c("i", { staticClass: "fa fa-calendar" })]
+          ),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-primary btn-sm pull-right",
+              staticStyle: { "margin-right": "5px" },
+              attrs: {
+                type: "button",
+                "data-widget": "collapse",
+                "data-toggle": "tooltip",
+                title: "Collapse"
+              }
+            },
+            [_c("i", { staticClass: "fa fa-minus" })]
+          )
+        ]),
+        _vm._v(" "),
+        _c("i", { staticClass: "fa fa-map-marker" }),
+        _vm._v(" "),
+        _c("h3", { staticClass: "box-title" }, [
+          _vm._v("\n              Visitors\n            ")
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "box-body" }, [
+        _c("div", {
+          staticStyle: { height: "250px", width: "100%" },
+          attrs: { id: "world-map" }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "box-footer no-border" }, [
+        _c("div", { staticClass: "row" }, [
+          _c(
+            "div",
+            {
+              staticClass: "col-xs-4 text-center",
+              staticStyle: { "border-right": "1px solid #f4f4f4" }
+            },
+            [
+              _c("div", { attrs: { id: "sparkline-1" } }),
+              _vm._v(" "),
+              _c("div", { staticClass: "knob-label" }, [_vm._v("Visitors")])
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "col-xs-4 text-center",
+              staticStyle: { "border-right": "1px solid #f4f4f4" }
+            },
+            [
+              _c("div", { attrs: { id: "sparkline-2" } }),
+              _vm._v(" "),
+              _c("div", { staticClass: "knob-label" }, [_vm._v("Online")])
+            ]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-xs-4 text-center" }, [
+            _c("div", { attrs: { id: "sparkline-3" } }),
+            _vm._v(" "),
+            _c("div", { staticClass: "knob-label" }, [_vm._v("Exists")])
+          ])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "box-header" }, [
+      _c("i", { staticClass: "fa fa-th" }),
+      _vm._v(" "),
+      _c("h3", { staticClass: "box-title" }, [_vm._v("Sales Graph")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "box-tools pull-right" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn bg-teal btn-sm",
+            attrs: { type: "button", "data-widget": "collapse" }
+          },
+          [_c("i", { staticClass: "fa fa-minus" })]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "btn bg-teal btn-sm",
+            attrs: { type: "button", "data-widget": "remove" }
+          },
+          [_c("i", { staticClass: "fa fa-times" })]
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "box-footer no-border" }, [
+      _c("div", { staticClass: "row" }, [
+        _c(
+          "div",
+          {
+            staticClass: "col-xs-4 text-center",
+            staticStyle: { "border-right": "1px solid #f4f4f4" }
+          },
+          [
+            _c("input", {
+              staticClass: "knob",
+              attrs: {
+                type: "text",
+                "data-readonly": "true",
+                value: "20",
+                "data-width": "60",
+                "data-height": "60",
+                "data-fgColor": "#39CCCC"
+              }
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "knob-label" }, [_vm._v("Mail-Orders")])
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "col-xs-4 text-center",
+            staticStyle: { "border-right": "1px solid #f4f4f4" }
+          },
+          [
+            _c("input", {
+              staticClass: "knob",
+              attrs: {
+                type: "text",
+                "data-readonly": "true",
+                value: "50",
+                "data-width": "60",
+                "data-height": "60",
+                "data-fgColor": "#39CCCC"
+              }
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "knob-label" }, [_vm._v("Online")])
+          ]
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-xs-4 text-center" }, [
+          _c("input", {
+            staticClass: "knob",
+            attrs: {
+              type: "text",
+              "data-readonly": "true",
+              value: "30",
+              "data-width": "60",
+              "data-height": "60",
+              "data-fgColor": "#39CCCC"
+            }
+          }),
+          _vm._v(" "),
+          _c("div", { staticClass: "knob-label" }, [_vm._v("In-Store")])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "box box-solid bg-green-gradient" }, [
+      _c("div", { staticClass: "box-header" }, [
+        _c("i", { staticClass: "fa fa-calendar" }),
+        _vm._v(" "),
+        _c("h3", { staticClass: "box-title" }, [_vm._v("Calendar")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "pull-right box-tools" }, [
+          _c("div", { staticClass: "btn-group" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-success btn-sm dropdown-toggle",
+                attrs: { type: "button", "data-toggle": "dropdown" }
+              },
+              [_c("i", { staticClass: "fa fa-bars" })]
+            ),
+            _vm._v(" "),
+            _c(
+              "ul",
+              {
+                staticClass: "dropdown-menu pull-right",
+                attrs: { role: "menu" }
+              },
+              [
+                _c("li", [
+                  _c("a", { attrs: { href: "#" } }, [_vm._v("Add new event")])
+                ]),
+                _vm._v(" "),
+                _c("li", [
+                  _c("a", { attrs: { href: "#" } }, [_vm._v("Clear events")])
+                ]),
+                _vm._v(" "),
+                _c("li", { staticClass: "divider" }),
+                _vm._v(" "),
+                _c("li", [
+                  _c("a", { attrs: { href: "#" } }, [_vm._v("View calendar")])
+                ])
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-success btn-sm",
+              attrs: { type: "button", "data-widget": "collapse" }
+            },
+            [_c("i", { staticClass: "fa fa-minus" })]
+          ),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-success btn-sm",
+              attrs: { type: "button", "data-widget": "remove" }
+            },
+            [_c("i", { staticClass: "fa fa-times" })]
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "box-body no-padding" }, [
+        _c("div", { staticStyle: { width: "100%" }, attrs: { id: "calendar" } })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "box-footer text-black" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-sm-6" }, [
+            _c("div", { staticClass: "clearfix" }, [
+              _c("span", { staticClass: "pull-left" }, [_vm._v("Task #1")]),
+              _vm._v(" "),
+              _c("small", { staticClass: "pull-right" }, [_vm._v("90%")])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "progress xs" }, [
+              _c("div", {
+                staticClass: "progress-bar progress-bar-green",
+                staticStyle: { width: "90%" }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "clearfix" }, [
+              _c("span", { staticClass: "pull-left" }, [_vm._v("Task #2")]),
+              _vm._v(" "),
+              _c("small", { staticClass: "pull-right" }, [_vm._v("70%")])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "progress xs" }, [
+              _c("div", {
+                staticClass: "progress-bar progress-bar-green",
+                staticStyle: { width: "70%" }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-sm-6" }, [
+            _c("div", { staticClass: "clearfix" }, [
+              _c("span", { staticClass: "pull-left" }, [_vm._v("Task #3")]),
+              _vm._v(" "),
+              _c("small", { staticClass: "pull-right" }, [_vm._v("60%")])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "progress xs" }, [
+              _c("div", {
+                staticClass: "progress-bar progress-bar-green",
+                staticStyle: { width: "60%" }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "clearfix" }, [
+              _c("span", { staticClass: "pull-left" }, [_vm._v("Task #4")]),
+              _vm._v(" "),
+              _c("small", { staticClass: "pull-right" }, [_vm._v("40%")])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "progress xs" }, [
+              _c("div", {
+                staticClass: "progress-bar progress-bar-green",
+                staticStyle: { width: "40%" }
+              })
+            ])
+          ])
+        ])
+      ])
     ])
   }
 ]

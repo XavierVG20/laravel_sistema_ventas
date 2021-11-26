@@ -24,6 +24,8 @@ Route::get('/', function () {
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\DashboardController::class, 'index'])->name('home');
 Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, '__invoke']);
+Route::get('/lineal', [App\Http\Controllers\DashboardController::class, 'lineal']);
+
 
 //Route::resource('/categoria',App\Http\Controllers\CategoriaController::class);
 Route::get('/categoria', [App\Http\Controllers\CategoriaController::class, 'index'])->name('categoria.index');
@@ -93,3 +95,7 @@ Route::put('/categoria', [App\Http\Controllers\CategoriaController::class, 'elim
 
 //Route::resource('/books', BooksController::class);
 
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

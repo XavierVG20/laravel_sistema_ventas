@@ -5,11 +5,13 @@ export default {
   extends: Line,
   data() {
     return {
+      etiquetas:[],
+      datos: [],
       gradient: null,
       gradient2: null
     };
   },
-  mounted() {
+ async mounted() {
     this.gradient = this.$refs.canvas
       .getContext("2d")
       .createLinearGradient(0, 0, 0, 450);
@@ -24,37 +26,39 @@ export default {
     this.gradient2.addColorStop(0, "rgba(0, 231, 255, 0.9)");
     this.gradient2.addColorStop(0.5, "rgba(0, 231, 255, 0.25)");
     this.gradient2.addColorStop(1, "rgba(0, 231, 255, 0)");
+      let me = this;
+
+        var url = "/lineal";
+      await  axios.get(url)
+          .then(response=>{
+                 console.log(response)
+             response.data.ventas.forEach(element => {
+               
+
+            me.etiquetas.push(element.mes)
+
+                me.datos.push(element.total)
+            }) 
+              
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
 
     this.renderChart(
       {
-        labels: [
-          "January",
-          "February",
-          "March",
-          "April",
-          "May",
-          "June",
-          "July"
-        ],
+        labels: this.etiquetas,
         datasets: [
           {
-            label: "Data One",
+            label: "Total Ventas",
             borderColor: "#FC2525",
             pointBackgroundColor: "white",
             borderWidth: 1,
             pointBorderColor: "white",
             backgroundColor: this.gradient,
-            data: [40, 39, 10, 40, 39, 80, 40]
-          },
-          {
-            label: "Data Two",
-            borderColor: "#05CBE1",
-            pointBackgroundColor: "white",
-            pointBorderColor: "white",
-            borderWidth: 1,
-            backgroundColor: this.gradient2,
-            data: [60, 55, 32, 10, 2, 12, 53]
+            data: this.datos
           }
+        
         ]
       },
       { responsive: true, maintainAspectRatio: false }

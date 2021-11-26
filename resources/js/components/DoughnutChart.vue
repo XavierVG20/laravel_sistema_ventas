@@ -29,8 +29,32 @@
         }
       } 
     },
-      mounted() {
-      this.listarventas();
+      async mounted() {
+       let me = this;
+
+        var url = "/dashboard";
+      await  axios.get(url)
+          .then(response=>{
+             me.labels1.push("Ventas")
+                me.labels1.push("Ingresos")            
+             response.data.ventas.forEach(element => {
+               
+
+                
+                me.backgroundColor2.push("gba(255, 99, 132, 0.2)")
+                me.datos.push(element.total)
+            }) 
+            response.data.ingresos.forEach(element => {
+
+               me.backgroundColor2.push(" 'rgba(54, 162, 235, 0.2)'")
+
+                me.datos.push(element.total)
+            })  
+              
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
       this.renderChart({
         labels: this.labels1,
         datasets:[{
@@ -42,34 +66,7 @@
     },
   
      methods: {
-    listarventas() {
-        let me = this;
-
-        var url = "/dashboard";
-        axios.get(url)
-          .then(response=>{
-             response.data.ventas.forEach(element => {
-                me.labels1.push("Ventas")
-                
-                me.backgroundColor2.push("gba(255, 99, 132, 0.2)")
-                me.datos.push(element.total)
-                console.log(element);
-            }) 
-            response.data.ingresos.forEach(element => {
-                me.labels1.push("Ingresos")
-               me.backgroundColor2.push(" 'rgba(54, 162, 235, 0.2)'")
-
-                me.datos.push(element.total)
-                 console.log("hola");
-            })  
-              
-
-            console.log(this.datos)
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
-      },
+   
    },
    
   }

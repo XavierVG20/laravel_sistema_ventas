@@ -7,6 +7,10 @@ use App\Models\User;
 
 class PerfilController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     //
    public function index(){
    // if (!$request->ajax())   return view('perfil');
