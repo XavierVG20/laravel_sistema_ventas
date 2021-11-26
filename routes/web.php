@@ -23,7 +23,7 @@ Route::get('/', function () {
 
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\DashboardController::class, 'index'])->name('home');
-Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, '__invoke']);
+Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index']);
 Route::get('/lineal', [App\Http\Controllers\DashboardController::class, 'lineal']);
 
 
