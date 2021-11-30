@@ -71,7 +71,6 @@ public function selectCategoria(Request $request){
     public function store(CategoriaRequest $request)
     {
         //
-        $validated=$request->validated();
         $categoria = new Categoria();
         $categoria->nombre = $request->nombre;
         $categoria->descripcion = $request->descripcion;
@@ -120,7 +119,7 @@ public function selectCategoria(Request $request){
      * @param  \App\Models\Categoria  $categoria
      * @return \Illuminate\Http\Response
      */
-    public function update(CategoriaRequest $request, Categoria $categoria)
+    public function update(CategoriaRequest $request)
     {
        
         $categoria = Categoria::findOrFail($request->id);
@@ -131,7 +130,7 @@ public function selectCategoria(Request $request){
     }
 
   
-    public function desactivar(Request $request, Categoria $categoria)
+    public function desactivar(Request $request)
     {
         //
        

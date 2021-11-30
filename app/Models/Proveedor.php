@@ -17,10 +17,7 @@ class Proveedor extends Model
     'direccion',
     'telefono',
     'email'];
-    public function user()
-    {
-        return $this->hasOne('App\Models\User');
-    }
+
 
 
  

@@ -88,42 +88,44 @@ class IngresoController extends Controller
     public function store(Request $request)
     {
  
-       // try{
-        //  DB::beginTransaction();
-          $mytime = Carbon::now();
-           
-          $ingreso = new Ingreso();
-          $ingreso->idproveedor = $request->idproveedor;
-          $ingreso->idusuario = \Auth::user()->id;
-          $ingreso->tipo_comprobante = $request->tipo_comprobante;
+       // if (!$request->ajax()) return redirect('/');
+ 
+        //try{
+          //  DB::beginTransaction();
+ 
+            $mytime= Carbon::now('America/Lima');
+ 
+            $ingreso = new Ingreso();
+            $ingreso->idproveedor = $request->idproveedor;
+            $ingreso->idusuario = \Auth::user()->id;
+            $ingreso->tipo_comprobante = $request->tipo_comprobante;
             $ingreso->serie_comprobante = $request->serie_comprobante;
             $ingreso->num_comprobante = $request->num_comprobante;
-         $ingreso->fecha_hora = $mytime->toDateString();
-          $ingreso->impuesto = $request->impuesto;
-          $ingreso->total = $request->total;
-          $ingreso->estado = 'Registrado';
+            $ingreso->fecha_hora = $mytime->toDateString();
+            $ingreso->impuesto = $request->impuesto;
+            $ingreso->total = $request->total;
+            $ingreso->estado = 'Registrado';
             $ingreso->save();
  
             $detalles = $request->data;//Array de detalles
             //Recorro todos los elementos
-
-        foreach($detalles as $ep=>$det)
+ 
+            foreach($detalles as $ep=>$det)
             {
-               $detalle = new DetalleIngreso();
+                $detalle = new DetalleIngreso();
                 $detalle->idingreso = $ingreso->id;
                 $detalle->idarticulo = $det['idarticulo'];
                 $detalle->cantidad = $det['cantidad'];
                 $detalle->precio = $det['precio'];          
                 $detalle->save();
             }          
-      
-     //   } catch (Exception $e){
-           // DB::rollBack();
-///} 
-        return [
-           
-            'ingreso' => $ingreso->id
-        ];
+         //   DB::commit();
+            return [
+                'id'=> $ingreso->id
+            ];
+      //  } catch (Exception $e){
+       //     DB::rollBack();
+     //   }
     }
  
     public function desactivar(Request $request)
