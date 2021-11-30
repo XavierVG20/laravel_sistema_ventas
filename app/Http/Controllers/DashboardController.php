@@ -17,7 +17,7 @@ class DashboardController extends Controller
       $anio=date('Y');
       $ingresos=DB::table('ingresos')
       ->select(
-      DB::raw('YEAR(fecha_hora) as year'),
+      DB::raw('YEAR(fecha_hora) as anio'),
       DB::raw('SUM(total) as total'),
       DB::raw('count(*) as total_ingresos'))
       ->whereYear('fecha_hora',$anio)
@@ -26,7 +26,7 @@ class DashboardController extends Controller
 
       $ventas=DB::table('ventas as v')
       ->select(
-      DB::raw('YEAR(v.fecha_hora) as year'),
+      DB::raw('YEAR(v.fecha_hora) as anio'),
       DB::raw('SUM(v.total) as total'),
       DB::raw('count(*) as total_ventas'))
       ->whereYear('v.fecha_hora',$anio)
@@ -51,7 +51,7 @@ class DashboardController extends Controller
         $anio=date('Y');
         $ingresos=DB::table('ingresos as i')
         ->select(
-        DB::raw('YEAR(i.fecha_hora) as year'),
+        DB::raw('YEAR(i.fecha_hora) as anio'),
         DB::raw('SUM(i.total) as total'),
         DB::raw('count(*) as total_ingresos'))
         ->whereYear('i.fecha_hora',$anio)
@@ -60,7 +60,7 @@ class DashboardController extends Controller
  
         $ventas=DB::table('ventas as v')
         ->select(
-        DB::raw('YEAR(v.fecha_hora) as year'),
+        DB::raw('YEAR(v.fecha_hora) as anio'),
         DB::raw('SUM(v.total) as total'),
         DB::raw('count(*) as total_ventas'))
         ->whereYear('v.fecha_hora',$anio)
