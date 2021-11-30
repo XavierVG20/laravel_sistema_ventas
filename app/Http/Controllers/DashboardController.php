@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\Ingreso;
+
 
 class DashboardController extends Controller
 {
@@ -15,6 +17,8 @@ class DashboardController extends Controller
     public function index(Request $reques){
       //   return view('home');
       $anio=date('Y');
+
+
       $ingresos=DB::table('ingresos')
       ->select(
       DB::raw('YEAR(fecha_hora) as anio'),
