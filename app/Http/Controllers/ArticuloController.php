@@ -8,6 +8,7 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Support\Facades\DB;
 use DataTables;
 use Cloudinary;
+
 use App\Models\Media;
 use App\Http\Requests\ArticuloRequest;
 
@@ -135,7 +136,32 @@ class ArticuloController extends Controller
     }
     public function store(ArticuloRequest $request)
     {
-        
+        if ($request->hasFile('file')) {
+            # cludynary 
+
+            $result = $request->file->storeOnCloudinary('articulos');
+ 
+            $media = new Media();
+           // $media->idmedia = $request->id;
+            $media->public_id = $result->getPublicId();
+            $media->file_url =  $result->getSecurePath();
+            $media->file_name = $result->getFileName();
+            $media->file_type = $result->getFileType();
+            $media->size = $result->getSize();
+                       
+            $media->save();
+
+            $articulo = new Articulo();
+            $articulo->idcategoria = $request->idcategoria;
+            $articulo->codigo = $request->codigo;
+            $articulo->nombre = $request->nombre;
+            $articulo->precio_venta = $request->precio_venta;
+            $articulo->stock = $request->stock;
+            $articulo->descripcion = $request->descripcion;
+            $articulo->condicion = '1';
+            $articulo->idmedia =  $media->id;
+            $articulo->save();
+        } else {
             $articulo = new Articulo();
             $articulo->idcategoria = $request->idcategoria;
             $articulo->codigo = $request->codigo;
@@ -145,6 +171,9 @@ class ArticuloController extends Controller
             $articulo->descripcion = $request->descripcion;
             $articulo->condicion = '1';
             $articulo->save();
+        }
+        
+        
         
 
 

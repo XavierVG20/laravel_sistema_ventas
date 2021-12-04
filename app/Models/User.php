@@ -48,4 +48,8 @@ class User extends Authenticatable
     public function rol(){
         return $this->belongsTo('App\Models\Rol');
     }
+    public function recivesBroadcastNotification ()
+    {
+       return 'App.Models.User.{id}'.$this->id;
+    }
 }

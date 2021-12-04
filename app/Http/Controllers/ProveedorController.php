@@ -24,10 +24,10 @@ class ProveedorController extends Controller
         $criterio = $request->criterio;
          
         if ($buscar==''){
-            $personas = Proveedor::orderBy('id', 'desc')->paginate(3);
+            $personas = Proveedor::orderBy('id', 'desc')->paginate(5);
         }
         else{
-            $personas = Proveedor::where($criterio, 'like', '%'. $buscar . '%')->orderBy('id', 'desc')->paginate(3);
+            $personas = Proveedor::where($criterio, 'like', '%'. $buscar . '%')->orderBy('id', 'desc')->paginate(5);
         }
          
  

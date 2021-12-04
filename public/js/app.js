@@ -2244,16 +2244,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
@@ -2267,9 +2257,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       stock: 0,
       descripcion: '',
       arrayArticulo: [],
+      imagen: null,
       preview: null,
       image: null,
-      no_image: '',
       preview_list: [],
       image_list: [],
       modal: 0,
@@ -2328,8 +2318,26 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }
   },
   methods: {
-    listarArticulo: function listarArticulo(page, buscar, criterio) {
+    getImage: function getImage(event) {
       var _this = this;
+
+      //Asignamos la imagen a  nuestra data
+      this.imagen = event.target.files[0];
+      var input = event.target;
+
+      if (input.files) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+          _this.preview = e.target.result;
+        }; //  this.image = input.files[0];
+
+
+        reader.readAsDataURL(input.files[0]);
+      }
+    },
+    listarArticulo: function listarArticulo(page, buscar, criterio) {
+      var _this2 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
         var me, url;
@@ -2337,11 +2345,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                me = _this;
+                me = _this2;
                 url = '/articulo?page=' + page + '&buscar=' + buscar + '&criterio=' + criterio;
                 _context.next = 4;
                 return axios.get(url).then(function (response) {
                   var respuesta = response.data;
+                  console.log(response);
                   me.arrayArticulo = respuesta.articulos.data;
                   me.pagination = respuesta.pagination;
                 })["catch"](function (error) {
@@ -2360,7 +2369,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       window.open('/articulo/listarPdf', '_blank');
     },
     selectCategoria: function selectCategoria() {
-      var _this2 = this;
+      var _this3 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
         var me, url;
@@ -2368,7 +2377,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                me = _this2;
+                me = _this3;
                 url = '/categoria/selectCategoria';
                 _context2.next = 4;
                 return axios.get(url).then(function (response) {
@@ -2395,37 +2404,39 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       me.listarArticulo(page, buscar, criterio);
     },
     registrarArticulo: function registrarArticulo() {
-      var _this3 = this;
+      var _this4 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
-        var me;
+        var me, data;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
-                me = _this3;
+                me = _this4;
                 _context3.prev = 1;
-                _context3.next = 4;
-                return axios.post('/articulo/registrar', {
-                  'idcategoria': _this3.idcategoria,
-                  'codigo': _this3.codigo,
-                  'nombre': _this3.nombre,
-                  'stock': _this3.stock,
-                  'precio_venta': _this3.precio_venta,
-                  'descripcion': _this3.descripcion
-                }).then(function (response) {
+                data = new FormData(); //Añadimos la imagen seleccionada
+
+                data.append('idcategoria', _this4.idcategoria);
+                data.append('codigo', _this4.codigo);
+                data.append('nombre', _this4.nombre);
+                data.append('stock', _this4.stock);
+                data.append('precio_venta', _this4.precio_venta);
+                data.append('descripcion', _this4.descripcion);
+                data.append('file', _this4.imagen);
+                _context3.next = 12;
+                return axios.post('/articulo/registrar', data).then(function (response) {
                   me.cerrarModal();
                   me.cerrarModal();
                   Swal.fire('Guardado!', 'El registro ha sido guardado con éxito.', 'success');
                   me.listarArticulo(1, '', 'nombre');
                 });
 
-              case 4:
-                _context3.next = 11;
+              case 12:
+                _context3.next = 19;
                 break;
 
-              case 6:
-                _context3.prev = 6;
+              case 14:
+                _context3.prev = 14;
                 _context3.t0 = _context3["catch"](1);
                 console.log(_context3.t0.response.data);
                 Swal.fire({
@@ -2436,19 +2447,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 });
 
                 if (_context3.t0.response.data) {
-                  _this3.errors = _context3.t0.response.data.errors;
+                  _this4.errors = _context3.t0.response.data.errors;
                 }
 
-              case 11:
+              case 19:
               case "end":
                 return _context3.stop();
             }
           }
-        }, _callee3, null, [[1, 6]]);
+        }, _callee3, null, [[1, 14]]);
       }))();
     },
     actualizarArticulo: function actualizarArticulo() {
-      var _this4 = this;
+      var _this5 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
         var me;
@@ -2456,17 +2467,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context4.prev = _context4.next) {
               case 0:
-                me = _this4;
+                me = _this5;
                 _context4.prev = 1;
                 _context4.next = 4;
                 return axios.put('/articulo/actualizar', {
-                  'idcategoria': _this4.idcategoria,
-                  'codigo': _this4.codigo,
-                  'nombre': _this4.nombre,
-                  'stock': _this4.stock,
-                  'precio_venta': _this4.precio_venta,
-                  'descripcion': _this4.descripcion,
-                  'id': _this4.articulo_id
+                  'idcategoria': _this5.idcategoria,
+                  'codigo': _this5.codigo,
+                  'nombre': _this5.nombre,
+                  'stock': _this5.stock,
+                  'precio_venta': _this5.precio_venta,
+                  'descripcion': _this5.descripcion,
+                  'id': _this5.articulo_id
                 }).then(function (response) {
                   me.cerrarModal();
                   Swal.fire('Actualizado!', 'El registro ha sido actualizado con éxito.', 'success');
@@ -2489,7 +2500,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 });
 
                 if (_context4.t0.response.data) {
-                  _this4.errors = _context4.t0.response.data.errors;
+                  _this5.errors = _context4.t0.response.data.errors;
                 }
 
               case 11:
@@ -2501,7 +2512,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }))();
     },
     desactivarArticulo: function desactivarArticulo(id) {
-      var _this5 = this;
+      var _this6 = this;
 
       Swal.fire({
         title: "Esta seguro de desactivar esta categoría?",
@@ -2514,7 +2525,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         confirmButtonText: "Aceptar"
       }).then(function (result) {
         if (result.value) {
-          var me = _this5;
+          var me = _this6;
           axios.put('/articulo/desactivar', {
             'id': id
           }).then(function (response) {
@@ -2534,7 +2545,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       });
     },
     activarArticulo: function activarArticulo(id) {
-      var _this6 = this;
+      var _this7 = this;
 
       Swal.fire({
         title: "Esta seguro de activar esta categoría?",
@@ -2546,7 +2557,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         confirmButtonText: "Aceptar"
       }).then(function (result) {
         if (result.value) {
-          var me = _this6;
+          var me = _this7;
           axios.put('/articulo/activar', {
             'id': id
           }).then(function (response) {
@@ -4008,7 +4019,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     return {
       total_articulos: 0,
       total_ventas: 0,
-      total_ingresos: 0
+      total_ingresos: 0,
+      total_clientes: 0
     };
   },
   methods: {
@@ -4033,6 +4045,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   });
                   response.data.ingresos.forEach(function (element) {
                     _this.total_ingresos = element.total_ingresos;
+                  });
+                  response.data.clientes.forEach(function (element) {
+                    _this.total_clientes = element.total_clientes;
                   });
                 })["catch"](function (error) {
                   console.log(error);
@@ -4457,29 +4472,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -4608,9 +4600,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
         reader.onload = function (e) {
           _this2.preview = e.target.result;
-        };
+        }; //  this.image = input.files[0];
 
-        this.image = input.files[0];
+
         reader.readAsDataURL(input.files[0]);
       }
     },
@@ -4637,7 +4629,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _context2.next = 9;
                 return axios.post('/datos/registrar', data).then(function (response) {
                   Swal.fire("Guardado!", "El registro ha sido guardado con éxito.", "success");
-                  _this3.errors = {};
                 })["catch"](function (error) {
                   Swal.fire({
                     icon: "error",
@@ -97819,7 +97810,7 @@ var render = function() {
               },
               [
                 _c("i", { staticClass: "icon-plus" }),
-                _vm._v(" Nuevo\n                        ")
+                _vm._v(" Nuevo\n                    ")
               ]
             ),
             _vm._v(" "),
@@ -97836,7 +97827,7 @@ var render = function() {
               },
               [
                 _c("i", { staticClass: "icon-doc" }),
-                _vm._v(" Reporte\n                        ")
+                _vm._v(" Reporte\n                    ")
               ]
             )
           ]),
@@ -98036,7 +98027,28 @@ var render = function() {
                         domProps: { textContent: _vm._s(articulo.descripcion) }
                       }),
                       _vm._v(" "),
-                      _c("td"),
+                      _c("td", [
+                        articulo.idmedia
+                          ? _c("div", [
+                              _c("img", {
+                                attrs: {
+                                  src: articulo.file_url,
+                                  height: "100px",
+                                  width: "100px"
+                                }
+                              })
+                            ])
+                          : _c("div", [
+                              _c("img", {
+                                attrs: {
+                                  src:
+                                    "https://res.cloudinary.com/drrzmfkvx/image/upload/v1638644067/no-image-icon-13_xj2n3t.png",
+                                  height: "100px",
+                                  width: "100px"
+                                }
+                              })
+                            ])
+                      ]),
                       _vm._v(" "),
                       _c("td", [
                         articulo.condicion
@@ -98256,7 +98268,16 @@ var render = function() {
                             })
                           ],
                           2
-                        )
+                        ),
+                        _vm._v(" "),
+                        _vm.errors.idcategoria
+                          ? _c("label", { staticClass: "text-danger" }, [
+                              _vm._v(
+                                "*\n                                        " +
+                                  _vm._s(_vm.errors.idcategoria[0])
+                              )
+                            ])
+                          : _vm._e()
                       ])
                     ]),
                     _vm._v(" "),
@@ -98332,7 +98353,7 @@ var render = function() {
                         _vm.errors.precio_venta
                           ? _c("label", { staticClass: "text-danger" }, [
                               _vm._v(
-                                "*\n                                            " +
+                                "*\n                                        " +
                                   _vm._s(_vm.errors.precio_venta[0])
                               )
                             ])
@@ -98413,7 +98434,7 @@ var render = function() {
                       _vm.errors.descripcion
                         ? _c("label", { staticClass: "text-danger" }, [
                             _vm._v(
-                              "*\n                                        " +
+                              "*\n                                    " +
                                 _vm._s(_vm.errors.descripcion[0])
                             )
                           ])
@@ -98474,13 +98495,65 @@ var render = function() {
                             },
                             [
                               _vm._v(
-                                "\n                                            Generando código de barras.\n                                        "
+                                "\n                                        Generando código de barras.\n                                    "
                               )
                             ]
                           )
                         ],
                         1
                       )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-sm-6" }, [
+                      _c("div", { staticClass: "form-group" }, [
+                        _c("label", { attrs: { for: "my-file" } }, [
+                          _vm._v("Select Image")
+                        ]),
+                        _vm._v(" "),
+                        _c("input", {
+                          attrs: {
+                            id: "inputFile1",
+                            type: "file",
+                            name: "image",
+                            accept: "image/*"
+                          },
+                          on: { change: _vm.getImage }
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "ul",
+                          { staticClass: "mailbox-attachments clearfix" },
+                          [
+                            _c("li", [
+                              _c(
+                                "a",
+                                {
+                                  staticClass: "mailbox-attachment-name",
+                                  attrs: { href: _vm.preview, target: "_blank" }
+                                },
+                                [
+                                  _c(
+                                    "span",
+                                    {
+                                      staticClass:
+                                        "mailbox-attachment-icon has-img"
+                                    },
+                                    [
+                                      _c("img", {
+                                        attrs: {
+                                          src: _vm.preview,
+                                          height: "250px",
+                                          width: "200"
+                                        }
+                                      })
+                                    ]
+                                  )
+                                ]
+                              )
+                            ])
+                          ]
+                        )
+                      ])
                     ])
                   ])
                 ])
@@ -98547,7 +98620,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("section", { staticClass: "content-header" }, [
       _c("h1", [
-        _vm._v("\n                Modulo\n                "),
+        _vm._v("\n            Modulo\n            "),
         _c("small", [_vm._v("de Articulos")])
       ]),
       _vm._v(" "),
@@ -100146,7 +100219,19 @@ var render = function() {
             ])
           ]),
           _vm._v(" "),
-          _vm._m(5),
+          _c("div", { staticClass: "col-lg-3 col-xs-6" }, [
+            _c("div", { staticClass: "small-box bg-yellow" }, [
+              _c("div", { staticClass: "inner" }, [
+                _c("h3", [_vm._v(" " + _vm._s(_vm.total_clientes))]),
+                _vm._v(" "),
+                _c("p", [_vm._v("Clientes Registrados")])
+              ]),
+              _vm._v(" "),
+              _vm._m(5),
+              _vm._v(" "),
+              _vm._m(6)
+            ])
+          ]),
           _vm._v(" "),
           _c("div", { staticClass: "col-lg-3 col-xs-6" }, [
             _c("div", { staticClass: "small-box bg-red" }, [
@@ -100156,9 +100241,9 @@ var render = function() {
                 _c("p", [_vm._v("Ingresos Registrados")])
               ]),
               _vm._v(" "),
-              _vm._m(6),
+              _vm._m(7),
               _vm._v(" "),
-              _vm._m(7)
+              _vm._m(8)
             ])
           ])
         ]),
@@ -100166,7 +100251,7 @@ var render = function() {
         _c("div", { staticClass: "row" }, [
           _c("section", { staticClass: "col-lg-7 connectedSortable" }, [
             _c("div", { staticClass: "nav-tabs-custom" }, [
-              _vm._m(8),
+              _vm._m(9),
               _vm._v(" "),
               _c("div", { staticClass: "tab-content no-padding" }, [
                 _c(
@@ -100198,7 +100283,7 @@ var render = function() {
           _vm._v(" "),
           _c("section", { staticClass: "col-lg-5 connectedSortable" }, [
             _c("div", { staticClass: "box box-solid bg-teal-gradient" }, [
-              _vm._m(9),
+              _vm._m(10),
               _vm._v(" "),
               _c("div", { staticClass: "box-body border-radius-none" }, [
                 _c(
@@ -100294,23 +100379,17 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-lg-3 col-xs-6" }, [
-      _c("div", { staticClass: "small-box bg-yellow" }, [
-        _c("div", { staticClass: "inner" }, [
-          _c("h3", [_vm._v("44")]),
-          _vm._v(" "),
-          _c("p", [_vm._v("Clientes Registrados")])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "icon" }, [
-          _c("i", { staticClass: "ion ion-person-add" })
-        ]),
-        _vm._v(" "),
-        _c("a", { staticClass: "small-box-footer", attrs: { href: "#" } }, [
-          _vm._v("ver "),
-          _c("i", { staticClass: "fa fa-arrow-circle-right" })
-        ])
-      ])
+    return _c("div", { staticClass: "icon" }, [
+      _c("i", { staticClass: "ion ion-person-add" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("a", { staticClass: "small-box-footer", attrs: { href: "#" } }, [
+      _vm._v("ver "),
+      _c("i", { staticClass: "fa fa-arrow-circle-right" })
     ])
   },
   function() {
@@ -100959,6 +101038,15 @@ var render = function() {
                       _vm._v(" "),
                       _c("div", { staticClass: "form-group" }, [
                         _c(
+                          "label",
+                          {
+                            staticClass: "col-sm-2 control-label",
+                            attrs: { for: "inputExperience" }
+                          },
+                          [_vm._v("Logo")]
+                        ),
+                        _vm._v(" "),
+                        _c(
                           "div",
                           { staticClass: "col-sm-offset-2 col-sm-10" },
                           [
@@ -100973,119 +101061,30 @@ var render = function() {
                                     [
                                       _c("li", [
                                         _c(
-                                          "span",
+                                          "a",
                                           {
                                             staticClass:
-                                              "mailbox-attachment-icon has-img"
+                                              "mailbox-attachment-name",
+                                            attrs: {
+                                              href: _vm.preview,
+                                              target: "_blank"
+                                            }
                                           },
                                           [
-                                            _c("img", {
-                                              attrs: {
-                                                src: _vm.preview,
-                                                height: "250px",
-                                                width: "200"
-                                              }
-                                            })
-                                          ]
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "div",
-                                          {
-                                            staticClass:
-                                              "mailbox-attachment-info"
-                                          },
-                                          [
-                                            _c(
-                                              "a",
-                                              {
-                                                staticClass:
-                                                  "mailbox-attachment-name",
-                                                attrs: {
-                                                  href: _vm.file_url,
-                                                  target: "_blank"
-                                                }
-                                              },
-                                              [
-                                                _c("i", {
-                                                  staticClass: "fa fa-camera"
-                                                })
-                                              ]
-                                            ),
-                                            _vm._v(" "),
-                                            _c("span", {
-                                              staticClass:
-                                                "mailbox-attachment-size"
-                                            })
-                                          ]
-                                        )
-                                      ])
-                                    ]
-                                  )
-                                ])
-                              : _c("div", [
-                                  _c(
-                                    "ul",
-                                    {
-                                      staticClass:
-                                        "mailbox-attachments clearfix"
-                                    },
-                                    [
-                                      _c("li", [
-                                        _c(
-                                          "span",
-                                          {
-                                            staticClass:
-                                              "mailbox-attachment-icon has-img"
-                                          },
-                                          [
-                                            _c("img", {
-                                              attrs: {
-                                                src: _vm.preview,
-                                                height: "250px",
-                                                width: "200"
-                                              }
-                                            })
-                                          ]
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "div",
-                                          {
-                                            staticClass:
-                                              "mailbox-attachment-info"
-                                          },
-                                          [
-                                            _c(
-                                              "a",
-                                              {
-                                                staticClass:
-                                                  "mailbox-attachment-name",
-                                                attrs: {
-                                                  href: _vm.file_url,
-                                                  target: "_blank"
-                                                }
-                                              },
-                                              [
-                                                _c("i", {
-                                                  staticClass: "fa fa-camera"
-                                                }),
-                                                _vm._v(" Ver imagen")
-                                              ]
-                                            ),
-                                            _vm._v(" "),
                                             _c(
                                               "span",
                                               {
                                                 staticClass:
-                                                  "mailbox-attachment-size"
+                                                  "mailbox-attachment-icon has-img"
                                               },
                                               [
-                                                _vm._v(
-                                                  "\n                              " +
-                                                    _vm._s(_vm.size) +
-                                                    " KB\n                            "
-                                                )
+                                                _c("img", {
+                                                  attrs: {
+                                                    src: _vm.preview,
+                                                    height: "250px",
+                                                    width: "200"
+                                                  }
+                                                })
                                               ]
                                             )
                                           ]
@@ -101093,7 +101092,8 @@ var render = function() {
                                       ])
                                     ]
                                   )
-                                ]),
+                                ])
+                              : _vm._e(),
                             _vm._v(" "),
                             _c("input", {
                               attrs: {

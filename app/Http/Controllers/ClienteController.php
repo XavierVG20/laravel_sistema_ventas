@@ -12,6 +12,11 @@ use App\Http\Requests\ClienteRequest;
 class ClienteController extends Controller
 {
     //
+     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
     public function __construct()
     {
         $this->middleware('auth');
@@ -25,10 +30,10 @@ class ClienteController extends Controller
         $criterio = $request->criterio;
         
         if ($buscar==''){
-            $personas = Persona::orderBy('id', 'desc')->paginate(3);
+            $personas = Persona::orderBy('id', 'desc')->paginate(5);
         }
         else{
-            $personas = Persona::where($criterio, 'like', '%'. $buscar . '%')->orderBy('id', 'desc')->paginate(3);
+            $personas = Persona::where($criterio, 'like', '%'. $buscar . '%')->orderBy('id', 'desc')->paginate(5);
         }
         
 

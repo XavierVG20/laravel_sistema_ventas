@@ -49,7 +49,7 @@
           <!-- small box -->
           <div class="small-box bg-yellow">
             <div class="inner">
-              <h3>44</h3>
+              <h3> {{total_clientes}}</h3>
 
               <p>Clientes Registrados</p>
             </div>
@@ -190,7 +190,8 @@ export default {
     return {
       total_articulos:0,
       total_ventas:0,
-      total_ingresos:0
+      total_ingresos:0,
+      total_clientes:0
 
 
 
@@ -214,6 +215,9 @@ export default {
              });
                response.data.ingresos.forEach(element => {
                this.total_ingresos = element.total_ingresos
+             });
+              response.data.clientes.forEach(element => {
+               this.total_clientes = element.total_clientes
              });
           
           })

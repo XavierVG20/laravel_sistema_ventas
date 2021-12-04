@@ -150,45 +150,22 @@
 
 
                   <div class="form-group">
+                    <label for="inputExperience" class="col-sm-2 control-label">Logo</label>
+
                     <div class="col-sm-offset-2 col-sm-10">
                       <div v-if="getImage">
                         <ul class="mailbox-attachments clearfix">
 
                           <li>
-                            <span class="mailbox-attachment-icon has-img"><img :src="preview"  height="250px"
+                           
+                                 <a :href="preview" class="mailbox-attachment-name" target="_blank"> 
+                                    <span class="mailbox-attachment-icon has-img"><img :src="preview"  height="250px"
                                 width="200"></span>
-
-                            <div class="mailbox-attachment-info">
-                              <a :href="file_url" class="mailbox-attachment-name" target="_blank"><i
-                                  class="fa fa-camera"></i> </a>
-                              <span class="mailbox-attachment-size">
-                                
-                              </span>
-                            </div>
+                                 </a>
                           </li>
 
                         </ul>
-
-
                       </div>
-
-                      <div v-else>
-                        <ul class="mailbox-attachments clearfix">
-
-                          <li>
-                            <span class="mailbox-attachment-icon has-img"><img :src="preview" height="250px"
-                              width="200"></span>
-
-                            <div class="mailbox-attachment-info">
-                              <a :href="file_url" class="mailbox-attachment-name" target="_blank"><i
-                                  class="fa fa-camera"></i> Ver imagen</a>
-                              <span class="mailbox-attachment-size">
-                                {{size}} KB
-                              </span>
-                            </div>
-                          </li>
-
-                        </ul>                      </div>
 
                       <input id="inputFile1" type="file" name="image" @change="getImage" accept="image/*">
                     </div>
@@ -334,7 +311,7 @@
           reader.onload = (e) => {
             this.preview = e.target.result;
           }
-          this.image = input.files[0];
+        //  this.image = input.files[0];
           reader.readAsDataURL(input.files[0]);
         }
       },
@@ -362,8 +339,6 @@
               "El registro ha sido guardado con éxito.",
               "success"
             );
-            this.errors={}
-
           })
           .catch(error => {
          Swal.fire({

@@ -101,15 +101,15 @@
                                     <td v-text="articulo.stock"></td>
                                     <td v-text="articulo.descripcion"></td>
                                     <td>
-                                        <!--
+                                        
                                             <div v-if="articulo.idmedia">
                                             <img :src="articulo.file_url" height="100px" width="100px">
                                         </div>
                                         <div v-else>
-                                            <img :src="'https://res.cloudinary.com/drrzmfkvx/image/upload/v1634782978/logo/318277_80538-Sin_imagen_disponible_cul5ns.jpg'"
+                                            <img :src="'https://res.cloudinary.com/drrzmfkvx/image/upload/v1638644067/no-image-icon-13_xj2n3t.png'"
                                                 height="100px" width="100px">
                                         </div>
-                                       -->
+                                       
 
 
                                     </td>
@@ -172,10 +172,10 @@
                                             <option v-for="categoria in arrayCategoria" :key="categoria.id"
                                                 :value="categoria.id" v-text="categoria.nombre"></option>
                                         </select>
-                                        <!--
+                                        
                                             <label v-if="errors.idcategoria" class="text-danger">*
                                             {{errors.idcategoria[0]}}</label>
-                                       -->
+                                       
                                     </div>
                                 </div>
 
@@ -239,39 +239,29 @@
 
 
                                 </div>
-                                <!--
+                                
       <div class="col-sm-6">
 
                                     <div class="form-group">
                                         <label for="my-file">Select Image</label>
-                                        <input type="file" accept="image/*" @change="previewImage"
-                                            class="form-control-file" id="my-file">
+                                         <input id="inputFile1" type="file" name="image" @change="getImage" accept="image/*">
+
 
                                         <ul class="mailbox-attachments clearfix">
 
                                             <li>
-
-                                                <template v-if="preview">
-                                                    <span class="mailbox-attachment-icon has-img"><img :src="preview"
-                                                            height="100px" width="100"></span>
-
-                                                    <div class="mailbox-attachment-info">
-                                                        <a @click="reset" class="btn btn-danger btn-block btn-social "
-                                                            target="_blank"> Quitar imagen</a>
-
-                                                    </div>
-                                                </template>
-                                            </li>
+                           
+                                 <a :href="preview" class="mailbox-attachment-name" target="_blank"> 
+                                    <span class="mailbox-attachment-icon has-img"><img :src="preview"  height="250px"
+                                width="200"></span>
+                                 </a>
+                          </li>
 
                                         </ul>
 
-                                        <div class="border p-2 mt-3">
-                                            <p>Vist Previa:</p>
-
-                                        </div>
+                                        
                                     </div>
                                 </div>
--->
                             </div>
                         </form>
                     </div>
@@ -303,9 +293,9 @@
                 stock: 0,
                 descripcion: '',
                 arrayArticulo: [],
+                imagen: null,
                 preview: null,
                 image: null,
-                no_image: '',
                 preview_list: [],
                 image_list: [],
                 modal: 0,
@@ -361,11 +351,25 @@
             }
         },
         methods: {
+               getImage(event) {
+        //Asignamos la imagen a  nuestra data
+        this.imagen = event.target.files[0];
+        var input = event.target;
+        if (input.files) {
+          var reader = new FileReader();
+          reader.onload = (e) => {
+            this.preview = e.target.result;
+          }
+        //  this.image = input.files[0];
+          reader.readAsDataURL(input.files[0]);
+        }
+      },
             async listarArticulo(page, buscar, criterio) {
                 let me = this;
                 var url = '/articulo?page=' + page + '&buscar=' + buscar + '&criterio=' + criterio;
                 await axios.get(url).then(function (response) {
                     var respuesta = response.data;
+                    console.log(response)
                     me.arrayArticulo = respuesta.articulos.data;
                     me.pagination = respuesta.pagination;
                 })
@@ -399,14 +403,18 @@
                 let me = this;
 
                 try {
-                    await axios.post('/articulo/registrar', {
-                        'idcategoria': this.idcategoria,
-                        'codigo': this.codigo,
-                        'nombre': this.nombre,
-                        'stock': this.stock,
-                        'precio_venta': this.precio_venta,
-                        'descripcion': this.descripcion
-                    }).then(function (response) {
+                         var data = new FormData();
+        //Añadimos la imagen seleccionada
+        data.append('idcategoria', this.idcategoria);
+        data.append('codigo', this.codigo);
+        data.append('nombre', this.nombre);
+        data.append('stock', this.stock);
+        data.append('precio_venta', this.precio_venta);
+        data.append('descripcion', this.descripcion);
+        data.append('file', this.imagen);
+
+
+                    await axios.post('/articulo/registrar', data).then(function (response) {
                         me.cerrarModal();
                         me.cerrarModal();
                         Swal.fire(

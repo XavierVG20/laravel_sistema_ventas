@@ -42,10 +42,13 @@ class DashboardController extends Controller
       $articulos= DB:: table('articulos as a')
        ->select(DB::raw('count(*) as total_articulos'))
        ->get();
+       $clientes= DB:: table('personas as a')
+       ->select(DB::raw('count(*) as total_clientes'))
+       ->get();
 
 
 
-      return ['ingresos'=>$ingresos,'ventas'=>$ventas,'anio'=>$anio , 'articulos'=>$articulos] ;   $anio=date('Y');
+      return ['ingresos'=>$ingresos,'ventas'=>$ventas,'anio'=>$anio , 'articulos'=>$articulos, 'clientes'=>$clientes];   $anio=date('Y');
      
         
          

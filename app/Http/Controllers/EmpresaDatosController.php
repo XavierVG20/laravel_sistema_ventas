@@ -45,7 +45,7 @@ class EmpresaDatosController extends Controller
          
     if ($request->hasFile('avatar')) {
              
-             $result = $request->avatar->storeOnCloudinary();
+             $result = $request->avatar->storeOnCloudinary('logo');
  
              $media = new Media();
             // $media->idmedia = $request->id;

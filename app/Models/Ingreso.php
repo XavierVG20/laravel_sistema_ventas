@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Ingreso extends Model
 {
-    public $timestamps = false;
 
     protected $fillable = [
         'idproveedor', 
