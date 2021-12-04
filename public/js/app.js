@@ -100222,7 +100222,7 @@ var render = function() {
           _c("div", { staticClass: "col-lg-3 col-xs-6" }, [
             _c("div", { staticClass: "small-box bg-yellow" }, [
               _c("div", { staticClass: "inner" }, [
-                _c("h3", [_vm._v(" " + _vm._s(_vm.total_clientes))]),
+                _c("h3", [_vm._v(" " + _vm._s(_vm.total_clientes) + " ")]),
                 _vm._v(" "),
                 _c("p", [_vm._v("Clientes Registrados")])
               ]),

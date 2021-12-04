@@ -49,7 +49,7 @@
           <!-- small box -->
           <div class="small-box bg-yellow">
             <div class="inner">
-              <h3> {{total_clientes}}</h3>
+              <h3> {{total_clientes}} </h3>
 
               <p>Clientes Registrados</p>
             </div>
