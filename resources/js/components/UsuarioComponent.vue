@@ -329,6 +329,11 @@
                     'password': this.password
 
                 }).then(response=> {
+                      Swal.fire(
+               "Guardado!",
+                "El registro ha sido guardado con éxito.",
+                "success"
+              );
                     me.cerrarModal();
                     me.listarPersona(1,'','nombre');
                 }).catch(error=> {
@@ -361,6 +366,11 @@
                     'password': this.password,
                     'id': this.persona_id
                 }).then(function (response) {
+                      Swal.fire(
+                "Actualizado!",
+                "El registro ha sido actualizado con éxito.",
+                "success"
+              );
                     me.cerrarModal();
                     me.listarPersona(1,'','nombre');
                 }).catch(error=> {
@@ -403,7 +413,7 @@
                                 this.modal = 1;
                                 this.tituloModal = 'Registrar Usuario';
                                 this.name= '';
-                                this.tipo_documento='DNI';
+                                this.tipo_documento='CI';
                                 this.num_documento='';
                                 this.direccion='';
                                 this.telefono='';

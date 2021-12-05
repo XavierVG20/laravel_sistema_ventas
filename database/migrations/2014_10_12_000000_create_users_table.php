@@ -29,15 +29,7 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->timestamps();
         });
-        DB::table('users')->insert(array('id'=>'1',
-        'name'=>'Administrador',
-         'email'=>'admin@admin.com', 
-         'password'=>'$2y$12$fQVExSFUFZCNs.9xClllau9VAWQGMJZq7KNTQ14DgpO2djOIiEeVi',
-         'tipo_documento'=>'C.I',
-         'num_documento'=>'05467834',
-         'direccion' => 'Quito',
-         'telefono'=>'05467834',
-          'idrol'=>'1'));
+      
 
 /*
         DB::table('users'->insert(array(

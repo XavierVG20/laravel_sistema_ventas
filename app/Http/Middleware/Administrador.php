@@ -4,10 +4,9 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Auth;
-
 use Illuminate\Http\Request;
 
-class Almacenero
+class Administrador
 {
     /**
      * Handle an incoming request.
@@ -18,9 +17,12 @@ class Almacenero
      */
     public function handle(Request $request, Closure $next)
     {
- 
+      //  if (Auth::user() &&  Auth::user()->idrol == 1) {
+
          
             return $next($request);
-     
+  //  }
+
+ //   return redirect()->to('/');
     }
 }

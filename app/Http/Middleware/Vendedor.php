@@ -7,7 +7,7 @@ use Auth;
 
 use Illuminate\Http\Request;
 
-class Almacenero
+class Vendedor
 {
     /**
      * Handle an incoming request.
@@ -17,10 +17,8 @@ class Almacenero
      * @return mixed
      */
     public function handle(Request $request, Closure $next)
-    {
- 
-         
+    {         
             return $next($request);
-     
+ 
     }
 }
